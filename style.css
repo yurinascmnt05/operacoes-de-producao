@@ -1,0 +1,482 @@
+/* Base para impressão em A4 */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 13.335px;   
+  margin: 0 auto;
+  width: 22.05cm;                  
+  height: 31.185cm;                
+  box-sizing: border-box;
+  background: #fff;
+  padding: 8.3475px;               
+  text-transform: uppercase;
+  line-height: 1.21275;            
+}
+
+/* Cabeçalho */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4.41px 11.025px;           
+  border-bottom: 1px solid black;
+  height: 46.305px;                
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  gap: 6.615px;                   
+}
+
+.cabecalho .logo img {
+  height: 39.69px;                
+  width: auto;
+}
+
+.cabecalho .titulo-area p {
+  margin: 0;
+  font-size: 15.435px;             
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.cabecalho .dados-doc p {
+  margin: 0 6.615px;              
+  font-size: 12.1275px;            
+  white-space: nowrap;
+}
+
+/* Seções gerais */
+.section {
+  border: 1px solid #ccc;
+  page-break-inside: avoid;
+  padding: 3.3075px 6.615px;           
+  margin-bottom: 6.615px;        
+}
+
+.section h3 {
+  margin-top: 0;
+  margin-bottom: 6.615px;        
+  font-size: 12.1275px;             
+  border-bottom: 1px solid #000;
+  padding-bottom: 3.3075px;        
+  text-transform: uppercase;
+}
+
+
+/* Seções compactas */
+.section.compacta {
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 100px;   
+  background-color: #9e9e9e9d;
+  height: 110px;   
+}
+
+.section.compacta.acabamento {
+  height: 160px;   
+}
+
+.section.compacta h3 {
+  font-size: 11.57625px;           
+  margin-bottom: 4.41px;          
+  padding-bottom: 2.205px;         
+}
+
+/* Layout de linhas e colunas */
+.linha {
+  display: flex;
+  gap: 11.025px;                   
+  margin-bottom: 3.3075px;         
+  flex-wrap: wrap;
+}
+
+/* Espaçamento extra à direita para coluna “rebaixo boca de chave” */
+.linha .coluna.rebaixo-boca-chave {
+  margin-right: 8.82px; 
+}
+
+.coluna {
+  flex: 1;
+  min-width: 154.35px;           
+  display: flex;
+  flex-direction: column;
+}
+
+/* Campos de formulário */
+label {
+  font-weight: bold;
+  margin-bottom: 1.1025px;          
+  font-size: 15px;             
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+  padding: 3.4725px 6.615px;            
+  font-size: 15px;             
+  border: 1px solid #888;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ajuste para input date - afastar do texto “urgente” */
+input[type="date"] {
+  margin-right: 6.615px;
+  padding: 3.4725px 6.615px;  
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  background: transparent;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 27.5625px;            /* 26.25px * 1.05 */
+}
+
+/* Estilo para Grau de Prioridade */
+
+.opcoes-prioridade {
+  display: flex;
+  gap: 8.82px;                   
+  margin-top: 3.4725px;            
+}
+
+.opcoes-prioridade label {
+  display: flex;
+  align-items: center;
+  font-size: 14.3325px;           
+  gap: 3.3075px;                  
+}
+
+/* Modo impressão */
+@media print {
+  body {
+    margin: 0;
+  }
+
+  .section {
+    page-break-inside: avoid;
+  }
+
+  button {
+    display: none;
+  }
+
+  .componenteViton {
+    display: none;
+  }
+
+  .componenteInox {
+    display: none;
+  }
+
+  .componentePassante {
+    display: none;
+  }
+
+  .componenteVitonAirTac {
+    display: none;
+  }
+
+  .infosParaImpressao{
+    display: none;
+  }
+
+  .componentePh{
+    display: none;
+  }
+
+  .componentePr{
+    display: none;
+  }
+
+}
+
+.aprovado-container {
+  display: flex;
+  gap: 8.82px;                  
+  align-items: center;
+}
+
+.aprovado-container label {
+  margin: 0;
+  font-weight: normal;
+  font-size: 12.1275px;           
+}
+ 
+.btn-imprimir {
+  margin: 13.23px auto;        
+  display: block;
+  padding: 5.5125px 15.435px;         
+  font-size: 14.3325px;           
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media print {
+  .btn-imprimir {
+    display: none;
+  }
+
+  #acabamento{
+    /* Altere de 'break-after: always;' para: */
+    page-break-after: always;
+  }
+}
+
+input, textarea {
+  font-size: 11.025px;           
+  padding: 1.658px 3.3075px;
+}
+
+h3 {
+  font-size: 12.1275px;           
+  margin: 3.3075px 0;             
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;     
+  height: 80px;   
+  background-color: #fff;   
+}
+
+table th, table td {
+  border: 1px solid black;
+  padding: 3.4725px;              
+  text-align: left;
+  font-size: 15px; 
+}
+
+table input[type="text"] {
+  width: 95%;
+  padding: 1.658px;            
+  font-size: 15px;           
+  border: none;
+  outline: none;
+}
+
+.imghaste{
+  display: flex;
+  justify-content: center; 
+}
+
+.imghaste img{
+  max-width: 100%;
+}
+
+.imgtubo{
+  display: flex;
+  justify-content: center; 
+}
+
+.imgguias{
+  display: flex;
+  justify-content: center; 
+}
+
+.imgtirantes{
+  display: flex;
+  justify-content: center;
+}
+
+.linha-dupla{
+  display: flex;
+  gap: 4.41px;                 
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.linha-dupla .section {
+  flex: 1;
+  min-width: 308.7px;          
+}
+
+.hidden {
+  display: none;
+}
+
+#curso,
+#cilindro,
+#curso-tubo,
+#curso-guias,
+#curso-tirantes{
+  height: 17.64px;            
+}
+
+select {
+  height: 1.433rem;           
+}
+
+.botoes-acoes {
+  display: flex;
+  gap: 9.27px;                 
+  justify-content: center;
+  margin: 13.23px 0;           
+}
+
+.btn-imprimir {
+  padding: 6.615px 15.435px;        
+  font-size: 15.435px;           
+  background-color: #4b8cd6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 8.82px 0;             
+}
+
+.btn-imprimir:hover {
+  background-color: #002f5a;
+}
+
+.select-cilindro {
+  max-height: 10px; /* altura máxima do dropdown */
+  overflow-y: auto;  /* mostra scroll se passar da altura */
+}
+
+/* Estilo base da div #especial */
+#especial {
+height: 140px;
+}
+
+/* Quando estiver visível (removendo a classe hidden) */
+#especial:not(.hidden) {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*TUBOS*/
+
+.section.compacta.operacao-corte-tubo {
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 105px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-rosca {
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 105px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-mecanica {
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 135px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-montagem{
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 185px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-testes{
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 185px;   
+  background-color: #9e9e9e9d; 
+}
+
+/* GUIAS E TIRANTES */
+.section.compacta.operacao-corte-guias{
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 105px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-rosca {
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 105px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-mecanica-guias{
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 135px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.compacta.operacao-mecanica-tirantes{
+  padding: 4.41px 6.615px;           
+  margin-bottom: 8.82px;   
+  height: 145px;   
+  background-color: #9e9e9e9d; 
+}
+
+.section.prioridade{
+
+  background-color: #9e9e9e9d; 
+}
+
+#nomehaste{
+  background: #fff;
+}
+
+#nometubo{
+  background: #fff;
+}
+
+#nomepassante {
+  background-color: white;
+}
+
+
+#nomeguias{
+  background: #fff;
+}
+
+
+#nometirantes{
+  background: #fff;
+}
+
+.agrupar-tubo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.imgRebaixo{
+  padding-left: 25%;
+}
+
+.imgRebaixoT{
+  padding-left: 25%;
+}
+
+.imgAlimentacao{
+  padding-left: 30%;
+}
+
+.imgFixacao{
+  padding-left: 30%;
+}
+
+#nomeccmb{
+  background-color: white;
+}
+
+#codigo-ccmb{
+  max-width: 250px;
+}
+
+.new-page{
+  break-after: page;
+} 
