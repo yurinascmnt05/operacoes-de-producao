@@ -6,6 +6,59 @@ let dadosPlanilha = [];
 
 // Espera o DOM estar pronto (jQuery)
 $(document).ready(function () {
+
+  // --- SISTEMA DE SINCRONIZAÇÃO BIDIRECIONAL DOS CAMPOS DE CÓDIGO ---
+
+  function sincronizarCodigosManualmente(origemId) {
+      // Pega o valor do campo que foi editado manualmente
+      const valorEditado = $(`#${origemId}`).val();
+      
+      // Lista de todos os campos de código que devem ser sincronizados
+      const camposCodigo = [
+          "codigo",           // Haste
+          "codigo-tubo",      // Tubo
+          "codigo-guias",     // Guias
+          "codigo-tirantes",  // Tirantes
+          "codigo-ccmb",      // CCMB/CCB
+          "codigo-passante"   // Passante
+      ];
+      
+      // Atualiza todos os outros campos (exceto o que foi editado)
+      camposCodigo.forEach(id => {
+          if (id !== origemId) {
+              $(`#${id}`).val(valorEditado);
+          }
+      });
+      
+      console.log(`Código sincronizado manualmente de ${origemId}: ${valorEditado}`);
+  }
+
+  // Configura os event listeners para todos os campos de código
+  $(document).ready(function() {
+      // Lista de IDs dos campos de código
+      const camposCodigo = [
+          "codigo",           // Haste
+          "codigo-tubo",      // Tubo
+          "codigo-guias",     // Guias
+          "codigo-tirantes",  // Tirantes
+          "codigo-ccmb",      // CCMB/CCB
+          "codigo-passante"   // Passante
+      ];
+      
+      // Adiciona event listener para cada campo
+      camposCodigo.forEach(id => {
+          $(`#${id}`).on('input', function() {
+              // Sincroniza quando o usuário digita algo
+              sincronizarCodigosManualmente(id);
+          });
+          
+          $(`#${id}`).on('change', function() {
+              // Sincroniza também quando o campo perde o foco (após edição)
+              sincronizarCodigosManualmente(id);
+          });
+      });
+  });
+
   // Inicializa o Select2 no select-cilindro
   $('#select-cilindro').select2({
     placeholder: 'Selecione um cilindro',
