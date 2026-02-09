@@ -432,13 +432,17 @@ function resetarCampos() {
       const medidaRD = item.medidaRD || '';
       const medidaCRD = item.medidaCRD || '';
 
-      // 2. Concatena os dois valores com um espaço no meio e remove espaços extras no início ou fim.
       const medidaRDConcatenada = (medidaRD + medidaCRD).trim();
-
+      //==============================================================
       const medidaRDAced = item.medidardacedb || '';
       const medidaCRDAced = item.medidaCRDacedb || '';
 
       const medidaRDAcedConcatenada = (medidaRDAced + medidaCRDAced).trim();
+      //============================================================
+      const medidaRDMi = item.medidaRD_MI || '';
+      const medidaCRDMi = item.medidaCRDMI || '';
+
+      const medidaRDMidConcatenada = (medidaRDMi + medidaCRDMi).trim();
       
 
       // Preenche os campos da haste
@@ -532,6 +536,7 @@ function resetarCampos() {
         inputMedidaRtAced.val(item.medidartaced || '');
         imgHasteAced.attr('src', item.imghasteaced || '');
         RdAced.val(medidaRDAcedConcatenada || '');
+      
 
       // Calcula as medidas finais
       calcular();
@@ -1027,7 +1032,7 @@ $('#versaoPassante').on('change', function() {
 
         $('#linha-dupla-container-corte').removeClass('hidden');
         $('#especial').removeClass('hidden');
-        $('op3-rosca-traseira').removeClass('hidden');
+        $('#op3-rosca-traseira').removeClass('hidden'); // Corrigi o seletor aqui (adicionei #)
         $('#imagem-haste').removeClass('hidden');
         $('#linha-dupla-container-rosca-mi').removeClass('hidden');
 
