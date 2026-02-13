@@ -290,7 +290,7 @@ function resetarCampos() {
       "CTN125", "CTE32", "CTE40", "CTE50", "CTE63", "CTE80", 
       "CTE100", "CTE125", "CTE160", "CTE200", "CTB32", "CTB40",
       "CTB50", "CTB63", "CTB80", "CTB100", "CTB125", "SAI160SNG", 
-      "SAI200SNG", "CT2M63", "CT2M100", "CT2M125",
+      "SAI200SNG", "CT2M63", "CT2M100", "CT2M125", "SGC160SNG", "SGC200SNG", "SGC250SNG"
     ];
 
     const cilindrosCcmb = [
