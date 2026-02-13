@@ -1253,13 +1253,6 @@ function atualizarCodigo() {
     if (cilindro) {
     const cilindroUpper = cilindro.toUpperCase();
 
-    if (cilindroUpper.match(/^SGC(160|200|250)SNG$/)) {
-        let base = cilindroUpper.replace("SNG", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso}SNG`;
-    }
-
-
     //=================================================================
     // CILINDROS FAMÍLIA ACE / ASE / ATE (Separador " X ")
     //=================================================================
