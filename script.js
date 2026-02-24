@@ -503,26 +503,26 @@ function resetarCampos() {
 
       //preenche os campos CCMB
         inputCcmbDianteiraImg.attr('src', item.rebaixoDianteiraCCMB || ''); 
-        inputCcmbC.text(item.c || '');
-        inputCcmbDc.text(item.diametroc || '');
-        inputCcmbA.text(item.a || '');
-        inputCcmbAe.text(item.diametroae || '');
-        inputCcmbB.text(item.b || '');
+        inputCcmbC.val(item.c || '');
+        inputCcmbDc.val(item.diametroc || '');
+        inputCcmbA.val(item.a || '');
+        inputCcmbAe.val(item.diametroae || '');
+        inputCcmbB.val(item.b || '');
 
         inputCcmbTraseiraImg.attr('src', item.rebaixoTraseiraCCMB || '');
-        inputCcmbCt.text(item.ctraseira || '');
-        inputCcmbDct.text(item.diametroctraseira || '');
-        inputCcmbAt.text(item.atraseira || '');
-        inputCcmbAet.text(item.diametroaetraseira || '');
-        inputCcmbBt.text(item.btraseira || '');
+        inputCcmbCt.val(item.ctraseira || '');
+        inputCcmbDct.val(item.diametroctraseira || '');
+        inputCcmbAt.val(item.atraseira || '');
+        inputCcmbAet.val(item.diametroaetraseira || '');
+        inputCcmbBt.val(item.btraseira || '');
         
         inputImgAlimentacao.attr('src', item.imgAlimentacao || '');
-        inputRoscaAlimentacao.text(item.roscaalimentacao || '');
-        inputComprimentoAlimentacao.text(item.comprimentoalimentacao || '');
+        inputRoscaAlimentacao.val(item.roscaalimentacao || '');
+        inputComprimentoAlimentacao.val(item.comprimentoalimentacao || '');
 
         inputImgFuracao.attr('src', item.furacao || '');
-        inputDiametroRebaixo.text(item.diametrorebaixo || '');
-        inputComprimentoRebaixo.text(item.comprimentorebaixo || '');
+        inputDiametroRebaixo.val(item.diametrorebaixo || '');
+        inputComprimentoRebaixo.val(item.comprimentorebaixo || '');
 
         //preenche os campos passante
         inputCortePassante.val(item.cortepassante || '');
