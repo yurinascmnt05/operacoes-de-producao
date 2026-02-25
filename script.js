@@ -170,6 +170,7 @@ function resetarCampos() {
   // Evento quando o usuário muda a seleção do cilindro
   $('#select-cilindro').on('change', function () {
     resetarCampos(); 
+    document.getElementById("observacao").value = "";
     const cilindroSelecionado = $(this).val();
 
     // Seleciona os campos de entrada (Haste)
