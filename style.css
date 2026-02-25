@@ -480,3 +480,7 @@ height: 140px;
 .new-page{
   break-after: page;
 } 
+
+.section.compacta.operacao-testes {
+  height: 110px;   
+}
