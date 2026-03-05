@@ -120,7 +120,7 @@ function resetarCampos() {
     $('#horaguias').val(horaSelecionada); // Adicionado para Guias
     $('#horatirantes').val(horaSelecionada); // Adicionado para Tirantes
     $('#horaccmb').val(horaSelecionada);
-    $('#horaPassante').val(horaSelecionada);
+    $('#horaPassante').val(horaSelecionada); 
   });
   // --- FIM DA SINCRONIZAÇÃO DE DATA/HORA ---
 
@@ -1019,7 +1019,7 @@ $('#versaoPassante').on('change', function() {
       if($(this).is(':checked')) {
 
         $('#linha-dupla-container-corte').addClass('hidden');
-        $('#especial').addClass('hidden');
+        $('#especial').addClass('hidden');      
         $('#op3-rosca-traseira').addClass('hidden');
         $('#imagem-haste').addClass('hidden');
         $('#linha-dupla-container-rosca-mi').addClass('hidden');
