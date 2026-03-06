@@ -1272,9 +1272,10 @@ function atualizarCodigo() {
     if (cilindro) {
     const cilindroUpper = cilindro.toUpperCase();
 
-    if (cilindroUpper === "SGC250SNG") {
+    if (cilindroUpper.match(/^SGC\d+SNG$/)) {
+      const numero = cilindroUpper.match(/\d+/)[0]; // pega o diâmetro
       separador = " X ";
-      textoFinalBase = `SGC250${separador}${curso}SNG`;
+      textoFinalBase = `SGC${numero}${separador}${curso}SNG`;
     }
 
     //=================================================================
