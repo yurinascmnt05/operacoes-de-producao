@@ -840,14 +840,6 @@ function resetarCampos() {
       $('#tubos').addClass('hidden');
       $('#paginaGuias').addClass('hidden');
       $('#paginaTirantes').removeClass('hidden');
-
-    } else {
-
-      // comportamento normal
-      $('#folhaHaste').removeClass('hidden');
-      $('#tubos').removeClass('hidden');
-      $('#paginaGuias').removeClass('hidden');
-      $('#paginaTirantes').removeClass('hidden');
     }
 
     } else {
