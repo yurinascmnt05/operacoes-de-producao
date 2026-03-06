@@ -832,6 +832,24 @@ function resetarCampos() {
           imgtubo.removeClass("hidden"); // Ensure the main tube image container is visible
       }
 
+      // Mostrar apenas folha de tirantes para SGC250SNG
+    if (cilindroSelecionado === "SGC250SNG") {
+
+      // esconde outras folhas
+      $('#folhaHaste').addClass('hidden');
+      $('#tubos').addClass('hidden');
+      $('#paginaGuias').addClass('hidden');
+      $('#paginaTirantes').removeClass('hidden');
+
+    } else {
+
+      // comportamento normal
+      $('#folhaHaste').removeClass('hidden');
+      $('#tubos').removeClass('hidden');
+      $('#paginaGuias').removeClass('hidden');
+      $('#paginaTirantes').removeClass('hidden');
+    }
+
     } else {
        // Limpa todos os campos se o item não for encontrado
       inputMedidaCorte.val('');
@@ -1254,12 +1272,17 @@ function atualizarCodigo() {
     if (cilindro) {
     const cilindroUpper = cilindro.toUpperCase();
 
+    if (cilindroUpper === "SGC250SNG") {
+      separador = " X ";
+      textoFinalBase = `SGC250${separador}${curso}SNG`;
+    }
+
     //=================================================================
     // CILINDROS FAMÍLIA ACE / ASE / ATE (Separador " X ")
     //=================================================================
 
     // ACE com sufixo S
-    if (cilindroUpper.match(/^ACE(12|16|20|25)S$/)) {
+      else if (cilindroUpper.match(/^ACE(12|16|20|25)S$/)) {
         let base = cilindroUpper.replace("S", "");
         separador = " X ";
         // --- LÓGICA PASSANTE ADICIONADA AQUI ---
