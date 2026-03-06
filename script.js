@@ -1276,7 +1276,10 @@ function atualizarCodigo() {
       const numero = cilindroUpper.match(/\d+/)[0]; // pega o diâmetro
       separador = " X ";
       textoFinalBase = `SGC${numero}${separador}${curso}SNG`;
+
+      alert("Para o SGC250, no campo QTD, informe a quantidade de TIRANTES.\n\nEx: 1 SGC = 4 Tirantes");
     }
+
 
     //=================================================================
     // CILINDROS FAMÍLIA ACE / ASE / ATE (Separador " X ")
