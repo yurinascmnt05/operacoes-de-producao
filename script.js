@@ -173,6 +173,10 @@ function resetarCampos() {
     document.getElementById("observacao").value = "";
     const cilindroSelecionado = $(this).val();
 
+    if (cilindroSelecionado.match(/^SGC\d+SNG$/)) {
+      alert("No campo QTD, informe a quantidade de TIRANTES.\n\nEx: 1 SGC = 4 Tirantes");
+    }
+
     // Seleciona os campos de entrada (Haste)
     const inputMedidaCorte = $('#input-medida-corte');
     const inputMedidaRd = $('#input-medida-rosca-dianteira');
@@ -1268,8 +1272,6 @@ function atualizarCodigo() {
       const numero = cilindroUpper.match(/\d+/)[0]; // pega o diâmetro
       separador = " X ";
       textoFinalBase = `SGC${numero}${separador}${curso}SNG`;
-
-      alert("Para o SGC250, no campo QTD, informe a quantidade de TIRANTES.\n\nEx: 1 SGC = 4 Tirantes");
     }
 
 
