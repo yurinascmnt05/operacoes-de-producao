@@ -219,13 +219,27 @@ textarea {
 }
 
 @media print {
-  .btn-imprimir {
-    display: none;
+  /* A quebra só funciona se o elemento NÃO tiver a classe .hidden */
+  .quebra-pagina:not(.hidden) {
+    display: block !important;
+    page-break-before: always !important;
+    break-before: page !important;
+    margin-top: 0 !important;
   }
 
-  #acabamento{
-    /* Altere de 'break-after: always;' para: */
-    page-break-after: always;
+  /* Garante que o hidden seja respeitado acima de tudo */
+  .hidden {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  .btn-imprimir {
+    display: none;
   }
 }
 
