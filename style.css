@@ -4,10 +4,10 @@ body {
   font-size: 13.335px;   
   margin: 0 auto;
   width: 22.05cm;                  
-  height: 31.185cm;                
+  min-height: 29.7cm; /* Alterado de height fixo para min-height (A4 padrão) */
   box-sizing: border-box;
   background: #fff;
-  padding: 8.3475px;               
+  padding: 0; /* Remova o padding do body para não empurrar o conteúdo */
   text-transform: uppercase;
   line-height: 1.21275;            
 }
@@ -270,7 +270,7 @@ table th, table td {
 table input[type="text"] {
   width: 95%;
   padding: 1.658px;            
-  font-size: 15px;           
+  font-size: 15px;
   border: none;
   outline: none;
 }
@@ -490,10 +490,6 @@ height: 140px;
 #codigo-ccmb{
   max-width: 250px;
 }
-
-.new-page{
-  break-after: page;
-} 
 
 .section.compacta.operacao-testes {
   height: 110px;   
