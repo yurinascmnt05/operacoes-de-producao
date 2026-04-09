@@ -543,25 +543,25 @@ function resetarCampos() {
         RdAced.val(medidaRDAcedConcatenada || '');
       
 
-      // Calcula as medidas finais
-      calcular();
-      calcularMi();
-      calcularTubo(); // Calcula a medida final do corte do tubo
-      calcularGuias();
-      calcularTirantes();
+        // Calcula as medidas finais
+        calcular();
+        calcularMi();
+        calcularTubo(); // Calcula a medida final do corte do tubo
+        calcularGuias();
+        calcularTirantes();
 
-      // Lógica para alterar o título da Operação 2 (Rosca de Fixação)
-      const tituloOp2 = $("#titulo-op2-rosca-fixacao");
-      const cilindrosObservacao = [
+        // Lógica para alterar o título da Operação 2 (Rosca de Fixação)
+        const tituloOp2 = $("#titulo-op2-rosca-fixacao");
+        const cilindrosObservacao = [
         "CCNG12", "CCNG16", "CCNG20", "CCNG25", "CCNG32",
         "CCNG40", "CCNG50", "CCNG63", "CCNG80", "CCNG100",
         "CCN12-M", "CCN16-M", "CCN20-M", "CCN25-M", "CCN32-M",
         "CCN40-M", "CCN50-M", "CCN63-M", "CCN80-M", "CCN100-M", "CCN125-M",
         "CCN12-F", "CCN16-F", "CCN20-F", "CCN25-F", "CCN32-F",
         "CCN40-F", "CCN50-F", "CCN63-F", "CCN80-F", "CCN100-F", "CCN125-F"
-      ];
-      const textoObservacao = "(Ø 80, 100 e 125, fazer nos 4 furos)";
-      const textoPadrao = "Operação 2: Rosca de Fixação";
+        ];
+        const textoObservacao = "(Ø 80, 100 e 125, fazer nos 4 furos)";
+        const textoPadrao = "Operação 2: Rosca de Fixação";
 
       if (cilindrosObservacao.includes(cilindroSelecionado)) {
         tituloOp2.text(`${textoPadrao} ${textoObservacao}`);
