@@ -1000,6 +1000,7 @@ $('#input-qtd-haste').on('input', function() {
       // Para todos os outros casos, a quantidade de tubos é igual à de hastes
       qtdTubo = qtdHaste || 0;
   }
+
   
   // Atualiza os campos do formulário
   $('#input-qtd-tubo').val(qtdTubo || '');
@@ -1025,7 +1026,6 @@ $('#versaoPassante').on('change', function() {
         $('#tabelaRebaixoTccmb').removeClass('hidden');
     }
 
-
     const cilindroSelecionado = $('#select-cilindro').val() || '';
 
     // Apenas executa a lógica de trocar o campo para a familía ace
@@ -1047,7 +1047,7 @@ $('#versaoPassante').on('change', function() {
 
         $('#linha-dupla-container-corte').removeClass('hidden');
         $('#especial').removeClass('hidden');
-        $('#op3-rosca-traseira').removeClass('hidden'); // Corrigi o seletor aqui (adicionei #)
+        $('#op3-rosca-traseira').removeClass('hidden');
         $('#imagem-haste').removeClass('hidden');
         $('#linha-dupla-container-rosca-mi').removeClass('hidden');
 
@@ -1056,6 +1056,16 @@ $('#versaoPassante').on('change', function() {
         $('#imgHasteAced').addClass('hidden');
         $('#rdAced').addClass('hidden');
 
+      }
+    }
+
+    if (cilindroSelecionado.toUpperCase().startsWith("CDVU")){
+      if($(this).is(':checked')) {
+        $('#rtAced').removeClass('hidden');
+        $('#op3-rosca-traseira').addClass('hidden');
+      } else {
+        $('#rtAced').addClass('hidden');
+        $('#op3-rosca-traseira').removeClass('hidden');
       }
     }
 
