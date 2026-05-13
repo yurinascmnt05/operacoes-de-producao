@@ -343,7 +343,7 @@ function resetarCampos() {
       inputTubo.val('');
       inputMateriaPrimaTubo.val('');
       inputMedidaCorteTubo.val('');
-      inputCursoTubo.val(''); // Limpa o campo de curso do tubo
+      inputCursoTubo.val('');
       inputMedidaRoscaTubo.val('');
       inputImagemTubo.attr('src', '');
       inputQtdTubo.val('');
@@ -420,8 +420,8 @@ function resetarCampos() {
       // Esconde as imagens de rebaixo CCMB e mostra a imagem do tubo normal
       $(".rebaixoCCMBD").addClass("hidden");
       $(".rebaixoCCMBT").addClass("hidden");
-      $(".imgtubonormal").removeClass("hidden"); // Ensure normal tube image is visible
-      $(".imgtubo").removeClass("hidden"); // Ensure main tube image is visible if it was hidden
+      $(".imgtubonormal").removeClass("hidden");
+      $(".imgtubo").removeClass("hidden");
 
       atualizarCodigo();
       return;
