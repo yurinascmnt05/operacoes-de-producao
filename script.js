@@ -1660,14 +1660,18 @@ function atualizarCodigo() {
   // Condição SAI corrigida
   else if (cilindroUpper.match(/^SAI(32|40|50|63|80|100|125|160|200)SNG$/)) {
       const numero = cilindroUpper.match(/\d+/)[0];
-      let base = "SAI" + numero; // Start with "SAI" and the captured number.
+      
+      // Adiciona o 'D' no prefixo apenas se for passante
+      let prefixo = versaoPassanteChecked ? "SAID" : "SAI"; 
+      
+      let base = prefixo + numero; // Ex: SAI32 ou SAID32
       separador = " X ";
+      
+      // O 'B' do Inox continua sendo adicionado DEPOIS do número, como era antes
       if (versaoInoxChecked) {
-          base += 'B'; // Append 'B' after the number.
+          base += 'B'; 
       }
-      if (versaoPassanteChecked) {
-          base += 'D'; // Append 'D' after the number (and 'B' if applicable).
-      }
+      
       const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG';
       textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
   }
