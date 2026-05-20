@@ -1,5 +1,5 @@
 // URL da API do Sheet.best que retorna os dados da planilha
-const urlAPI = 'https://api.sheetbest.com/sheets/b1f9110a-a118-402c-b5fd-17ca597a70ed';
+const urlAPI = 'https://script.google.com/macros/s/AKfycbz2aY79S22w5D_ZsxSLc9DVFNTfVwG79T-hez7FYEfwSO8y7MTkJoOstPBQm7QHvL8feg/exec';
 
 // Variável global para armazenar os dados carregados da planilha
 let dadosPlanilha = []; 
