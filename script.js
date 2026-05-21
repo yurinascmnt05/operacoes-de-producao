@@ -82,7 +82,7 @@ function resetarCampos() {
   $('#inputAdicionaPh').val('');
   // Limpa o valor do campo de Prolongamento de Rosca (PR)
   $('#inputAdicionaPr').val(''); 
-
+  $('#qtd-cilindro').val('');
 
 
   $('#haste-passante').addClass('hidden');
@@ -172,10 +172,6 @@ function resetarCampos() {
     resetarCampos(); 
     document.getElementById("observacao").value = "";
     const cilindroSelecionado = $(this).val();
-
-    if (cilindroSelecionado.match(/^SGC\d+SNG$/)) {
-      alert("No campo QTD, informe a quantidade de TIRANTES.\n\nEx: 1 SGC = 4 Tirantes");
-    }
 
     // Seleciona os campos de entrada (Haste)
     const inputMedidaCorte = $('#input-medida-corte');
@@ -796,8 +792,6 @@ function resetarCampos() {
 
       // 3. Controla a lógica especial para a série GB/GR (alerta e ocultação de Haste/Tubo)
       if (cilindrosGb.includes(cilindroSelecionado)) {
-        alert("Lembrete: 1 peça GB/GR possui 2 hastes, verifique a quantidade antes de imprimir a OP!");
-        
         // Esconde as folhas de Haste e Tubo, deixando apenas a de Guias (que já está visível)
         folhaHaste.addClass("hidden");
         folhaTubo.addClass("hidden");
@@ -984,6 +978,122 @@ function resetarCampos() {
   });
 
 // --- INÍCIO DA LÓGICA DE QUANTIDADE CORRIGIDA ---
+// script.js
+
+// script.js
+
+// --- LÓGICA DE QUANTIDADE VIA QTD CILINDRO (CORRIGIDA) ---
+function atualizarQuantidades() {
+  const qtdCilindro = parseInt($('#qtd-cilindro').val()) || 0;
+  const isPassante = $('#versaoPassante').is(':checked');
+  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase();
+
+  // 1. Valores Base (Comportamento Padrão)
+  let qtdHaste = qtdCilindro;
+  let qtdTubo = qtdCilindro;
+  let qtdPassante = qtdCilindro;
+  let qtdGuias = qtdCilindro * 2;
+  let qtdTirantes = qtdCilindro * 4;
+
+  // 2. Regra Especial para cilindros GB / GR
+  if (cilindroSelecionado.startsWith("GB") || cilindroSelecionado.startsWith("GR")) {
+    qtdHaste = qtdCilindro * 2;     // 1 peça GB/GR possui 2 hastes
+    qtdTubo = qtdCilindro;          // Mantém 1 tubo por cilindro
+    qtdPassante = qtdCilindro * 2;
+    qtdGuias = qtdCilindro * 2;     // Evita o efeito cascata
+    qtdTirantes = qtdCilindro * 4;  // Evita o efeito cascata
+  } 
+  // 3. Regra Especial para cilindros SAI Passante
+  else if (isPassante && cilindroSelecionado.startsWith("SAI")) {
+    qtdHaste = qtdCilindro * 2;     // Dobro de hastes se for passante
+    qtdTubo = qtdCilindro;
+    qtdPassante = qtdCilindro * 2;
+    qtdGuias = qtdHaste * 2;        // Baseado na quantidade real de hastes
+    qtdTirantes = qtdTubo * 4;      // Baseado na quantidade real de tubos
+  }
+
+  // 4. Aplica os valores exatos diretamente nos inputs do formulário
+  $('#input-qtd-haste').val(qtdHaste || '');
+  $('#input-qtd-tubo').val(qtdTubo || '');
+  $('#input-qtd-passante').val(qtdPassante || '');
+  $('#input-qtd-guias').val(qtdGuias || '');
+  $('#input-qtd-tirantes').val(qtdTirantes || '');
+}
+
+// Dispara a atualização sempre que o usuário alterar a quantidade de cilindros
+$('#qtd-cilindro').on('input change', function() {
+  atualizarQuantidades();
+});
+
+// Modificação do evento do versaoPassante para também disparar o recálculo de quantidades
+$('#versaoPassante').on('change', function() {
+  const isChecked = $(this).is(':checked');
+
+  if (isChecked) {
+      $('#haste-passante').removeClass('hidden');
+      $('#imgrebaixoTccmb').addClass('hidden');
+      $('#tabelaRebaixoTccmb').addClass('hidden');
+  } else {
+      $('#haste-passante').addClass('hidden');
+      $('#imgrebaixoTccmb').removeClass('hidden');
+      $('#tabelaRebaixoTccmb').removeClass('hidden');
+  }
+
+  const cilindroSelecionado = $('#select-cilindro').val() || '';
+
+  // Lógica para alternar campos da família ACE
+  if (cilindroSelecionado.toUpperCase().startsWith("ACE")){
+    if($(this).is(':checked')) {
+      $('#linha-dupla-container-corte').addClass('hidden');
+      $('#especial').addClass('hidden');      
+      $('#op3-rosca-traseira').addClass('hidden');
+      $('#imagem-haste').addClass('hidden');
+      $('#linha-dupla-container-rosca-mi').addClass('hidden');
+
+      $('#opCorteAce').removeClass('hidden');
+      $('#rtAced').removeClass('hidden');
+      $('#imgHasteAced').removeClass('hidden');
+      $('#rdAced').removeClass('hidden');
+    } else {
+      $('#linha-dupla-container-corte').removeClass('hidden');
+      $('#especial').removeClass('hidden');
+      $('#op3-rosca-traseira').removeClass('hidden');
+      $('#imagem-haste').removeClass('hidden');
+      $('#linha-dupla-container-rosca-mi').removeClass('hidden');
+
+      $('#opCorteAce').addClass('hidden');
+      $('#rtAced').addClass('hidden');
+      $('#imgHasteAced').addClass('hidden');
+      $('#rdAced').addClass('hidden');
+    }
+  }
+
+  if (cilindroSelecionado.toUpperCase().startsWith("CDVU")){
+    if($(this).is(':checked')) {
+      $('#rtAced').removeClass('hidden');
+      $('#op3-rosca-traseira').addClass('hidden');
+    } else {
+      $('#rtAced').addClass('hidden');
+      $('#op3-rosca-traseira').removeClass('hidden');
+    }
+  }
+
+  // CHAMA A ATUALIZAÇÃO DE QUANTIDADES PARA AJUSTAR O DOBRO CASO SEJA SAI PASSANTE
+  atualizarQuantidades();
+  
+  // Atualiza o código do produto
+  atualizarCodigo();
+});
+
+// Certifique-se de que ao mudar o cilindro no select, as quantidades também atualizem
+$('#select-cilindro').on('change', function () {
+  // ... (todo o seu código atual do evento change do select-cilindro permanece aqui) ...
+  
+  // No final deste evento, logo antes do 'atualizarCodigo()', adicione:
+  atualizarQuantidades();
+});
+
+// --- FIM DA LÓGICA DE QUANTIDADE ---
 
 // Evento para quando a quantidade de hastes for alterada
 $('#input-qtd-haste').on('input', function() {
@@ -1180,7 +1290,6 @@ function calcularMi() {
   }
 }
 
-// --- ADICIONE ESTA NOVA FUNÇÃO ---
 /**
  * Calcula a medida final da rosca dianteira com base no PR.
  */
