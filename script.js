@@ -289,7 +289,7 @@ function resetarCampos() {
     const cilindrosTirantados = [
       "CTN32", "CTN40", "CTN50", "CTN63", "CTN80", "CTN100", 
       "CTN125", "CTE32", "CTE40", "CTE50", "CTE63", "CTE80", 
-      "CTE100", "CTE125", "CTE160", "CTE200", "CTB32", "CTB40",
+      "CTE100", "CTE125", "CTE160", "CTE200", "CTE320", "CTB32", "CTB40",
       "CTB50", "CTB63", "CTB80", "CTB100", "CTB125", "SAI160SNG", 
       "SAI200SNG", "CT2M40", "CT2M50", "CT2M63", "CT2M100", "CT2M125", "SGC160SNG", "SGC200SNG", "SGC250SNG"
     ];
@@ -832,6 +832,15 @@ function resetarCampos() {
 
       // Mostrar apenas folha de tirantes para SGC250SNG
     if (cilindroSelecionado === "SGC250SNG") {
+
+      // esconde outras folhas
+      $('#folhaHaste').addClass('hidden');
+      $('#tubos').addClass('hidden');
+      $('#paginaGuias').addClass('hidden');
+      $('#paginaTirantes').removeClass('hidden');
+    }
+
+    if (cilindroSelecionado === "CTE320") {
 
       // esconde outras folhas
       $('#folhaHaste').addClass('hidden');
