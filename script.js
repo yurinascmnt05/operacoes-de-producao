@@ -1627,7 +1627,7 @@ function atualizarCodigo() {
         const numero = match[1];
         separador = " - ";
         const sufixoFinal = versaoVitonChecked ? ' - V' : '';
-        textoFinalBase = `CSM3B ${numero}${separador}${curso}${sufixoFinal}C`;
+        textoFinalBase = `CSM3B${numero}${separador}${curso}C${sufixoFinal}`;
     }
 
     //=================================================================
