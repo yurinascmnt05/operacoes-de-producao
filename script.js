@@ -1619,7 +1619,7 @@ function atualizarCodigo() {
         const numero = match[1];
         separador = " - ";
         const sufixoFinal = versaoVitonChecked ? ' - V' : '';
-        textoFinalBase = `CSM3F ${numero}${separador}${curso}${sufixoFinal}C`;
+        textoFinalBase = `CSM3F ${numero}${separador}${curso}C${sufixoFinal}`;
     }
     // CSM3B (Formato especial)
     else if (cilindroUpper.match(/^CSM3B(32|40|50|63)-C$/)) {
