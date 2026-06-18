@@ -303,7 +303,8 @@ function resetarCampos() {
 
     const cilindrosCcb = [
       "CCB12-F", "CCB16-F", "CCB20-F", "CCB25-F", "CCB32-F", "CCB40-F", "CCB50-F", "CCB63-F", "CCB80-F", "CCB100-F",
-      "CCB12-M", "CCB16-M", "CCB20-M", "CCB25-M", "CCB32-M", "CCB40-M", "CCB50-M", "CCB63-M", "CCB80-M", "CCB100-M"
+      "CCB12-M", "CCB16-M", "CCB20-M", "CCB25-M", "CCB32-M", "CCB40-M", "CCB50-M", "CCB63-M", "CCB80-M", "CCB100-M",
+      "CCB16L-M"
     ]
 
     const familiaCc = [...cilindrosCcmb, ...cilindrosCcb];
