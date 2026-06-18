@@ -1679,6 +1679,8 @@ function atualizarCodigo() {
         let base = cilindroUpper.replace("-M", "");
         if (cilindroUpper === "CCMB20-M") {
             base = "CCMB20";
+        } else if (cilindroUpper === "CCB20-M") {
+            base = "CCB25";
         }
         separador = " - ";
         textoFinalBase = `${base}${separador}${curso} M`;
@@ -1689,14 +1691,16 @@ function atualizarCodigo() {
     }
 
     // CCMB...-M / -F
-    else if (cilindroUpper.match(/^CCMB(12|16|20|25|32|40|50|63|80|100)L-M$/)) {
+    else if (cilindroUpper.match(/^(CCMB|CCB)(12|16|20|25|32|40|50|63|80|100)L-M$/)) {
         let base = cilindroUpper.replace("L-M", "");
         if (cilindroUpper === "CCMBL20-M") {
             base = "CCMBL20";
+        } else if (cilindroUpper === "CCBL20-M") {
+            base = "CCBL20";
         }
         separador = " - ";
         textoFinalBase = `${base}L${separador}${curso} M`;
-    } else if (cilindroUpper.match(/^CCMB(12|16|20|25|32|40|50|63|80|100)L-F$/)) {
+    } else if (cilindroUpper.match(/^(CCMB|CCB)(12|16|20|25|32|40|50|63|80|100)L-F$/)) {
         const base = cilindroUpper.replace("L-F", "");
         separador = " - ";
         textoFinalBase = `${base}L${separador}${curso} F`;
