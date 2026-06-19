@@ -165,8 +165,6 @@ function resetarCampos() {
     })
     .catch(err => console.error('Erro ao carregar dados:', err));
 
-       
-
   // Evento quando o usuário muda a seleção do cilindro
   $('#select-cilindro').on('change', function () {
     resetarCampos(); 
@@ -177,6 +175,7 @@ function resetarCampos() {
     const inputMedidaCorte = $('#input-medida-corte');
     const inputMedidaRd = $('#input-medida-rosca-dianteira');
     const inputMedidaRt = $('#input-medida-rosca-traseira');
+    const inputMedidaRtCcb = $('#input-medida-rosca-traseira-ccb');
     const inputImagem = $('#imagem-haste');
     const inputMedidaRebaixo = $('#input-medida-rebaixo');
     const inputMedidaComprimento = $('#input-medida-comprimento');
@@ -316,6 +315,7 @@ function resetarCampos() {
       inputMedidaCorte.val('');
       inputMedidaRd.val('');
       inputMedidaRt.val('');
+      inputMedidaRtCcb.val('');
       inputImagem.attr('src', '');
       inputMedidaRebaixo.val('');
       inputMedidaComprimento.val('');
@@ -456,6 +456,7 @@ function resetarCampos() {
       inputMedidaRd.val(medidaRDConcatenada);
 
       inputMedidaRt.val(item.medidaRT || '');
+      inputMedidaRtCcb.val(item.medidaRT || '');
       inputImagem.attr('src', item.imagemdahaste || '');
       inputMedidaRebaixo.val(item.medidarebaixo || '');
       inputMedidaComprimento.val(item.medidacomprimento || '');
@@ -819,11 +820,13 @@ function resetarCampos() {
 
       // Lógica para mostrar/esconder a página CCMB/CCB
     const paginaCcmb = $("#paginaCcmb"); // <--- ADICIONE ESTA LINHA
+    const op3Ccb = $("#op3-rosca-traseira-ccb"); // <--- ADICIONE ESTA LINHA
     if (familiaCc.includes(cilindroSelecionado)) { // <--- ADICIONE ESTE BLOCO
       paginaCcmb.removeClass("hidden"); // Mostra a página CCMB]
-      
+      op3Ccb.removeClass("hidden"); // Mostra a operação de rosca traseira para CCB
     } else {
       paginaCcmb.addClass("hidden"); // Esconde a página CCMB
+      op3Ccb.addClass("hidden"); // Esconde a operação de rosca traseira para CCB
     }
       
       // Lógica para exibir imagens de rebaixo CCMB16 ou imagem do tubo normal
@@ -862,6 +865,7 @@ function resetarCampos() {
       inputMedidaCorte.val('');
       inputMedidaRd.val('');
       inputMedidaRt.val('');
+      inputMedidaRtCcb.val('');
       inputImagem.attr('src', '');
       inputMedidaRebaixo.val('');
       inputMedidaComprimento.val('');
