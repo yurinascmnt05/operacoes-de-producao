@@ -78,6 +78,12 @@ function resetarCampos() {
   $('#versaoPassante').prop('checked', false);
   $('#versaoVitonAirTac').prop('checked', false);
 
+  $('#versaoViton').prop('checked', false).trigger('change');
+  $('#versaoInox').prop('checked', false).trigger('change');
+  $('#versaoPassante').prop('checked', false).trigger('change');
+  $('#versaoVitonAirTac').prop('checked', false).trigger('change');
+
+
   // Limpa o valor do campo de Prolongamento de Haste (PH)
   $('#inputAdicionaPh').val('');
   // Limpa o valor do campo de Prolongamento de Rosca (PR)
