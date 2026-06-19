@@ -249,6 +249,8 @@ function resetarCampos() {
     const inputCcmbAt = $('#ccmb-at');
     const inputCcmbAet = $('#ccmb-aet');
     const inputCcmbBt = $('#ccmb-bt');
+    const inputDiamX = $('#input-diam-x');
+    const inputCompX = $('#input-comp-x');
 
     const inputImgAlimentacao = $('#imgAlimentacao');
     const inputRoscaAlimentacao = $('#ccmb-rosca-alimentacao');
@@ -384,6 +386,8 @@ function resetarCampos() {
       inputCcmbAt.val('');
       inputCcmbAet.val('');
       inputCcmbBt.val('');
+      inputDiamX.val('');
+      inputCompX.val('');
 
       inputImgAlimentacao.attr('src', '');
       inputRoscaAlimentacao.val('');
@@ -517,6 +521,8 @@ function resetarCampos() {
         inputCcmbAt.val(item.atraseira || '');
         inputCcmbAet.val(item.diametroaetraseira || '');
         inputCcmbBt.val(item.btraseira || '');
+        inputDiamX.val(item.diamx || '');
+        inputCompX.val(item.compx || '');
         
         inputImgAlimentacao.attr('src', item.imgAlimentacao || '');
         inputRoscaAlimentacao.val(item.roscaalimentacao || '');
@@ -814,7 +820,8 @@ function resetarCampos() {
       // Lógica para mostrar/esconder a página CCMB/CCB
     const paginaCcmb = $("#paginaCcmb"); // <--- ADICIONE ESTA LINHA
     if (familiaCc.includes(cilindroSelecionado)) { // <--- ADICIONE ESTE BLOCO
-      paginaCcmb.removeClass("hidden"); // Mostra a página CCMB
+      paginaCcmb.removeClass("hidden"); // Mostra a página CCMB]
+      
     } else {
       paginaCcmb.addClass("hidden"); // Esconde a página CCMB
     }
