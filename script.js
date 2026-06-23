@@ -720,7 +720,7 @@ function resetarCampos() {
         "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG", 
         "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG", 
         "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG", 
-        "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG"
+        "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG", "CDVU50-F"
       ];
 
       const cilindrosEspecial = [
@@ -1070,7 +1070,7 @@ $('#versaoPassante').on('change', function() {
   const cilindroSelecionado = $('#select-cilindro').val() || '';
 
   // Lógica para alternar campos da família ACE
-  if (cilindroSelecionado.toUpperCase().startsWith("ACE")){
+  if (cilindroSelecionado.toUpperCase().startsWith("ACE") || cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
     if($(this).is(':checked')) {
       $('#linha-dupla-container-corte').addClass('hidden');
       $('#especial').addClass('hidden');      
