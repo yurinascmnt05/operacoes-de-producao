@@ -827,13 +827,17 @@ function resetarCampos() {
 
       // Lógica para mostrar/esconder a página CCMB/CCB
     const paginaCcmb = $("#paginaCcmb"); // <--- ADICIONE ESTA LINHA
-    const op3Ccb = $("#op3-rosca-traseira-ccb"); // <--- ADICIONE ESTA LINHA
+    const op3Ccb = $("#op3-rosca-traseira-ccb");
+    const op3 = $("#op3-rosca-traseira");
     if (familiaCc.includes(cilindroSelecionado)) { // <--- ADICIONE ESTE BLOCO
       paginaCcmb.removeClass("hidden"); // Mostra a página CCMB]
       op3Ccb.removeClass("hidden"); // Mostra a operação de rosca traseira para CCB
+      op3.addClass("hidden"); // Esconde a operação de rosca traseira para CCMB
+
     } else {
       paginaCcmb.addClass("hidden"); // Esconde a página CCMB
       op3Ccb.addClass("hidden"); // Esconde a operação de rosca traseira para CCB
+      op3.removeClass("hidden"); // Mostra a operação de rosca traseira para CCMB
     }
       
       // Lógica para exibir imagens de rebaixo CCMB16 ou imagem do tubo normal
