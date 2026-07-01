@@ -991,6 +991,20 @@ function resetarCampos() {
           $("#componenteInox").removeClass("hidden");
       }
 
+      const cilindrosBsai = [
+        "BSAI32SG", "BSAI40SG", "BSAI50SG", "BSAI63SG", "BSAI80SG", "BSAI100SG", "BSAI125SG"
+      ];
+
+      if(cilindrosBsai.includes(cilindroSelecionado)) {
+        $("#componenteViton").addClass("hidden");
+        $("#componenteInox").addClass("hidden");
+        $("#componentePassante").addClass("hidden");
+      } else {
+          $("#componenteViton").removeClass("hidden");
+          $("#componenteInox").removeClass("hidden");
+          $("#componentePassante").removeClass("hidden");
+      }
+
 
     atualizarCodigo(); // Atualiza o código exibido
   });
@@ -1803,11 +1817,12 @@ function atualizarCodigo() {
     //=================================================================
 
   // Condição SAI corrigida
-  else if (cilindroUpper.match(/^(SAI(32|40|50|63|80|100|125|160|200)|BSAI(32|40|50|63|80|100|125))SNG$/)) {
+else if (cilindroUpper.match(/^(SAI(32|40|50|63|80|100|125|160|200)SNG|BSAI(32|40|50|63|80|100|125)SG)$/)) {
     const numero = cilindroUpper.match(/\d+/)[0];
     
     // Identifica se o cilindro base é BSAI ou SAI
-    const tipoBase = cilindroUpper.startsWith("BSAI") ? "BSAI" : "SAI";
+    const isBsai = cilindroUpper.startsWith("BSAI");
+    const tipoBase = isBsai ? "BSAI" : "SAI";
     
     // Adiciona o 'D' no prefixo apenas se for passante (Ex: SAID ou BSAID)
     let prefixo = versaoPassanteChecked ? tipoBase + "D" : tipoBase; 
@@ -1815,12 +1830,21 @@ function atualizarCodigo() {
     let base = prefixo + numero; // Ex: SAI32, SAID32, BSAI32 ou BSAID32
     separador = " X ";
     
-    // O 'B' do Inox continua sendo adicionado DEPOIS do número, como era antes
+    // O 'B' do Inox continua sendo adicionado DEPOIS do número
     if (versaoInoxChecked) {
         base += 'B'; 
     }
     
-    const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG';
+    // Define o sufixo final correto dependendo se é BSAI ou SAI
+    let sufixoFinal = "";
+    if (isBsai) {
+        // Se for BSAI, usa SG (ou SHG se for Viton)
+        sufixoFinal = versaoVitonChecked ? 'SHG' : 'SG';
+    } else {
+        // Se for SAI, usa SNG (ou SHG se for Viton)
+        sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG';
+    }
+    
     textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
 }
 
