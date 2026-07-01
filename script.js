@@ -1803,23 +1803,26 @@ function atualizarCodigo() {
     //=================================================================
 
   // Condição SAI corrigida
-  else if (cilindroUpper.match(/^SAI(32|40|50|63|80|100|125|160|200)SNG$/)) {
-      const numero = cilindroUpper.match(/\d+/)[0];
-      
-      // Adiciona o 'D' no prefixo apenas se for passante
-      let prefixo = versaoPassanteChecked ? "SAID" : "SAI"; 
-      
-      let base = prefixo + numero; // Ex: SAI32 ou SAID32
-      separador = " X ";
-      
-      // O 'B' do Inox continua sendo adicionado DEPOIS do número, como era antes
-      if (versaoInoxChecked) {
-          base += 'B'; 
-      }
-      
-      const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG';
-      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
-  }
+  else if (cilindroUpper.match(/^(SAI(32|40|50|63|80|100|125|160|200)|BSAI(32|40|50|63|80|100|125))SNG$/)) {
+    const numero = cilindroUpper.match(/\d+/)[0];
+    
+    // Identifica se o cilindro base é BSAI ou SAI
+    const tipoBase = cilindroUpper.startsWith("BSAI") ? "BSAI" : "SAI";
+    
+    // Adiciona o 'D' no prefixo apenas se for passante (Ex: SAID ou BSAID)
+    let prefixo = versaoPassanteChecked ? tipoBase + "D" : tipoBase; 
+    
+    let base = prefixo + numero; // Ex: SAI32, SAID32, BSAI32 ou BSAID32
+    separador = " X ";
+    
+    // O 'B' do Inox continua sendo adicionado DEPOIS do número, como era antes
+    if (versaoInoxChecked) {
+        base += 'B'; 
+    }
+    
+    const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG';
+    textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+}
 
     //=================================================================
     // REGRAS GERAIS (Menor Prioridade)
