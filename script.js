@@ -1435,8 +1435,18 @@ function atualizarCodigo() {
 
     if (cilindroUpper.match(/^SGC\d+SNG$/)) {
       const numero = cilindroUpper.match(/\d+/)[0]; // pega o diâmetro
+      let prefixo = versaoPassanteChecked ? 'SGCD' : 'SGC'; // Lógica Passante
+
+      let base = prefixo + numero; // Adiciona o prefixo ao número
       separador = " X ";
-      textoFinalBase = `SGC${numero}${separador}${curso}SNG`;
+
+      if (versaoInoxChecked) {
+        base += 'B'; // Adiciona o sufixo I se a versão inox estiver marcada
+      }
+
+      let sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG'; // Lógica Viton
+
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
 
 
@@ -1878,10 +1888,10 @@ else if (cilindroUpper.match(/^(SAI(32|40|50|63|80|100|125|160|200)SNG|BSAI(32|4
     // As outras lógicas permanecem iguais.
     // Adiciona '- P' somente se for passante E NÃO for um cilindro ACE
     const cilindroUpper = cilindro.toUpperCase();
-    if (versaoPassanteChecked && !(cilindroUpper.startsWith("ACE") || cilindroUpper.startsWith("ASE") || cilindroUpper.startsWith("ATE") || cilindroUpper.startsWith("SAI") || cilindroUpper.startsWith("MI"))) {
+    if (versaoPassanteChecked && !(cilindroUpper.startsWith("ACE") || cilindroUpper.startsWith("ASE") || cilindroUpper.startsWith("ATE") || cilindroUpper.startsWith("SAI") || cilindroUpper.startsWith("MI") || cilindroUpper.startsWith("SGC"))) {
     codigoFinalFormatado += ' - P';
     }
-    if (versaoInoxChecked && !(cilindroUpper.startsWith("SAI"))) {
+    if (versaoInoxChecked && !(cilindroUpper.startsWith("SAI") || cilindroUpper.startsWith("SGC"))) {
         codigoFinalFormatado += ' - I';
     }
 
