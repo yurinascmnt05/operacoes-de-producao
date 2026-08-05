@@ -175,7 +175,7 @@ $(document).ready(function () {
   $('#select-cilindro').on('change', function () {
     resetarCampos();
     document.getElementById("observacao").value = "";
-    const cilindroSelecionado = $(this).val();
+    const cilindroSelecionado = ($(this).val() || '').toUpperCase().trim();
 
     // Seleciona os campos de entrada (Haste)
     const inputMedidaCorte = $('#input-medida-corte');
@@ -1085,7 +1085,7 @@ $(document).ready(function () {
       $('#tabelaRebaixoTccmb').removeClass('hidden');
     }
 
-    const cilindroSelecionado = $('#select-cilindro').val() || '';
+    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
 
     // Lógica para alternar campos da família ACE
     if (cilindroSelecionado.toUpperCase().startsWith("ACE") || cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
@@ -1145,7 +1145,7 @@ $(document).ready(function () {
   $('#input-qtd-haste').on('input', function () {
     const qtdHaste = parseInt($(this).val()) || 0;
     const isPassante = $('#versaoPassante').is(':checked');
-    const cilindroSelecionado = $('#select-cilindro').val() || '';
+    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
 
     let qtdTubo; // Variável para armazenar a quantidade de tubos calculada
 
@@ -1182,7 +1182,7 @@ $(document).ready(function () {
       $('#tabelaRebaixoTccmb').removeClass('hidden');
     }
 
-    const cilindroSelecionado = $('#select-cilindro').val() || '';
+    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
 
     // Apenas executa a lógica de trocar o campo para a familía ace
     if (cilindroSelecionado.toUpperCase().startsWith("ACE")) {
@@ -1259,7 +1259,7 @@ $(document).ready(function () {
 // Função calcular: Calcula a medida de corte final da haste padrão
 function calcular() {
   // --- Valores de entrada ---
-  const cilindroSelecionado = $('#select-cilindro').val();
+  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
   const curso = parseFloat($('#curso').val()) || 0;
 
   // 1. LÊ O VALOR DO NOVO CAMPO "PROLONGAMENTO DE HASTE"
@@ -1314,7 +1314,7 @@ function calcular() {
 // Função calcularMi: Calcula a medida de corte final da haste MI
 function calcularMi() {
   const curso = parseFloat($('#curso').val()) || 0;
-  const cilindroSelecionado = $('#select-cilindro').val();
+  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
 
   // 1. LÊ O VALOR DO PROLONGAMENTO (a linha que faltava)
   const prolongamentoPH = parseFloat($('#inputAdicionaPh').val()) || 0;
@@ -1365,7 +1365,7 @@ function calcularRosca() {
 // Função calcularTubo: Calcula a medida de corte final do tubo
 function calcularTubo() {
   const inputCurso = $('#curso'); // Lê o valor do curso principal
-  const cilindroSelecionado = $('#select-cilindro').val();
+  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
   const curso = parseFloat(inputCurso.val()) || 0;
 
   const item = dadosPlanilha.find(d => d.cilindro === cilindroSelecionado);
@@ -1383,7 +1383,7 @@ function calcularTubo() {
 // Função calcularTubo: Calcula a medida de corte final do tubo
 function calcularGuias() {
   const inputCurso = $('#curso'); // Lê o valor do curso principal
-  const cilindroSelecionado = $('#select-cilindro').val();
+  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
   const curso = parseFloat(inputCurso.val()) || 0;
 
   const item = dadosPlanilha.find(d => d.cilindro === cilindroSelecionado);
@@ -1401,7 +1401,7 @@ function calcularGuias() {
 // Função calcularTubo: Calcula a medida de corte final do tubo
 function calcularTirantes() {
   const inputCurso = $('#curso'); // Lê o valor do curso principal
-  const cilindroSelecionado = $('#select-cilindro').val();
+  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
   const curso = parseFloat(inputCurso.val()) || 0;
 
   const item = dadosPlanilha.find(d => d.cilindro === cilindroSelecionado);
