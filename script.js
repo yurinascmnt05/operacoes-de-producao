@@ -2,7 +2,7 @@
 const urlAPI = 'https://script.google.com/macros/s/AKfycbz2aY79S22w5D_ZsxSLc9DVFNTfVwG79T-hez7FYEfwSO8y7MTkJoOstPBQm7QHvL8feg/exec';
 
 // Variável global para armazenar os dados carregados da planilha
-let dadosPlanilha = []; 
+let dadosPlanilha = [];
 
 // Espera o DOM estar pronto (jQuery)
 $(document).ready(function () {
@@ -10,53 +10,53 @@ $(document).ready(function () {
   // --- SISTEMA DE SINCRONIZAÇÃO BIDIRECIONAL DOS CAMPOS DE CÓDIGO ---
 
   function sincronizarCodigosManualmente(origemId) {
-      // Pega o valor do campo que foi editado manualmente
-      const valorEditado = $(`#${origemId}`).val();
-      
-      // Lista de todos os campos de código que devem ser sincronizados
-      const camposCodigo = [
-          "codigo",           // Haste
-          "codigo-tubo",      // Tubo
-          "codigo-guias",     // Guias
-          "codigo-tirantes",  // Tirantes
-          "codigo-ccmb",      // CCMB/CCB
-          "codigo-passante"   // Passante
-      ];
-      
-      // Atualiza todos os outros campos (exceto o que foi editado)
-      camposCodigo.forEach(id => {
-          if (id !== origemId) {
-              $(`#${id}`).val(valorEditado);
-          }
-      });
-      
-      console.log(`Código sincronizado manualmente de ${origemId}: ${valorEditado}`);
+    // Pega o valor do campo que foi editado manualmente
+    const valorEditado = $(`#${origemId}`).val();
+
+    // Lista de todos os campos de código que devem ser sincronizados
+    const camposCodigo = [
+      "codigo",           // Haste
+      "codigo-tubo",      // Tubo
+      "codigo-guias",     // Guias
+      "codigo-tirantes",  // Tirantes
+      "codigo-ccmb",      // CCMB/CCB
+      "codigo-passante"   // Passante
+    ];
+
+    // Atualiza todos os outros campos (exceto o que foi editado)
+    camposCodigo.forEach(id => {
+      if (id !== origemId) {
+        $(`#${id}`).val(valorEditado);
+      }
+    });
+
+    console.log(`Código sincronizado manualmente de ${origemId}: ${valorEditado}`);
   }
 
   // Configura os event listeners para todos os campos de código
-  $(document).ready(function() {
-      // Lista de IDs dos campos de código
-      const camposCodigo = [
-          "codigo",           // Haste
-          "codigo-tubo",      // Tubo
-          "codigo-guias",     // Guias
-          "codigo-tirantes",  // Tirantes
-          "codigo-ccmb",      // CCMB/CCB
-          "codigo-passante"   // Passante
-      ];
-      
-      // Adiciona event listener para cada campo
-      camposCodigo.forEach(id => {
-          $(`#${id}`).on('input', function() {
-              // Sincroniza quando o usuário digita algo
-              sincronizarCodigosManualmente(id);
-          });
-          
-          $(`#${id}`).on('change', function() {
-              // Sincroniza também quando o campo perde o foco (após edição)
-              sincronizarCodigosManualmente(id);
-          });
+  $(document).ready(function () {
+    // Lista de IDs dos campos de código
+    const camposCodigo = [
+      "codigo",           // Haste
+      "codigo-tubo",      // Tubo
+      "codigo-guias",     // Guias
+      "codigo-tirantes",  // Tirantes
+      "codigo-ccmb",      // CCMB/CCB
+      "codigo-passante"   // Passante
+    ];
+
+    // Adiciona event listener para cada campo
+    camposCodigo.forEach(id => {
+      $(`#${id}`).on('input', function () {
+        // Sincroniza quando o usuário digita algo
+        sincronizarCodigosManualmente(id);
       });
+
+      $(`#${id}`).on('change', function () {
+        // Sincroniza também quando o campo perde o foco (após edição)
+        sincronizarCodigosManualmente(id);
+      });
+    });
   });
 
   // Inicializa o Select2 no select-cilindro
@@ -69,48 +69,48 @@ $(document).ready(function () {
   /**
  * Reseta os campos de opções e customizações para o estado padrão.
  */
-function resetarCampos() {
-  console.log("Resetando campos de customização...");
+  function resetarCampos() {
+    console.log("Resetando campos de customização...");
 
-  // Desmarca todas as checkboxes de versões/opções
-  $('#versaoViton').prop('checked', false);
-  $('#versaoInox').prop('checked', false);
-  $('#versaoPassante').prop('checked', false);
-  $('#versaoVitonAirTac').prop('checked', false);
+    // Desmarca todas as checkboxes de versões/opções
+    $('#versaoViton').prop('checked', false);
+    $('#versaoInox').prop('checked', false);
+    $('#versaoPassante').prop('checked', false);
+    $('#versaoVitonAirTac').prop('checked', false);
 
-  $('#versaoViton').prop('checked', false).trigger('change');
-  $('#versaoInox').prop('checked', false).trigger('change');
-  $('#versaoPassante').prop('checked', false).trigger('change');
-  $('#versaoVitonAirTac').prop('checked', false).trigger('change');
-
-
-  // Limpa o valor do campo de Prolongamento de Haste (PH)
-  $('#inputAdicionaPh').val('');
-  // Limpa o valor do campo de Prolongamento de Rosca (PR)
-  $('#inputAdicionaPr').val(''); 
-  $('#qtd-cilindro').val('');
+    $('#versaoViton').prop('checked', false).trigger('change');
+    $('#versaoInox').prop('checked', false).trigger('change');
+    $('#versaoPassante').prop('checked', false).trigger('change');
+    $('#versaoVitonAirTac').prop('checked', false).trigger('change');
 
 
-  $('#haste-passante').addClass('hidden');
-}
+    // Limpa o valor do campo de Prolongamento de Haste (PH)
+    $('#inputAdicionaPh').val('');
+    // Limpa o valor do campo de Prolongamento de Rosca (PR)
+    $('#inputAdicionaPr').val('');
+    $('#qtd-cilindro').val('');
+
+
+    $('#haste-passante').addClass('hidden');
+  }
 
 
   // --- INÍCIO DO NOVO CÓDIGO ---
   // Evento para sincronizar o nome selecionado com os campos de nome nas outras seções
-  $('#select-nome').on('change', function() {
+  $('#select-nome').on('change', function () {
     const nomeSelecionado = $(this).val();
     const nomeSelecionadoUpper = nomeSelecionado.toUpperCase(); // Pega o valor selecionado
     $('#nometubo').val(nomeSelecionadoUpper);    // Atualiza o campo de nome no Tubo
     $('#nomeguias').val(nomeSelecionadoUpper);   // Atualiza o campo de nome nas Guias
     $('#nometirantes').val(nomeSelecionadoUpper); // Atualiza o campo de nome nos Tirantes
-    $('#nomeccmb').val(nomeSelecionadoUpper); 
+    $('#nomeccmb').val(nomeSelecionadoUpper);
     $('#nomepassante').val(nomeSelecionadoUpper);
   });
   // --- FIM DO NOVO CÓDIGO ---
-  
-    // --- INÍCIO DA SINCRONIZAÇÃO DE DATA/HORA ---
+
+  // --- INÍCIO DA SINCRONIZAÇÃO DE DATA/HORA ---
   // Evento para sincronizar a data da Haste com Tubo, Guias e Tirantes
-  $('#datahaste').on('input change', function() {
+  $('#datahaste').on('input change', function () {
     const dataSelecionada = $(this).val();
     $('#datatubo').val(dataSelecionada);
     $('#dataguias').val(dataSelecionada); // Adicionado para Guias
@@ -120,25 +120,25 @@ function resetarCampos() {
   });
 
   // Evento para sincronizar a hora da Haste com Tubo, Guias e Tirantes
-  $('#horahaste').on('input change', function() {
+  $('#horahaste').on('input change', function () {
     const horaSelecionada = $(this).val();
     $('#horatubo').val(horaSelecionada);
     $('#horaguias').val(horaSelecionada); // Adicionado para Guias
     $('#horatirantes').val(horaSelecionada); // Adicionado para Tirantes
     $('#horaccmb').val(horaSelecionada);
-    $('#horaPassante').val(horaSelecionada); 
+    $('#horaPassante').val(horaSelecionada);
   });
   // --- FIM DA SINCRONIZAÇÃO DE DATA/HORA ---
 
   // --- INÍCIO DA SINCRONIZAÇÃO DE PRIORIDADE ---
   // Evento para sincronizar os botões de rádio de prioridade em todas as folhas
   // Seleciona todos os inputs de rádio cujos nomes começam com "prioridade"
-  $('input[type="radio"][name^="prioridade"]').on('change', function() {
+  $('input[type="radio"][name^="prioridade"]').on('change', function () {
     // Verifica se o botão que disparou o evento está marcado
     if (this.checked) {
       // Pega o valor do botão selecionado ("padrao" ou "urgente")
       const valorSelecionado = $(this).val();
-      
+
       // Seleciona TODOS os botões de rádio com o mesmo valor e os marca como checados
       $('input[type="radio"][name^="prioridade"][value="' + valorSelecionado + '"]').prop('checked', true);
     }
@@ -173,7 +173,7 @@ function resetarCampos() {
 
   // Evento quando o usuário muda a seleção do cilindro
   $('#select-cilindro').on('change', function () {
-    resetarCampos(); 
+    resetarCampos();
     document.getElementById("observacao").value = "";
     const cilindroSelecionado = $(this).val();
 
@@ -199,7 +199,7 @@ function resetarCampos() {
 
     const inputImgHastePassante = $('#imagem-haste-passante');
     const inputQtdPassante = $('#input-qtd-passante');
-    const inputMateriaPrimaPassante = $('#input-materia-prima-passante'); 
+    const inputMateriaPrimaPassante = $('#input-materia-prima-passante');
 
     // Campos MI
     const inputMedidaCorteMi = $('#input-medida-corte-mi');
@@ -280,24 +280,24 @@ function resetarCampos() {
 
     // Lista de cilindros que devem mostrar a página de guias
     const cilindrosGuiados = [
-      "CCNG12", "CCNG16", "CCNG20", "CCNG25", "CCNG32", 
-      "CCNG40", "CCNG50", "CCNG63", "CCNG80", "CCNG100", 
+      "CCNG12", "CCNG16", "CCNG20", "CCNG25", "CCNG32",
+      "CCNG40", "CCNG50", "CCNG63", "CCNG80", "CCNG100",
       "CDVUL12", "CDVUL16", "CDVUL20", "CDVUL25", "CDVUL32",
-      "CDVUL40", "CDVUL50", "CDVUL63", "CDVUL80", "CDVUL100", 
+      "CDVUL40", "CDVUL50", "CDVUL63", "CDVUL80", "CDVUL100",
     ];
 
     const cilindrosGb = [
-      "GB12", "GB16", "GB20", "GB25", "GB32", "GB40", "GB50", "GB63", 
-      "GB80", "GB100","GR12", "GR16", "GR20", "GR25", "GR32", "GR40", "GR50", "GR63", 
+      "GB12", "GB16", "GB20", "GB25", "GB32", "GB40", "GB50", "GB63",
+      "GB80", "GB100", "GR12", "GR16", "GR20", "GR25", "GR32", "GR40", "GR50", "GR63",
       "GR80", "GR100",
     ];
 
     // Lista de cilindros que devem mostrar a página de tirantes
     const cilindrosTirantados = [
-      "CTN32", "CTN40", "CTN50", "CTN63", "CTN80", "CTN100", 
-      "CTN125", "CTE32", "CTE40", "CTE50", "CTE63", "CTE80", 
+      "CTN32", "CTN40", "CTN50", "CTN63", "CTN80", "CTN100",
+      "CTN125", "CTE32", "CTE40", "CTE50", "CTE63", "CTE80",
       "CTE100", "CTE125", "CTE160", "CTE200", "CTE320", "CTB32", "CTB40",
-      "CTB50", "CTB63", "CTB80", "CTB100", "CTB125", "SAI160SNG", 
+      "CTB50", "CTB63", "CTB80", "CTB100", "CTB125", "SAI160SNG",
       "SAI200SNG", "CT2M32", "CT2M40", "CT2M50", "CT2M63", "CT2M80", "CT2M100", "CT2M125", "SGC160SNG", "SGC200SNG", "SGC250SNG",
       "CPB125"
     ];
@@ -389,7 +389,7 @@ function resetarCampos() {
 
       inputCcmbTraseiraImg.attr('src', '');
       inputCcmbCt.val('');
-      inputCcmbDct.val('');    
+      inputCcmbDct.val('');
       inputCcmbAt.val('');
       inputCcmbAet.val('');
       inputCcmbBt.val('');
@@ -416,7 +416,7 @@ function resetarCampos() {
       inputMedidaRtAced.val('');
       imgHasteAced.attr('src', '');
       RdAced.val('');
-      
+
 
       // Esconde páginas opcionais
       $("#paginaGuias").addClass("hidden");
@@ -424,7 +424,7 @@ function resetarCampos() {
 
       // Reseta o título da Operação 2
       $("#titulo-op2-rosca-fixacao").text("Operação 2: Rosca de Fixação");
-      
+
       // Esconde as imagens de rebaixo CCMB e mostra a imagem do tubo normal
       $(".rebaixoCCMBD").addClass("hidden");
       $(".rebaixoCCMBT").addClass("hidden");
@@ -456,7 +456,7 @@ function resetarCampos() {
       const medidaCRDMi = item.medidaCRDMI || '';
 
       const medidaRDMidConcatenada = (medidaRDMi + medidaCRDMi).trim();
-      
+
 
       // Preenche os campos da haste
       inputMedidaCorte.val(item.medidacorte || '');
@@ -499,16 +499,16 @@ function resetarCampos() {
       // Preenche os campos de Guias
       inputCilindroGuias.val(item.cilindro || '');
       inputMateriaPrimaGuias.val(item.materiaprimaguia || '');
-      inputMedidaCorteGuias.val(item.medidaguia || ''); 
+      inputMedidaCorteGuias.val(item.medidaguia || '');
       inputCursoGuias.val($('#curso').val() || ''); // Sincroniza o campo de curso das guias com o curso da haste
-      inputImagemGuias.attr('src', item.imagemguia  || '');
+      inputImagemGuias.attr('src', item.imagemguia || '');
       inputDiametroHasteGuias.val(item.diametroguia || '');
       inputRoscaGuia.val(item.roscaguia || '');
 
       // Preenche os campos de Tirantes
       inputCilindroTirantes.val(item.cilindro || '');
       inputMateriaPrimaTirantes.val(item.materiaprimatirante || '');
-      inputMedidaCorteTirantes.val(item.medidatirante || ''); 
+      inputMedidaCorteTirantes.val(item.medidatirante || '');
       inputCursoTirantes.val($('#curso').val() || ''); // Sincroniza o campo de curso das guias com o curso da haste
       inputImagemTirantes.attr('src', item.imagemtirante || '');
       inputDiametroHasteTirantes.val(item.diametrotirante || '');
@@ -516,63 +516,63 @@ function resetarCampos() {
       inputRoscaTirantesLadoB.val(item.roscatiranteb || '');
 
       //preenche os campos CCMB
-        inputCcmbDianteiraImg.attr('src', item.rebaixoDianteiraCCMB || ''); 
-        inputCcmbC.val(item.c || '');
-        inputCcmbDc.val(item.diametroc || '');
-        inputCcmbA.val(item.a || '');
-        inputCcmbAe.val(item.diametroae || '');
-        inputCcmbB.val(item.b || '');
+      inputCcmbDianteiraImg.attr('src', item.rebaixoDianteiraCCMB || '');
+      inputCcmbC.val(item.c || '');
+      inputCcmbDc.val(item.diametroc || '');
+      inputCcmbA.val(item.a || '');
+      inputCcmbAe.val(item.diametroae || '');
+      inputCcmbB.val(item.b || '');
 
-        inputCcmbTraseiraImg.attr('src', item.rebaixoTraseiraCCMB || '');
-        inputCcmbCt.val(item.ctraseira || '');
-        inputCcmbDct.val(item.diametroctraseira || '');
-        inputCcmbAt.val(item.atraseira || '');
-        inputCcmbAet.val(item.diametroaetraseira || '');
-        inputCcmbBt.val(item.btraseira || '');
-        inputDiamX.val(item.diamx || '');
-        inputCompX.val(item.compx || '');
-        
-        inputImgAlimentacao.attr('src', item.imgAlimentacao || '');
-        inputRoscaAlimentacao.val(item.roscaalimentacao || '');
-        inputComprimentoAlimentacao.val(item.comprimentoalimentacao || '');
+      inputCcmbTraseiraImg.attr('src', item.rebaixoTraseiraCCMB || '');
+      inputCcmbCt.val(item.ctraseira || '');
+      inputCcmbDct.val(item.diametroctraseira || '');
+      inputCcmbAt.val(item.atraseira || '');
+      inputCcmbAet.val(item.diametroaetraseira || '');
+      inputCcmbBt.val(item.btraseira || '');
+      inputDiamX.val(item.diamx || '');
+      inputCompX.val(item.compx || '');
 
-        inputImgFuracao.attr('src', item.furacao || '');
-        inputDiametroRebaixo.val(item.diametrorebaixo || '');
-        inputComprimentoRebaixo.val(item.comprimentorebaixo || '');
+      inputImgAlimentacao.attr('src', item.imgAlimentacao || '');
+      inputRoscaAlimentacao.val(item.roscaalimentacao || '');
+      inputComprimentoAlimentacao.val(item.comprimentoalimentacao || '');
 
-        //preenche os campos passante
-        inputCortePassante.val(item.cortepassante || '');
-        inputDiametroHastePassante.val(item.diametrohaste || '');
-        inputMedidaRdPassante.val(medidaRDConcatenada);
-        inputMedidaRtPassante.val(item.medidaRTpassante || '');
-        inputMedidaRebaixoPassante.val(item.medidarebaixo || '');
-        inputMedidaComprimentoPassante .val(item.medidacomprimento || '');
-        inputMedidaCorteAce.val(item.cortepassanteace || '');
-        inputDiametroHasteAcePassante.val(item.diametrohaste || '');
-        inputMedidaRtAced.val(item.medidartaced || '');
-        imgHasteAced.attr('src', item.imghasteaced || '');
-        RdAced.val(medidaRDAcedConcatenada || '');
-      
+      inputImgFuracao.attr('src', item.furacao || '');
+      inputDiametroRebaixo.val(item.diametrorebaixo || '');
+      inputComprimentoRebaixo.val(item.comprimentorebaixo || '');
 
-        // Calcula as medidas finais
-        calcular();
-        calcularMi();
-        calcularTubo(); // Calcula a medida final do corte do tubo
-        calcularGuias();
-        calcularTirantes();
+      //preenche os campos passante
+      inputCortePassante.val(item.cortepassante || '');
+      inputDiametroHastePassante.val(item.diametrohaste || '');
+      inputMedidaRdPassante.val(medidaRDConcatenada);
+      inputMedidaRtPassante.val(item.medidaRTpassante || '');
+      inputMedidaRebaixoPassante.val(item.medidarebaixo || '');
+      inputMedidaComprimentoPassante.val(item.medidacomprimento || '');
+      inputMedidaCorteAce.val(item.cortepassanteace || '');
+      inputDiametroHasteAcePassante.val(item.diametrohaste || '');
+      inputMedidaRtAced.val(item.medidartaced || '');
+      imgHasteAced.attr('src', item.imghasteaced || '');
+      RdAced.val(medidaRDAcedConcatenada || '');
 
-        // Lógica para alterar o título da Operação 2 (Rosca de Fixação)
-        const tituloOp2 = $("#titulo-op2-rosca-fixacao");
-        const cilindrosObservacao = [
+
+      // Calcula as medidas finais
+      calcular();
+      calcularMi();
+      calcularTubo(); // Calcula a medida final do corte do tubo
+      calcularGuias();
+      calcularTirantes();
+
+      // Lógica para alterar o título da Operação 2 (Rosca de Fixação)
+      const tituloOp2 = $("#titulo-op2-rosca-fixacao");
+      const cilindrosObservacao = [
         "CCNG12", "CCNG16", "CCNG20", "CCNG25", "CCNG32",
         "CCNG40", "CCNG50", "CCNG63", "CCNG80", "CCNG100",
         "CCN12-M", "CCN16-M", "CCN20-M", "CCN25-M", "CCN32-M",
         "CCN40-M", "CCN50-M", "CCN63-M", "CCN80-M", "CCN100-M", "CCN125-M",
         "CCN12-F", "CCN16-F", "CCN20-F", "CCN25-F", "CCN32-F",
         "CCN40-F", "CCN50-F", "CCN63-F", "CCN80-F", "CCN100-F", "CCN125-F"
-        ];
-        const textoObservacao = "(Ø 80, 100 e 125, fazer nos 4 furos)";
-        const textoPadrao = "Operação 2: Rosca de Fixação";
+      ];
+      const textoObservacao = "(Ø 80, 100 e 125, fazer nos 4 furos)";
+      const textoPadrao = "Operação 2: Rosca de Fixação";
 
       if (cilindrosObservacao.includes(cilindroSelecionado)) {
         tituloOp2.text(`${textoPadrao} ${textoObservacao}`);
@@ -582,12 +582,12 @@ function resetarCampos() {
 
       const infoccb = $('#info-ccb');
 
-      if (cilindrosCcb.includes(cilindroSelecionado)){
+      if (cilindrosCcb.includes(cilindroSelecionado)) {
         infoccb.removeClass("hidden");
       } else {
         infoccb.addClass("hidden");
       }
-      
+
 
       // Lógica para tolerancia dianteira
       const toleranciaD = $("#toleranciaHasteRD");
@@ -609,7 +609,7 @@ function resetarCampos() {
       ];
 
       const cilindrosToleranciaD2 = [
-        "CSM10", "CSM12", "CSM16", "CSM20", "CSM25", 
+        "CSM10", "CSM12", "CSM16", "CSM20", "CSM25",
         "CSM2B20", "CSM2B25", "CSM2B32", "CSM2B40",
         "CSM3B32-C", "CSM3B40-C", "CSM3B50-C", "CSM3B63-C",
         "CSM3F32-C", "CSM3F40-C", "CSM3F50-C", "CSM3F63-C",
@@ -629,13 +629,13 @@ function resetarCampos() {
         "CCB12-F", "CCB16-F", "CCB20-F", "CCB25-F", "CCB32-F", "CCB40-F", "CCB50-F", "CCB63-F", "CCB80-F", "CCB100-F"
       ];
 
-      
+
 
       if (cilindrosToleranciaD1.includes(cilindroSelecionado)) {
         toleranciaD.text(`${textoToleranciaD1}`);
-      } else if(cilindrosToleranciaD2.includes(cilindroSelecionado)) {
+      } else if (cilindrosToleranciaD2.includes(cilindroSelecionado)) {
         toleranciaD.text(`${textoToleranciaD2}`);
-      } else if(cilindrosToleranciaD3.includes(cilindroSelecionado)) {
+      } else if (cilindrosToleranciaD3.includes(cilindroSelecionado)) {
         toleranciaD.text(`${textoToleranciaD3}`);
       } else {
         toleranciaD.text(`${textoPadraoTolerancia}`);
@@ -662,7 +662,7 @@ function resetarCampos() {
       ];
 
       const cilindrosToleranciaT2 = [
-        "CSM10", "CSM12", "CSM16", "CSM20", "CSM25", 
+        "CSM10", "CSM12", "CSM16", "CSM20", "CSM25",
         "CSM2B20", "CSM2B25", "CSM2B32", "CSM2B40",
         "CSM3B32-C", "CSM3B40-C", "CSM3B50-C", "CSM3B63-C",
         "CSM3F32-C", "CSM3F40-C", "CSM3F50-C", "CSM3F63-C",
@@ -684,9 +684,9 @@ function resetarCampos() {
 
       if (cilindrosToleranciaT1.includes(cilindroSelecionado)) {
         toleranciaT.text(`${textoToleranciaT1}`);
-      } else if(cilindrosToleranciaT2.includes(cilindroSelecionado)) {
+      } else if (cilindrosToleranciaT2.includes(cilindroSelecionado)) {
         toleranciaT.text(`${textoToleranciaT2}`);
-      } else if(cilindrosToleranciaT3.includes(cilindroSelecionado)) {
+      } else if (cilindrosToleranciaT3.includes(cilindroSelecionado)) {
         toleranciaT.text(`${textoToleranciaT3}`);
       } else {
         toleranciaT.text(`${textoPadraoToleranciaT}`);
@@ -705,21 +705,21 @@ function resetarCampos() {
         "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
         "MI12SU", "MI16SU", "MI20SUG", "MI25SUG",
         "MIC12SCA", "MIC16SCA", "MIC20SCAG", "MIC25SCAG",
-        "MIC12SU", "MIC16SU", "MIC20SUG", "MIC25SUG",
+        "MIC12SU", "MIC16SU", "MIC20SUG", "MIC25SUG", "MI32", "MI40",
         "MSI12SCA", "MSI16SCA", "MSI20SCAG", "MSI25SCAG",
         "MSI12SU", "MSI16SU", "MSI20SUG", "MSI25SUG",
         "MTI12SCA", "MTI16SCA", "MTI20SCAG", "MTI25SCAG",
         "MTI12SU", "MTI16SU", "MTI20SUG", "MTI25SUG",
-        "ACE12S", "ACE16S", "ACE20S", "ACE25S", "ACE32SG", 
+        "ACE12S", "ACE16S", "ACE20S", "ACE25S", "ACE32SG",
         "ACE40SG", "ACE50SG", "ACE63SG",
-        "ACE125SG", "ACE12SB", "ACE16SB", "ACE20SB", "ACE25SB", 
-        "ACE32SBG", "ACE40SBG", "ACE50SBG", "ACE63SBG", 
-        "ACE125SBG", "ASE12", "ASE16", "ASE20", "ASE25", 
-        "ASE32SG", "ASE40SG", "ASE50SG", "ASE63SG", "ASE80SG", "ASE100SG", 
-        "ASE125SG", "ASE12SB", "ASE16SB", "ASE20SB", "ASE25SB", "ASE32SBG", 
-        "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG", 
-        "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG", 
-        "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG", 
+        "ACE125SG", "ACE12SB", "ACE16SB", "ACE20SB", "ACE25SB",
+        "ACE32SBG", "ACE40SBG", "ACE50SBG", "ACE63SBG",
+        "ACE125SBG", "ASE12", "ASE16", "ASE20", "ASE25",
+        "ASE32SG", "ASE40SG", "ASE50SG", "ASE63SG", "ASE80SG", "ASE100SG",
+        "ASE125SG", "ASE12SB", "ASE16SB", "ASE20SB", "ASE25SB", "ASE32SBG",
+        "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG",
+        "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG",
+        "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG",
         "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG", "CDVU50-F"
       ];
 
@@ -732,16 +732,16 @@ function resetarCampos() {
         "MSI12SU", "MSI16SU", "MSI20SUG", "MSI25SUG",
         "MTI12SCA", "MTI16SCA", "MTI20SCAG", "MTI25SCAG",
         "MTI12SU", "MTI16SU", "MTI20SUG", "MTI25SUG",
-        "ACE12S", "ACE16S", "ACE20S", "ACE25S", "ACE32SG", 
-        "ACE40SG", "ACE50SG", "ACE63SG", "ACE100SG", 
-        "ACE125SG", "ACE12SB", "ACE16SB", "ACE20SB", "ACE25SB", 
+        "ACE12S", "ACE16S", "ACE20S", "ACE25S", "ACE32SG",
+        "ACE40SG", "ACE50SG", "ACE63SG", "ACE100SG",
+        "ACE125SG", "ACE12SB", "ACE16SB", "ACE20SB", "ACE25SB",
         "ACE32SBG", "ACE40SBG", "ACE50SBG", "ACE63SBG",
-        "ACE125SBG", "ASE12", "ASE16", "ASE20", "ASE25", 
-        "ASE32SG", "ASE40SG", "ASE50SG", "ASE63SG", "ASE80SG", "ASE100SG", 
-        "ASE125SG", "ASE12SB", "ASE16SB", "ASE20SB", "ASE25SB", "ASE32SBG", 
-        "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG", 
-        "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG", 
-        "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG", 
+        "ACE125SBG", "ASE12", "ASE16", "ASE20", "ASE25",
+        "ASE32SG", "ASE40SG", "ASE50SG", "ASE63SG", "ASE80SG", "ASE100SG",
+        "ASE125SG", "ASE12SB", "ASE16SB", "ASE20SB", "ASE25SB", "ASE32SBG",
+        "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG",
+        "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG",
+        "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG",
         "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG"
       ];
 
@@ -771,7 +771,7 @@ function resetarCampos() {
       } else {
         observacao.text(`${textoPadraoAR}`)
       }
- 
+
       if (cilindrosMI.includes(cilindroSelecionado)) {
         opCorte.addClass("hidden");
         opRd.addClass("hidden");
@@ -826,53 +826,53 @@ function resetarCampos() {
       }
 
       // Lógica para mostrar/esconder a página CCMB/CCB
-    const paginaCcmb = $("#paginaCcmb"); // <--- ADICIONE ESTA LINHA
-    const op3Ccb = $("#op3-rosca-traseira-ccb");
-    const op3 = $("#op3-rosca-traseira");
-    if (familiaCc.includes(cilindroSelecionado)) { // <--- ADICIONE ESTE BLOCO
-      paginaCcmb.removeClass("hidden"); // Mostra a página CCMB]
-      op3Ccb.removeClass("hidden"); // Mostra a operação de rosca traseira para CCB
-      op3.addClass("hidden"); // Esconde a operação de rosca traseira para CCMB
+      const paginaCcmb = $("#paginaCcmb"); // <--- ADICIONE ESTA LINHA
+      const op3Ccb = $("#op3-rosca-traseira-ccb");
+      const op3 = $("#op3-rosca-traseira");
+      if (familiaCc.includes(cilindroSelecionado)) { // <--- ADICIONE ESTE BLOCO
+        paginaCcmb.removeClass("hidden"); // Mostra a página CCMB]
+        op3Ccb.removeClass("hidden"); // Mostra a operação de rosca traseira para CCB
+        op3.addClass("hidden"); // Esconde a operação de rosca traseira para CCMB
 
-    } else {
-      paginaCcmb.addClass("hidden"); // Esconde a página CCMB
-      op3Ccb.addClass("hidden"); // Esconde a operação de rosca traseira para CCB
-      op3.removeClass("hidden"); // Mostra a operação de rosca traseira para CCMB
-    }
-      
+      } else {
+        paginaCcmb.addClass("hidden"); // Esconde a página CCMB
+        op3Ccb.addClass("hidden"); // Esconde a operação de rosca traseira para CCB
+        op3.removeClass("hidden"); // Mostra a operação de rosca traseira para CCMB
+      }
+
       // Lógica para exibir imagens de rebaixo CCMB16 ou imagem do tubo normal
       const rebaixoCCMBD = $(".agrupar-tubo");;
       const imgtubo = $(".imgtubo"); // The main image-tubo container
 
       if (cilindroSelecionado === "CCMB16") {
-          rebaixoCCMBD.removeClass("hidden");
-          imgtubo.removeClass("hidden"); // Ensure the main tube image container is visible
+        rebaixoCCMBD.removeClass("hidden");
+        imgtubo.removeClass("hidden"); // Ensure the main tube image container is visible
       } else {
-          rebaixoCCMBD.addClass("hidden");
-          imgtubo.removeClass("hidden"); // Ensure the main tube image container is visible
+        rebaixoCCMBD.addClass("hidden");
+        imgtubo.removeClass("hidden"); // Ensure the main tube image container is visible
       }
 
       // Mostrar apenas folha de tirantes para SGC250SNG
-    if (cilindroSelecionado === "SGC250SNG") {
+      if (cilindroSelecionado === "SGC250SNG") {
 
-      // esconde outras folhas
-      $('#folhaHaste').addClass('hidden');
-      $('#tubos').addClass('hidden');
-      $('#paginaGuias').addClass('hidden');
-      $('#paginaTirantes').removeClass('hidden');
-    }
+        // esconde outras folhas
+        $('#folhaHaste').addClass('hidden');
+        $('#tubos').addClass('hidden');
+        $('#paginaGuias').addClass('hidden');
+        $('#paginaTirantes').removeClass('hidden');
+      }
 
-    if (cilindroSelecionado === "CTE320") {
+      if (cilindroSelecionado === "CTE320") {
 
-      // esconde outras folhas
-      $('#folhaHaste').addClass('hidden');
-      $('#tubos').addClass('hidden');
-      $('#paginaGuias').addClass('hidden');
-      $('#paginaTirantes').removeClass('hidden');
-    }
+        // esconde outras folhas
+        $('#folhaHaste').addClass('hidden');
+        $('#tubos').addClass('hidden');
+        $('#paginaGuias').addClass('hidden');
+        $('#paginaTirantes').removeClass('hidden');
+      }
 
     } else {
-       // Limpa todos os campos se o item não for encontrado
+      // Limpa todos os campos se o item não for encontrado
       inputMedidaCorte.val('');
       inputMedidaRd.val('');
       inputMedidaRt.val('');
@@ -934,7 +934,7 @@ function resetarCampos() {
       inputRoscaTirantesLadoB.val('');
       // Esconde páginas opcionais
       $('#paginaTirantes').addClass('hidden');
-      
+
       //CCMB
       inputCcmbDianteiraImg.attr('src', '');
       inputCilindroCcmb.val('');
@@ -961,7 +961,7 @@ function resetarCampos() {
       inputMedidaRtAced.val('');
       imgHasteAced.attr('src', '');
       RdAced.val('');
-    
+
 
       // Esconde as imagens de rebaixo CCMB e mostra a imagem do tubo normal
       $(".rebaixoCCMBD").addClass("hidden");
@@ -971,39 +971,39 @@ function resetarCampos() {
     }
 
     const cilindrosAirTac = [
-        "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
-        "MI12SU", "MI16SU", "MI20SUG", "MI25SUG",
-        "MIC12SCA", "MIC16SCA", "MIC20SCAG", "MIC25SCAG",
-        "MIC12SU", "MIC16SU", "MIC20SUG", "MIC25SUG",
-        "MSI12SCA", "MSI16SCA", "MSI20SCAG", "MSI25SCAG",
-        "MSI12SU", "MSI16SU", "MSI20SUG", "MSI25SUG",
-        "MTI12SCA", "MTI16SCA", "MTI20SCAG", "MTI25SCAG",
-        "MTI12SU", "MTI16SU", "MTI20SUG", "MTI25SUG",
-      ];
+      "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
+      "MI12SU", "MI16SU", "MI20SUG", "MI25SUG",
+      "MIC12SCA", "MIC16SCA", "MIC20SCAG", "MIC25SCAG",
+      "MIC12SU", "MIC16SU", "MIC20SUG", "MIC25SUG",
+      "MSI12SCA", "MSI16SCA", "MSI20SCAG", "MSI25SCAG",
+      "MSI12SU", "MSI16SU", "MSI20SUG", "MSI25SUG",
+      "MTI12SCA", "MTI16SCA", "MTI20SCAG", "MTI25SCAG",
+      "MTI12SU", "MTI16SU", "MTI20SUG", "MTI25SUG",
+    ];
 
-      
 
-      if(cilindrosAirTac.includes(cilindroSelecionado)) {
-        $("#componenteViton").addClass("hidden");
-        $("#componenteInox").addClass("hidden");
-      } else {
-          $("#componenteViton").removeClass("hidden");
-          $("#componenteInox").removeClass("hidden");
-      }
 
-      const cilindrosBsai = [
-        "BSAI32SG", "BSAI40SG", "BSAI50SG", "BSAI63SG", "BSAI80SG", "BSAI100SG", "BSAI125SG"
-      ];
+    if (cilindrosAirTac.includes(cilindroSelecionado)) {
+      $("#componenteViton").addClass("hidden");
+      $("#componenteInox").addClass("hidden");
+    } else {
+      $("#componenteViton").removeClass("hidden");
+      $("#componenteInox").removeClass("hidden");
+    }
 
-      if(cilindrosBsai.includes(cilindroSelecionado)) {
-        $("#componenteViton").addClass("hidden");
-        $("#componenteInox").addClass("hidden");
-        $("#componentePassante").addClass("hidden");
-      } else {
-          $("#componenteViton").removeClass("hidden");
-          $("#componenteInox").removeClass("hidden");
-          $("#componentePassante").removeClass("hidden");
-      }
+    const cilindrosBsai = [
+      "BSAI32SG", "BSAI40SG", "BSAI50SG", "BSAI63SG", "BSAI80SG", "BSAI100SG", "BSAI125SG"
+    ];
+
+    if (cilindrosBsai.includes(cilindroSelecionado)) {
+      $("#componenteViton").addClass("hidden");
+      $("#componenteInox").addClass("hidden");
+      $("#componentePassante").addClass("hidden");
+    } else {
+      $("#componenteViton").removeClass("hidden");
+      $("#componenteInox").removeClass("hidden");
+      $("#componentePassante").removeClass("hidden");
+    }
 
 
     atualizarCodigo(); // Atualiza o código exibido
@@ -1017,179 +1017,179 @@ function resetarCampos() {
     calcularGuias(); // Recalcula as guias
     calcularTirantes(); //Recalcula os tirantes
     atualizarCodigo(); // Atualiza código e sincroniza cursos
-    
+
     // Sincroniza o campo de curso das guias com o valor do curso da haste
     $('#curso-guias').val($('#curso').val());
     $('#curso-tirantes').val($('#curso').val());
   });
 
-// --- INÍCIO DA LÓGICA DE QUANTIDADE CORRIGIDA ---
-// script.js
+  // --- INÍCIO DA LÓGICA DE QUANTIDADE CORRIGIDA ---
+  // script.js
 
-// script.js
+  // script.js
 
-// --- LÓGICA DE QUANTIDADE VIA QTD CILINDRO (CORRIGIDA) ---
-function atualizarQuantidades() {
-  const qtdCilindro = parseInt($('#qtd-cilindro').val()) || 0;
-  const isPassante = $('#versaoPassante').is(':checked');
-  const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase();
+  // --- LÓGICA DE QUANTIDADE VIA QTD CILINDRO (CORRIGIDA) ---
+  function atualizarQuantidades() {
+    const qtdCilindro = parseInt($('#qtd-cilindro').val()) || 0;
+    const isPassante = $('#versaoPassante').is(':checked');
+    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase();
 
-  // 1. Valores Base (Comportamento Padrão)
-  let qtdHaste = qtdCilindro;
-  let qtdTubo = qtdCilindro;
-  let qtdPassante = qtdCilindro;
-  let qtdGuias = qtdCilindro * 2;
-  let qtdTirantes = qtdCilindro * 4;
+    // 1. Valores Base (Comportamento Padrão)
+    let qtdHaste = qtdCilindro;
+    let qtdTubo = qtdCilindro;
+    let qtdPassante = qtdCilindro;
+    let qtdGuias = qtdCilindro * 2;
+    let qtdTirantes = qtdCilindro * 4;
 
-  // 2. Regra Especial para cilindros GB / GR
-  if (cilindroSelecionado.startsWith("GB") || cilindroSelecionado.startsWith("GR")) {
-    qtdHaste = qtdCilindro * 2;     // 1 peça GB/GR possui 2 hastes
-    qtdTubo = qtdCilindro;          // Mantém 1 tubo por cilindro
-    qtdPassante = qtdCilindro * 2;
-    qtdGuias = qtdCilindro * 2;     // Evita o efeito cascata
-    qtdTirantes = qtdCilindro * 4;  // Evita o efeito cascata
-  } 
-  // 3. Regra Especial para cilindros SAI Passante
-  else if (isPassante && cilindroSelecionado.startsWith("SAI")) {
-    qtdHaste = qtdCilindro * 2;     // Dobro de hastes se for passante
-    qtdTubo = qtdCilindro;
-    qtdPassante = qtdCilindro * 2;
-    qtdGuias = qtdHaste * 2;        // Baseado na quantidade real de hastes
-    qtdTirantes = qtdTubo * 4;      // Baseado na quantidade real de tubos
+    // 2. Regra Especial para cilindros GB / GR
+    if (cilindroSelecionado.startsWith("GB") || cilindroSelecionado.startsWith("GR")) {
+      qtdHaste = qtdCilindro * 2;     // 1 peça GB/GR possui 2 hastes
+      qtdTubo = qtdCilindro;          // Mantém 1 tubo por cilindro
+      qtdPassante = qtdCilindro * 2;
+      qtdGuias = qtdCilindro * 2;     // Evita o efeito cascata
+      qtdTirantes = qtdCilindro * 4;  // Evita o efeito cascata
+    }
+    // 3. Regra Especial para cilindros SAI Passante
+    else if (isPassante && cilindroSelecionado.startsWith("SAI")) {
+      qtdHaste = qtdCilindro * 2;     // Dobro de hastes se for passante
+      qtdTubo = qtdCilindro;
+      qtdPassante = qtdCilindro * 2;
+      qtdGuias = qtdHaste * 2;        // Baseado na quantidade real de hastes
+      qtdTirantes = qtdTubo * 4;      // Baseado na quantidade real de tubos
+    }
+
+    // 4. Aplica os valores exatos diretamente nos inputs do formulário
+    $('#input-qtd-haste').val(qtdHaste || '');
+    $('#input-qtd-tubo').val(qtdTubo || '');
+    $('#input-qtd-passante').val(qtdPassante || '');
+    $('#input-qtd-guias').val(qtdGuias || '');
+    $('#input-qtd-tirantes').val(qtdTirantes || '');
   }
 
-  // 4. Aplica os valores exatos diretamente nos inputs do formulário
-  $('#input-qtd-haste').val(qtdHaste || '');
-  $('#input-qtd-tubo').val(qtdTubo || '');
-  $('#input-qtd-passante').val(qtdPassante || '');
-  $('#input-qtd-guias').val(qtdGuias || '');
-  $('#input-qtd-tirantes').val(qtdTirantes || '');
-}
+  // Dispara a atualização sempre que o usuário alterar a quantidade de cilindros
+  $('#qtd-cilindro').on('input change', function () {
+    atualizarQuantidades();
+  });
 
-// Dispara a atualização sempre que o usuário alterar a quantidade de cilindros
-$('#qtd-cilindro').on('input change', function() {
-  atualizarQuantidades();
-});
+  // Modificação do evento do versaoPassante para também disparar o recálculo de quantidades
+  $('#versaoPassante').on('change', function () {
+    const isChecked = $(this).is(':checked');
 
-// Modificação do evento do versaoPassante para também disparar o recálculo de quantidades
-$('#versaoPassante').on('change', function() {
-  const isChecked = $(this).is(':checked');
-
-  if (isChecked) {
+    if (isChecked) {
       $('#haste-passante').removeClass('hidden');
       $('#imgrebaixoTccmb').addClass('hidden');
       $('#tabelaRebaixoTccmb').addClass('hidden');
-  } else {
+    } else {
       $('#haste-passante').addClass('hidden');
       $('#imgrebaixoTccmb').removeClass('hidden');
       $('#tabelaRebaixoTccmb').removeClass('hidden');
-  }
-
-  const cilindroSelecionado = $('#select-cilindro').val() || '';
-
-  // Lógica para alternar campos da família ACE
-  if (cilindroSelecionado.toUpperCase().startsWith("ACE") || cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
-    if($(this).is(':checked')) {
-      $('#linha-dupla-container-corte').addClass('hidden');
-      $('#especial').addClass('hidden');      
-      $('#op3-rosca-traseira').addClass('hidden');
-      $('#imagem-haste').addClass('hidden');
-      $('#linha-dupla-container-rosca-mi').addClass('hidden');
-
-      $('#opCorteAce').removeClass('hidden');
-      $('#rtAced').removeClass('hidden');
-      $('#imgHasteAced').removeClass('hidden');
-      $('#rdAced').removeClass('hidden');
-    } else {
-      $('#linha-dupla-container-corte').removeClass('hidden');
-      $('#especial').removeClass('hidden');
-      $('#op3-rosca-traseira').removeClass('hidden');
-      $('#imagem-haste').removeClass('hidden');
-      $('#linha-dupla-container-rosca-mi').removeClass('hidden');
-
-      $('#opCorteAce').addClass('hidden');
-      $('#rtAced').addClass('hidden');
-      $('#imgHasteAced').addClass('hidden');
-      $('#rdAced').addClass('hidden');
     }
-  }
 
-  if (cilindroSelecionado.toUpperCase().startsWith("CDVU")){
-    if($(this).is(':checked')) {
-      $('#rtAced').removeClass('hidden');
-      $('#op3-rosca-traseira').addClass('hidden');
-    } else {
-      $('#rtAced').addClass('hidden');
-      $('#op3-rosca-traseira').removeClass('hidden');
+    const cilindroSelecionado = $('#select-cilindro').val() || '';
+
+    // Lógica para alternar campos da família ACE
+    if (cilindroSelecionado.toUpperCase().startsWith("ACE") || cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
+      if ($(this).is(':checked')) {
+        $('#linha-dupla-container-corte').addClass('hidden');
+        $('#especial').addClass('hidden');
+        $('#op3-rosca-traseira').addClass('hidden');
+        $('#imagem-haste').addClass('hidden');
+        $('#linha-dupla-container-rosca-mi').addClass('hidden');
+
+        $('#opCorteAce').removeClass('hidden');
+        $('#rtAced').removeClass('hidden');
+        $('#imgHasteAced').removeClass('hidden');
+        $('#rdAced').removeClass('hidden');
+      } else {
+        $('#linha-dupla-container-corte').removeClass('hidden');
+        $('#especial').removeClass('hidden');
+        $('#op3-rosca-traseira').removeClass('hidden');
+        $('#imagem-haste').removeClass('hidden');
+        $('#linha-dupla-container-rosca-mi').removeClass('hidden');
+
+        $('#opCorteAce').addClass('hidden');
+        $('#rtAced').addClass('hidden');
+        $('#imgHasteAced').addClass('hidden');
+        $('#rdAced').addClass('hidden');
+      }
     }
-  }
 
-  // CHAMA A ATUALIZAÇÃO DE QUANTIDADES PARA AJUSTAR O DOBRO CASO SEJA SAI PASSANTE
-  atualizarQuantidades();
-  
-  // Atualiza o código do produto
-  atualizarCodigo();
-});
+    if (cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
+      if ($(this).is(':checked')) {
+        $('#rtAced').removeClass('hidden');
+        $('#op3-rosca-traseira').addClass('hidden');
+      } else {
+        $('#rtAced').addClass('hidden');
+        $('#op3-rosca-traseira').removeClass('hidden');
+      }
+    }
 
-// Certifique-se de que ao mudar o cilindro no select, as quantidades também atualizem
-$('#select-cilindro').on('change', function () {
-  // ... (todo o seu código atual do evento change do select-cilindro permanece aqui) ...
-  
-  // No final deste evento, logo antes do 'atualizarCodigo()', adicione:
-  atualizarQuantidades();
-});
+    // CHAMA A ATUALIZAÇÃO DE QUANTIDADES PARA AJUSTAR O DOBRO CASO SEJA SAI PASSANTE
+    atualizarQuantidades();
 
-// --- FIM DA LÓGICA DE QUANTIDADE ---
+    // Atualiza o código do produto
+    atualizarCodigo();
+  });
 
-// Evento para quando a quantidade de hastes for alterada
-$('#input-qtd-haste').on('input', function() {
-  const qtdHaste = parseInt($(this).val()) || 0;
-  const isPassante = $('#versaoPassante').is(':checked');
-  const cilindroSelecionado = $('#select-cilindro').val() || '';
+  // Certifique-se de que ao mudar o cilindro no select, as quantidades também atualizem
+  $('#select-cilindro').on('change', function () {
+    // ... (todo o seu código atual do evento change do select-cilindro permanece aqui) ...
 
-  let qtdTubo; // Variável para armazenar a quantidade de tubos calculada
+    // No final deste evento, logo antes do 'atualizarCodigo()', adicione:
+    atualizarQuantidades();
+  });
 
-  // A lógica de tubo = metade da haste só se aplica se for um cilindro SAI com opção passante
-  if (isPassante && cilindroSelecionado.toUpperCase().startsWith("SAI")) {
+  // --- FIM DA LÓGICA DE QUANTIDADE ---
+
+  // Evento para quando a quantidade de hastes for alterada
+  $('#input-qtd-haste').on('input', function () {
+    const qtdHaste = parseInt($(this).val()) || 0;
+    const isPassante = $('#versaoPassante').is(':checked');
+    const cilindroSelecionado = $('#select-cilindro').val() || '';
+
+    let qtdTubo; // Variável para armazenar a quantidade de tubos calculada
+
+    // A lógica de tubo = metade da haste só se aplica se for um cilindro SAI com opção passante
+    if (isPassante && cilindroSelecionado.toUpperCase().startsWith("SAI")) {
       qtdTubo = Math.round(qtdHaste / 2) || 0;
-  } else {
+    } else {
       // Para todos os outros casos, a quantidade de tubos é igual à de hastes
       qtdTubo = qtdHaste || 0;
-  }
+    }
 
-  
-  // Atualiza os campos do formulário
-  $('#input-qtd-tubo').val(qtdTubo || '');
-  $('#input-qtd-guias').val(qtdHaste * 2 || '');
-  // <<< ALTERADO: A quantidade de tirantes agora é baseada na quantidade de TUBOS
-  $('#input-qtd-tirantes').val(qtdTubo * 4 || ''); 
 
-  $('#input-qtd-passante').val(qtdHaste || '');
-});
+    // Atualiza os campos do formulário
+    $('#input-qtd-tubo').val(qtdTubo || '');
+    $('#input-qtd-guias').val(qtdHaste * 2 || '');
+    // <<< ALTERADO: A quantidade de tirantes agora é baseada na quantidade de TUBOS
+    $('#input-qtd-tirantes').val(qtdTubo * 4 || '');
 
-// Evento para a checkbox 'passante'
-$('#versaoPassante').on('change', function() {
+    $('#input-qtd-passante').val(qtdHaste || '');
+  });
 
-  const isChecked = $(this).is(':checked');
+  // Evento para a checkbox 'passante'
+  $('#versaoPassante').on('change', function () {
+
+    const isChecked = $(this).is(':checked');
 
     if (isChecked) {
-        $('#haste-passante').removeClass('hidden');
-        $('#imgrebaixoTccmb').addClass('hidden');
-        $('#tabelaRebaixoTccmb').addClass('hidden');
+      $('#haste-passante').removeClass('hidden');
+      $('#imgrebaixoTccmb').addClass('hidden');
+      $('#tabelaRebaixoTccmb').addClass('hidden');
     } else {
-        $('#haste-passante').addClass('hidden');
-        $('#imgrebaixoTccmb').removeClass('hidden');
-        $('#tabelaRebaixoTccmb').removeClass('hidden');
+      $('#haste-passante').addClass('hidden');
+      $('#imgrebaixoTccmb').removeClass('hidden');
+      $('#tabelaRebaixoTccmb').removeClass('hidden');
     }
 
     const cilindroSelecionado = $('#select-cilindro').val() || '';
 
     // Apenas executa a lógica de trocar o campo para a familía ace
-    if (cilindroSelecionado.toUpperCase().startsWith("ACE")){
-      if($(this).is(':checked')) {
+    if (cilindroSelecionado.toUpperCase().startsWith("ACE")) {
+      if ($(this).is(':checked')) {
 
         $('#linha-dupla-container-corte').addClass('hidden');
-        $('#especial').addClass('hidden');      
+        $('#especial').addClass('hidden');
         $('#op3-rosca-traseira').addClass('hidden');
         $('#imagem-haste').addClass('hidden');
         $('#linha-dupla-container-rosca-mi').addClass('hidden');
@@ -1215,8 +1215,8 @@ $('#versaoPassante').on('change', function() {
       }
     }
 
-    if (cilindroSelecionado.toUpperCase().startsWith("CDVU")){
-      if($(this).is(':checked')) {
+    if (cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
+      if ($(this).is(':checked')) {
         $('#rtAced').removeClass('hidden');
         $('#op3-rosca-traseira').addClass('hidden');
       } else {
@@ -1227,30 +1227,30 @@ $('#versaoPassante').on('change', function() {
 
     // Apenas executa a lógica de alterar quantidades para a família SAI
     if (cilindroSelecionado.toUpperCase().startsWith("SAI")) {
-        const qtdHasteInput = $('#input-qtd-haste');
-        const qtdTuboInput = $('#input-qtd-tubo');
-        const qtdBase = parseInt(qtdTuboInput.val()) || 0;
+      const qtdHasteInput = $('#input-qtd-haste');
+      const qtdTuboInput = $('#input-qtd-tubo');
+      const qtdBase = parseInt(qtdTuboInput.val()) || 0;
 
-        if ($(this).is(':checked')) {
-            qtdHasteInput.val(qtdBase * 2);
-            $('#haste-passante').addClass('hidden');
-        } else {
-            qtdHasteInput.val(qtdBase);
-            $('#haste-passante').addClass('hidden');
-        }
-        
-        // Dispara a atualização das outras quantidades
-        qtdHasteInput.trigger('input');
+      if ($(this).is(':checked')) {
+        qtdHasteInput.val(qtdBase * 2);
+        $('#haste-passante').addClass('hidden');
+      } else {
+        qtdHasteInput.val(qtdBase);
+        $('#haste-passante').addClass('hidden');
+      }
+
+      // Dispara a atualização das outras quantidades
+      qtdHasteInput.trigger('input');
     }
 
     // A função para atualizar o código do produto e a visibilidade da folha
     // é chamada para TODOS os cilindros, o que está correto.
     atualizarCodigo();
-});
+  });
 
 
 
-// --- FIM DA LÓGICA DE QUANTIDADE ---
+  // --- FIM DA LÓGICA DE QUANTIDADE ---
 
 });
 
@@ -1260,8 +1260,8 @@ $('#versaoPassante').on('change', function() {
 function calcular() {
   // --- Valores de entrada ---
   const cilindroSelecionado = $('#select-cilindro').val();
-  const curso = parseFloat($('#curso').val()) || 0; 
-  
+  const curso = parseFloat($('#curso').val()) || 0;
+
   // 1. LÊ O VALOR DO NOVO CAMPO "PROLONGAMENTO DE HASTE"
   // Usamos o ID que definimos no HTML corrigido: "inputAdicionaPh"
   const prolongamentoPH = parseFloat($('#inputAdicionaPh').val()) || 0; // Converte para número, ou usa 0 se estiver vazio
@@ -1286,36 +1286,36 @@ function calcular() {
   }
 
   //CALCULO DE HASTE PARA O ACED
-  if (item && item.cortepassanteace){
-  const medidaOriginalAcedStr = String(item.cortepassanteace).replace(',', '.').replace('mm', '').trim();
-  const medidaOriginalAced = parseFloat(medidaOriginalAcedStr) || 0;
+  if (item && item.cortepassanteace) {
+    const medidaOriginalAcedStr = String(item.cortepassanteace).replace(',', '.').replace('mm', '').trim();
+    const medidaOriginalAced = parseFloat(medidaOriginalAcedStr) || 0;
 
-  const medidaFinalAced = medidaOriginalAced + curso + prolongamentoPH + prolongamentoPR; // Adicione "+ prolongamentoPR"
+    const medidaFinalAced = medidaOriginalAced + curso + prolongamentoPH + prolongamentoPR; // Adicione "+ prolongamentoPR"
 
-  $('#input-medida-corte-ace').val(medidaFinalAced.toFixed(2).replace('.', ',') + "mm");
-  }else {
+    $('#input-medida-corte-ace').val(medidaFinalAced.toFixed(2).replace('.', ',') + "mm");
+  } else {
     $('#input-medida-corte-ace').val('');
   }
 
   // --- Cálculo Corte Passante ---
   if (item && item.cortepassante) {
-      const cortePassanteStr = String(item.cortepassante).replace(',', '.').replace('mm', '').trim();
-      const cortePassante = parseFloat(cortePassanteStr) || 0;
+    const cortePassanteStr = String(item.cortepassante).replace(',', '.').replace('mm', '').trim();
+    const cortePassante = parseFloat(cortePassanteStr) || 0;
 
-      // Soma corte passante com o curso
-      const medidaPassanteFinal = cortePassante + curso;
+    // Soma corte passante com o curso
+    const medidaPassanteFinal = cortePassante + curso;
 
-      $('#input-medida-corte-passante').val(medidaPassanteFinal.toFixed(2).replace('.', ',') + "mm");
-    } else {
-      $('#input-medida-corte-passante').val('');
-    }
+    $('#input-medida-corte-passante').val(medidaPassanteFinal.toFixed(2).replace('.', ',') + "mm");
+  } else {
+    $('#input-medida-corte-passante').val('');
+  }
 }
 
 // Função calcularMi: Calcula a medida de corte final da haste MI
 function calcularMi() {
   const curso = parseFloat($('#curso').val()) || 0;
   const cilindroSelecionado = $('#select-cilindro').val();
-  
+
   // 1. LÊ O VALOR DO PROLONGAMENTO (a linha que faltava)
   const prolongamentoPH = parseFloat($('#inputAdicionaPh').val()) || 0;
   const prolongamentoPR = parseFloat($('#inputAdicionaPr').val()) || 0; // Adicione esta
@@ -1328,7 +1328,7 @@ function calcularMi() {
 
     // 2. SOMA O PROLONGAMENTO NO CÁLCULO FINAL (a alteração que faltava)
     const medidaFinal = medidaOriginal + curso + prolongamentoPH + prolongamentoPR; // Adicione "+ prolongamentoPR"
-    
+
     // Atualiza o campo correto, o da linha MI
     $('#input-medida-corte-mi').val(medidaFinal.toFixed(2).replace('.', ',') + "mm");
   } else {
@@ -1340,26 +1340,26 @@ function calcularMi() {
  * Calcula a medida final da rosca dianteira com base no PR.
  */
 function calcularRosca() {
-    const prolongamentoPR = parseFloat($('#inputAdicionaPr').val()) || 0;
-    const item = dadosPlanilha.find(d => d.cilindro === $('#select-cilindro').val());
+  const prolongamentoPR = parseFloat($('#inputAdicionaPr').val()) || 0;
+  const item = dadosPlanilha.find(d => d.cilindro === $('#select-cilindro').val());
 
-    if (item) {
-        // Usa as colunas que você já havia preparado
-        const medidaRD_texto = item.medidaRD || ''; 
-        const medidaCRD_base_str = item.medidaCRD || '0';
-        
-        // Extrai o valor numérico
-        const valorBaseCRD = parseFloat(medidaCRD_base_str) || 0;
-        const unidadeCRD = medidaCRD_base_str.replace(/[0-9.,]/g, '');
-        
-        // Soma o valor base da rosca apenas com o prolongamento da rosca (PR)
-        const valorFinalCRD = valorBaseCRD + prolongamentoPR;
+  if (item) {
+    // Usa as colunas que você já havia preparado
+    const medidaRD_texto = item.medidaRD || '';
+    const medidaCRD_base_str = item.medidaCRD || '0';
 
-        // Monta a string final e atualiza os campos
-        const roscaFinalString = `${medidaRD_texto}${valorFinalCRD}${unidadeCRD}`.trim();
-        $('#input-medida-rosca-dianteira').val(roscaFinalString);
-        $('#input-medida-rosca-dianteira-mi').val(roscaFinalString);
-    }
+    // Extrai o valor numérico
+    const valorBaseCRD = parseFloat(medidaCRD_base_str) || 0;
+    const unidadeCRD = medidaCRD_base_str.replace(/[0-9.,]/g, '');
+
+    // Soma o valor base da rosca apenas com o prolongamento da rosca (PR)
+    const valorFinalCRD = valorBaseCRD + prolongamentoPR;
+
+    // Monta a string final e atualiza os campos
+    const roscaFinalString = `${medidaRD_texto}${valorFinalCRD}${unidadeCRD}`.trim();
+    $('#input-medida-rosca-dianteira').val(roscaFinalString);
+    $('#input-medida-rosca-dianteira-mi').val(roscaFinalString);
+  }
 }
 
 // Função calcularTubo: Calcula a medida de corte final do tubo
@@ -1418,19 +1418,19 @@ function calcularTirantes() {
 
 
 function atualizarCodigo() {
-    const cilindro = $('#select-cilindro').val() || '';
-    const curso = $('#curso').val() || '';
-    const versaoVitonChecked = $('#versaoViton').is(':checked');
-    const versaoInoxChecked = $('#versaoInox').is(':checked');
-    const versaoPassanteChecked = $('#versaoPassante').is(':checked');
-    const prolongamento = parseFloat($('#inputAdicionaPh').val()) || 0;
-    const prolongamentoAtivo = (parseFloat($('#inputAdicionaPh').val()) || 0) > 0;
-    const prolongamentoPR = parseFloat($('#inputAdicionaPr').val()) || 0;
+  const cilindro = $('#select-cilindro').val() || '';
+  const curso = $('#curso').val() || '';
+  const versaoVitonChecked = $('#versaoViton').is(':checked');
+  const versaoInoxChecked = $('#versaoInox').is(':checked');
+  const versaoPassanteChecked = $('#versaoPassante').is(':checked');
+  const prolongamento = parseFloat($('#inputAdicionaPh').val()) || 0;
+  const prolongamentoAtivo = (parseFloat($('#inputAdicionaPh').val()) || 0) > 0;
+  const prolongamentoPR = parseFloat($('#inputAdicionaPr').val()) || 0;
 
-    let textoFinalBase = '';
-    let separador = '';
+  let textoFinalBase = '';
+  let separador = '';
 
-    if (cilindro) {
+  if (cilindro) {
     const cilindroUpper = cilindro.toUpperCase();
 
     if (cilindroUpper.match(/^SGC\d+SNG$/)) {
@@ -1455,50 +1455,50 @@ function atualizarCodigo() {
     //=================================================================
 
     // ACE com sufixo S
-      else if (cilindroUpper.match(/^ACE(12|16|20|25)S$/)) {
-        let base = cilindroUpper.replace("S", "");
-        separador = " X ";
-        // --- LÓGICA PASSANTE ADICIONADA AQUI ---
-        if (versaoPassanteChecked) {
+    else if (cilindroUpper.match(/^ACE(12|16|20|25)S$/)) {
+      let base = cilindroUpper.replace("S", "");
+      separador = " X ";
+      // --- LÓGICA PASSANTE ADICIONADA AQUI ---
+      if (versaoPassanteChecked) {
         base = base.replace("ACE", "ACED"); // Transforma ACE32 em ACED32
-       }
-        // --- FIM DA LÓGICA PASSANTE ---
-        const sufixoFinal = versaoVitonChecked ? 'SH' : 'S'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      }
+      // --- FIM DA LÓGICA PASSANTE ---
+      const sufixoFinal = versaoVitonChecked ? 'SH' : 'S'; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
 
 
     // ACE com sufixo SG
-      else if (cilindroUpper.match(/^ACE(32|40|50|63|80|100|125)SG$/)) {
+    else if (cilindroUpper.match(/^ACE(32|40|50|63|80|100|125)SG$/)) {
       let base = cilindroUpper.replace("SG", ""); // Mude para 'let'
       separador = " X ";
-    // --- LÓGICA PASSANTE ADICIONADA AQUI ---
+      // --- LÓGICA PASSANTE ADICIONADA AQUI ---
       if (versaoPassanteChecked) {
         base = base.replace("ACE", "ACED"); // Transforma ACE32 em ACED32
       }
-    // --- FIM DA LÓGICA PASSANTE ---
+      // --- FIM DA LÓGICA PASSANTE ---
       const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SG'; // Lógica Viton
       textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
 
     else if (cilindroUpper.match(/^ACE(12|16|20|25)SB$/)) {
-        let base = cilindroUpper.replace('SB', '');
-        separador = " X ";
-        // --- LÓGICA PASSANTE ADICIONADA AQUI ---
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace('SB', '');
+      separador = " X ";
+      // --- LÓGICA PASSANTE ADICIONADA AQUI ---
+      if (versaoPassanteChecked) {
         base = base.replace("ACE", "ACED"); // Transforma ACE32 em ACED32
-       }
-        // --- FIM DA LÓGICA PASSANTE ---
-        const sufixoFinal = versaoVitonChecked ? 'SBH' : 'SB'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      }
+      // --- FIM DA LÓGICA PASSANTE ---
+      const sufixoFinal = versaoVitonChecked ? 'SBH' : 'SB'; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
 
     // ACE com sufixo SBG
-      else if (cilindroUpper.match(/^ACE(32|40|50|63|80|100|125)SBG$/)) {
+    else if (cilindroUpper.match(/^ACE(32|40|50|63|80|100|125)SBG$/)) {
       let base = cilindroUpper.replace("SBG", "");
       separador = " X ";
       if (versaoPassanteChecked) {
-      base = base.replace("ACE", "ACED"); // Transforma ACE32 em ACED32
+        base = base.replace("ACE", "ACED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SBHG' : 'SBG'; // Lógica Viton (Corrigido de SBHG para SBH)
       textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
@@ -1506,125 +1506,125 @@ function atualizarCodigo() {
 
 
     // ASE com sufixo S
-      else if (cilindroUpper.match(/^ASE(12|16|20|25)$/)) {
-        let base = cilindroUpper;
-        separador = " X ";
-        if (versaoPassanteChecked) {
+    else if (cilindroUpper.match(/^ASE(12|16|20|25)$/)) {
+      let base = cilindroUpper;
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ASE", "ASED"); // Transforma ACE32 em ACED32
-        }
-        const sufixoFinal = versaoVitonChecked ? 'SH' : 'S'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
       }
+      const sufixoFinal = versaoVitonChecked ? 'SH' : 'S'; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
+    }
 
 
     // ASE com sufixo SG
-      else if (cilindroUpper.match(/^ASE(32|40|50|63|80|100|125)SG$/)) {
-        let base = cilindroUpper.replace("SG", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+    else if (cilindroUpper.match(/^ASE(32|40|50|63|80|100|125)SG$/)) {
+      let base = cilindroUpper.replace("SG", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ASE", "ASED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SG'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
-      }
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+    }
     // ASE com sufixo SB
     else if (cilindroUpper.match(/^ASE(12|16|20|25)SB$/)) {
-        let base = cilindroUpper.replace("SB", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace("SB", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ASE", "ASED"); // Transforma ACE32 em ACED32
-        }
-        const sufixoFinal = versaoVitonChecked ? 'SBH' : 'SB'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      }
+      const sufixoFinal = versaoVitonChecked ? 'SBH' : 'SB'; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
     // ASE com sufixo SBG
     else if (cilindroUpper.match(/^ASE(32|40|50|63|80|100|125)SBG$/)) {
-        let base = cilindroUpper.replace("SBG", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace("SBG", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ASE", "ASED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SBHG' : 'SBG'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
     // ATE com sufixo S
     else if (cilindroUpper.match(/^ATE(12|16|20|25)S$/)) {
-        let base = cilindroUpper.replace("S", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace("S", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ATE", "ATED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SH' : 'S'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
     // ATE com sufixo SG
     else if (cilindroUpper.match(/^ATE(32|40|50|63|80|100|125)SG$/)) {
-        let base = cilindroUpper.replace("SG", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace("SG", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ATE", "ATED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SHG' : 'SG'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
     // ATE com sufixo SB
     else if (cilindroUpper.match(/^ATE(12|16|20|25)SB$/)) {
-        let base = cilindroUpper.replace("SB", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace("SB", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ATE", "ATED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SBH' : 'SB'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
     // ATE com sufixo SBG
     else if (cilindroUpper.match(/^ATE(32|40|50|63|80|100|125)SBG$/)) {
-        let base = cilindroUpper.replace("SBG", "");
-        separador = " X ";
-        if (versaoPassanteChecked) {
+      let base = cilindroUpper.replace("SBG", "");
+      separador = " X ";
+      if (versaoPassanteChecked) {
         base = base.replace("ATE", "ATED"); // Transforma ACE32 em ACED32
       }
       const sufixoFinal = versaoVitonChecked ? 'SBHG' : 'SBG'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
 
-    else if (cilindroUpper.match(/^CSM(10|12|16|20|25)R$/)){
-      const base = cilindroUpper.replace("R","");
+    else if (cilindroUpper.match(/^CSM(10|12|16|20|25)R$/)) {
+      const base = cilindroUpper.replace("R", "");
       separador = " - ";
       const sufixoFinal = versaoVitonChecked ? ' - V ' : '';
       textoFinalBase = `${base}${separador}${curso}R ${sufixoFinal}`
     }
 
-    else if (cilindroUpper.match(/^CSM(10|12|16|20|25)A$/)){
-      const base = cilindroUpper.replace("A","");
+    else if (cilindroUpper.match(/^CSM(10|12|16|20|25)A$/)) {
+      const base = cilindroUpper.replace("A", "");
       separador = " - ";
       const sufixoFinal = versaoVitonChecked ? ' - V ' : '';
       textoFinalBase = `${base}${separador}${curso}A ${sufixoFinal}`
     }
 
-    else if (cilindroUpper.match(/^CSM(10|16|20|25)F$/)){
-      const base = cilindroUpper.replace("F","");
+    else if (cilindroUpper.match(/^CSM(10|16|20|25)F$/)) {
+      const base = cilindroUpper.replace("F", "");
       separador = " - ";
       const sufixoFinal = versaoVitonChecked ? ' - V ' : '';
       textoFinalBase = `${base}${separador}${curso}F ${sufixoFinal}`
     }
 
-    else if (cilindroUpper.match(/^CSM2B(20|25|32|40)A$/)){
-      const base = cilindroUpper.replace("A","");
+    else if (cilindroUpper.match(/^CSM2B(20|25|32|40)A$/)) {
+      const base = cilindroUpper.replace("A", "");
       separador = " - ";
       const sufixoFinal = versaoVitonChecked ? ' - V ' : '';
       textoFinalBase = `${base}${separador}${curso}A ${sufixoFinal}`
     }
-    
-    else if (cilindroUpper.match(/^CSM2B(20|25|32|40)R$/)){
-      const base = cilindroUpper.replace("R","");
+
+    else if (cilindroUpper.match(/^CSM2B(20|25|32|40)R$/)) {
+      const base = cilindroUpper.replace("R", "");
       separador = " - ";
       const sufixoFinal = versaoVitonChecked ? ' - V ' : '';
       textoFinalBase = `${base}${separador}${curso}R ${sufixoFinal}`
     }
 
-    else if (cilindroUpper.match(/^CSM2B(20|25|32|40)F$/)){
-      const base = cilindroUpper.replace("F","");
+    else if (cilindroUpper.match(/^CSM2B(20|25|32|40)F$/)) {
+      const base = cilindroUpper.replace("F", "");
       separador = " - ";
       const sufixoFinal = versaoVitonChecked ? ' - V ' : '';
       textoFinalBase = `${base}${separador}${curso}F ${sufixoFinal}`
@@ -1634,47 +1634,47 @@ function atualizarCodigo() {
     // CILINDROS FAMÍLIA CSM (Separador " - ")
     //=================================================================
 
-     // CSM com sufixo -C
+    // CSM com sufixo -C
     else if (cilindroUpper.match(/^CSM(16|20|25)$/)) {
-        const base = cilindroUpper.replace("", "");
-        separador = " - ";
-        const sufixoFinal = versaoVitonChecked ? ' - V' : ''; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
+      const base = cilindroUpper.replace("", "");
+      separador = " - ";
+      const sufixoFinal = versaoVitonChecked ? ' - V' : ''; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
 
     }
     // CSM com sufixo -C
     else if (cilindroUpper.match(/^CSM(16|20|25)-C$/)) {
-        const base = cilindroUpper.replace("-C", "");
-        separador = " - ";
-        const sufixoFinal = versaoVitonChecked ? 'C - V' : 'C'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
+      const base = cilindroUpper.replace("-C", "");
+      separador = " - ";
+      const sufixoFinal = versaoVitonChecked ? 'C - V' : 'C'; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
 
     }
     // CSM com sufixo F-C
     else if (cilindroUpper.match(/^CSM(16|20|25)F-C$/)) {
-        const base = cilindroUpper.replace("-C", "");
-        const prefixoCorreto = (cilindroUpper === "CSM25F-C") ? "CSM25F" : base;
-        separador = " - ";
-        const sufixoFinal = versaoVitonChecked ? 'C - V' : 'C'; // Lógica Viton
-        textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
+      const base = cilindroUpper.replace("-C", "");
+      const prefixoCorreto = (cilindroUpper === "CSM25F-C") ? "CSM25F" : base;
+      separador = " - ";
+      const sufixoFinal = versaoVitonChecked ? 'C - V' : 'C'; // Lógica Viton
+      textoFinalBase = `${base}${separador}${curso}${sufixoFinal}`;
 
-        
+
     }
     // CSM3F (Formato especial)
     else if (cilindroUpper.match(/^CSM3F(32|40|50|63)-C$/)) {
-        const match = cilindroUpper.match(/^CSM3F(\d+)-C$/);
-        const numero = match[1];
-        separador = " - ";
-        const sufixoFinal = versaoVitonChecked ? ' - V' : '';
-        textoFinalBase = `CSM3F ${numero}${separador}${curso}C${sufixoFinal}`;
+      const match = cilindroUpper.match(/^CSM3F(\d+)-C$/);
+      const numero = match[1];
+      separador = " - ";
+      const sufixoFinal = versaoVitonChecked ? ' - V' : '';
+      textoFinalBase = `CSM3F ${numero}${separador}${curso}C${sufixoFinal}`;
     }
     // CSM3B (Formato especial)
     else if (cilindroUpper.match(/^CSM3B(32|40|50|63)-C$/)) {
-        const match = cilindroUpper.match(/^CSM3B(\d+)-C$/);
-        const numero = match[1];
-        separador = " - ";
-        const sufixoFinal = versaoVitonChecked ? ' - V' : '';
-        textoFinalBase = `CSM3B${numero}${separador}${curso}C${sufixoFinal}`;
+      const match = cilindroUpper.match(/^CSM3B(\d+)-C$/);
+      const numero = match[1];
+      separador = " - ";
+      const sufixoFinal = versaoVitonChecked ? ' - V' : '';
+      textoFinalBase = `CSM3B${numero}${separador}${curso}C${sufixoFinal}`;
     }
 
     //=================================================================
@@ -1683,287 +1683,287 @@ function atualizarCodigo() {
 
     // CCN...-M / -F
     else if (cilindroUpper.match(/^CCN(12|16|20|25|32|40|50|63|80|100|125)-M$/)) {
-        const base = cilindroUpper.replace("-M", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} M`;
+      const base = cilindroUpper.replace("-M", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} M`;
     } else if (cilindroUpper.match(/^CCN(12|16|20|25|32|40|50|63|80|100|125)-F$/)) {
-        const base = cilindroUpper.replace("-F", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} F`;
+      const base = cilindroUpper.replace("-F", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} F`;
     }
     // CCN...A-M / A-F (haste anti-giro)
     else if (cilindroUpper.match(/^CCN(12|16|20|25|32|40|50|63|80|100|125)M-A$/)) {
-        const base = cilindroUpper.replace("M-A", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso}M - A`;
+      const base = cilindroUpper.replace("M-A", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso}M - A`;
     } else if (cilindroUpper.match(/^CCN(12|16|20|25|32|40|50|63|80|100|125)F-A$/)) {
-        const base = cilindroUpper.replace("F-A", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso}F - A`;
+      const base = cilindroUpper.replace("F-A", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso}F - A`;
     }
     // CCN...R-M / R-F (haste reforçada)
     else if (cilindroUpper.match(/^CCN(12|16|20|25|32|40|50|63|80|100|125)M-R$/)) {
-        const base = cilindroUpper.replace("M-R", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso}M - R`;
+      const base = cilindroUpper.replace("M-R", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso}M - R`;
     } else if (cilindroUpper.match(/^CCN(12|16|20|25|32|40|50|63|80|100|125)F-R$/)) {
-        const base = cilindroUpper.replace("F-R", ""); // Bug corrigido
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso}F - R`;
+      const base = cilindroUpper.replace("F-R", ""); // Bug corrigido
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso}F - R`;
     }
     // CDVU...-M / -F
     else if (cilindroUpper.match(/^CDVU(12|16|20|25|32|40|50|63|80|100|125)-M$/)) {
-        const base = cilindroUpper.replace("-M", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} M`;
+      const base = cilindroUpper.replace("-M", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} M`;
     } else if (cilindroUpper.match(/^CDVU(12|16|20|25|32|40|50|63|80|100|125)-F$/)) {
-        const base = cilindroUpper.replace("-F", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} F`;
+      const base = cilindroUpper.replace("-F", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} F`;
     }
     // CCMB...-M / -F
     else if (cilindroUpper.match(/^CCMB(12|16|20|25|32|40|50|63|80|100)-M$/)) {
-        let base = cilindroUpper.replace("-M", "");
-        if (cilindroUpper === "CCMB20-M") {
-            base = "CCMB20";
-        } else if (cilindroUpper === "CCB20-M") {
-            base = "CCB25";
-        }
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} M`;
+      let base = cilindroUpper.replace("-M", "");
+      if (cilindroUpper === "CCMB20-M") {
+        base = "CCMB20";
+      } else if (cilindroUpper === "CCB20-M") {
+        base = "CCB25";
+      }
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} M`;
     } else if (cilindroUpper.match(/^CCMB(12|16|20|25|32|40|50|63|80|100)-F$/)) {
-        const base = cilindroUpper.replace("-F", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} F`;
+      const base = cilindroUpper.replace("-F", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} F`;
     }
 
     // CCMB...-M / -F
     else if (cilindroUpper.match(/^(CCMB|CCB)(12|16|20|25|32|40|50|63|80|100)L-M$/)) {
-        let base = cilindroUpper.replace("L-M", "");
-        if (cilindroUpper === "CCMBL20-M") {
-            base = "CCMBL20";
-        } else if (cilindroUpper === "CCBL20-M") {
-            base = "CCBL20";
-        }
-        separador = " - ";
-        textoFinalBase = `${base}L${separador}${curso} M`;
+      let base = cilindroUpper.replace("L-M", "");
+      if (cilindroUpper === "CCMBL20-M") {
+        base = "CCMBL20";
+      } else if (cilindroUpper === "CCBL20-M") {
+        base = "CCBL20";
+      }
+      separador = " - ";
+      textoFinalBase = `${base}L${separador}${curso} M`;
     } else if (cilindroUpper.match(/^(CCMB|CCB)(12|16|20|25|32|40|50|63|80|100)L-F$/)) {
-        const base = cilindroUpper.replace("L-F", "");
-        separador = " - ";
-        textoFinalBase = `${base}L${separador}${curso} F`;
+      const base = cilindroUpper.replace("L-F", "");
+      separador = " - ";
+      textoFinalBase = `${base}L${separador}${curso} F`;
     }
 
     // CCB...-M / -F
     else if (cilindroUpper.match(/^CCB(12|16|20|25|32|40|50|63|80|100)-M$/)) {
-        const base = cilindroUpper.replace("-M", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} M`;
+      const base = cilindroUpper.replace("-M", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} M`;
     } else if (cilindroUpper.match(/^CCB(12|16|20|25|32|40|50|63|80|100)-F$/)) {
-        const base = cilindroUpper.replace("-F", "");
-        separador = " - ";
-        textoFinalBase = `${base}${separador}${curso} F`;
+      const base = cilindroUpper.replace("-F", "");
+      separador = " - ";
+      textoFinalBase = `${base}${separador}${curso} F`;
     }
 
     // MI com vários sufixos
-   else if (
-    cilindroUpper.match(/^MI(C)?(12|16)SCA$/) ||
-    cilindroUpper.match(/^MI(C)?(20|25)SCAG$/) ||
-    cilindroUpper.match(/^MI(C)?(12|16|20|25)SUG$/) ||
-    cilindroUpper.match(/^MI(C)?(12|16)SU$/)
-) {
-    const match = cilindroUpper.match(/^(MI(C)?)(\d+)(SCA|SCAG|SUG|SU)$/);
+    else if (
+      cilindroUpper.match(/^MI(C)?(12|16)SCA$/) ||
+      cilindroUpper.match(/^MI(C)?(20|25)SCAG$/) ||
+      cilindroUpper.match(/^MI(C)?(12|16|20|25)SUG$/) ||
+      cilindroUpper.match(/^MI(C)?(12|16)SU$/)
+    ) {
+      const match = cilindroUpper.match(/^(MI(C)?)(\d+)(SCA|SCAG|SUG|SU)$/);
 
-    // Define o prefixo condicionalmente com base na seleção do passante
-    const prefixo = versaoPassanteChecked 
-      ? `${match[1]}D${match[3]}`  // Ex: "MIC" + "D" + "12" = "MICD12"
-      : `${match[1]}${match[3]}`;  // Ex: "MIC" + "12"     = "MIC12"
+      // Define o prefixo condicionalmente com base na seleção do passante
+      const prefixo = versaoPassanteChecked
+        ? `${match[1]}D${match[3]}`  // Ex: "MIC" + "D" + "12" = "MICD12"
+        : `${match[1]}${match[3]}`;  // Ex: "MIC" + "12"     = "MIC12"
 
-    const sufixo = match[4];
-    separador = " X ";
-    
-    // LINHA CRÍTICA: Certifique-se de usar ACENTOS GRAVES (`) aqui
-    textoFinalBase = `${prefixo}${separador}${curso} ${sufixo}`;
-} 
+      const sufixo = match[4];
+      separador = " X ";
+
+      // LINHA CRÍTICA: Certifique-se de usar ACENTOS GRAVES (`) aqui
+      textoFinalBase = `${prefixo}${separador}${curso} ${sufixo}`;
+    }
 
     // MSI/MTI com SCA/SCAG
     else if (cilindroUpper.match(/^MSI(12|16)SCA$/)) {
-        const base = cilindroUpper.replace("SCA", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SCA`;
+      const base = cilindroUpper.replace("SCA", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SCA`;
     } else if (cilindroUpper.match(/^MSI(20|25)SCAG$/)) {
-        const base = cilindroUpper.replace("SCAG", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SCAG`;
+      const base = cilindroUpper.replace("SCAG", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SCAG`;
     } else if (cilindroUpper.match(/^MTI(12|16)SCA$/)) {
-        const base = cilindroUpper.replace("SCA", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SCA`;
+      const base = cilindroUpper.replace("SCA", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SCA`;
     } else if (cilindroUpper.match(/^MTI(20|25)SCAG$/)) {
-        const base = cilindroUpper.replace("SCAG", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SCAG`;
+      const base = cilindroUpper.replace("SCAG", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SCAG`;
     }
     // MSI/MTI com SU/SUG
     else if (cilindroUpper.match(/^MSI(12|16)SU$/)) {
-        const base = cilindroUpper.replace("SU", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SU`;
+      const base = cilindroUpper.replace("SU", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SU`;
     } else if (cilindroUpper.match(/^MSI(20|25)SUG$/)) {
-        const base = cilindroUpper.replace("SUG", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SUG`;
+      const base = cilindroUpper.replace("SUG", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SUG`;
     } else if (cilindroUpper.match(/^MTI(12|16)SU$/)) {
-        const base = cilindroUpper.replace("SU", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SU`;
+      const base = cilindroUpper.replace("SU", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SU`;
     } else if (cilindroUpper.match(/^MTI(20|25)SUG$/)) {
-        const base = cilindroUpper.replace("SUG", "");
-        separador = " X ";
-        textoFinalBase = `${base}${separador}${curso} SUG`;
+      const base = cilindroUpper.replace("SUG", "");
+      separador = " X ";
+      textoFinalBase = `${base}${separador}${curso} SUG`;
     }
 
     //=================================================================
     // CILINDROS FAMÍLIA SAI (Separador " X ")
     //=================================================================
 
-  // Condição SAI corrigida
-else if (cilindroUpper.match(/^(SAI(32|40|50|63|80|100|125|160|200)SNG|BSAI(32|40|50|63|80|100|125)SG)$/)) {
-    const numero = cilindroUpper.match(/\d+/)[0];
-    
-    // Identifica se o cilindro base é BSAI ou SAI
-    const isBsai = cilindroUpper.startsWith("BSAI");
-    const tipoBase = isBsai ? "BSAI" : "SAI";
-    
-    // Adiciona o 'D' no prefixo apenas se for passante (Ex: SAID ou BSAID)
-    let prefixo = versaoPassanteChecked ? tipoBase + "D" : tipoBase; 
-    
-    let base = prefixo + numero; // Ex: SAI32, SAID32, BSAI32 ou BSAID32
-    separador = " X ";
-    
-    // O 'B' do Inox continua sendo adicionado DEPOIS do número
-    if (versaoInoxChecked) {
-        base += 'B'; 
-    }
-    
-    // Define o sufixo final correto dependendo se é BSAI ou SAI
-    let sufixoFinal = "";
-    if (isBsai) {
+    // Condição SAI corrigida
+    else if (cilindroUpper.match(/^(SAI(32|40|50|63|80|100|125|160|200)SNG|BSAI(32|40|50|63|80|100|125)SG)$/)) {
+      const numero = cilindroUpper.match(/\d+/)[0];
+
+      // Identifica se o cilindro base é BSAI ou SAI
+      const isBsai = cilindroUpper.startsWith("BSAI");
+      const tipoBase = isBsai ? "BSAI" : "SAI";
+
+      // Adiciona o 'D' no prefixo apenas se for passante (Ex: SAID ou BSAID)
+      let prefixo = versaoPassanteChecked ? tipoBase + "D" : tipoBase;
+
+      let base = prefixo + numero; // Ex: SAI32, SAID32, BSAI32 ou BSAID32
+      separador = " X ";
+
+      // O 'B' do Inox continua sendo adicionado DEPOIS do número
+      if (versaoInoxChecked) {
+        base += 'B';
+      }
+
+      // Define o sufixo final correto dependendo se é BSAI ou SAI
+      let sufixoFinal = "";
+      if (isBsai) {
         // Se for BSAI, usa SG (ou SHG se for Viton)
         sufixoFinal = versaoVitonChecked ? 'SHG' : 'SG';
-    } else {
+      } else {
         // Se for SAI, usa SNG (ou SHG se for Viton)
         sufixoFinal = versaoVitonChecked ? 'SHG' : 'SNG';
+      }
+
+      textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
     }
-    
-    textoFinalBase = `${base}${separador}${curso} ${sufixoFinal}`;
-}
 
     //=================================================================
     // REGRAS GERAIS (Menor Prioridade)
 
 
     else if (cilindroUpper.startsWith("MI") || cilindroUpper.startsWith("ACE") || cilindroUpper.startsWith("SAI")) {
-        separador = " X ";
-        textoFinalBase = `${cilindroUpper}${separador}${curso}`;
+      separador = " X ";
+      textoFinalBase = `${cilindroUpper}${separador}${curso}`;
     } else {
-        separador = " - ";
-        textoFinalBase = `${cilindroUpper}${separador}${curso}`;
+      separador = " - ";
+      textoFinalBase = `${cilindroUpper}${separador}${curso}`;
     }
 
-} else {
+  } else {
     textoFinalBase = '';
-}
+  }
 
-    // --- INÍCIO DA LÓGICA MODIFICADA ---
-    // --- Lógica para Sufixos Condicionais com Ordem V -> P -> I ---
-    let codigoFinalFormatado = textoFinalBase;
+  // --- INÍCIO DA LÓGICA MODIFICADA ---
+  // --- Lógica para Sufixos Condicionais com Ordem V -> P -> I ---
+  let codigoFinalFormatado = textoFinalBase;
 
-    if (textoFinalBase) {
+  if (textoFinalBase) {
     // A lógica do Viton agora é condicional:
     // SÓ adiciona ' - V' se a caixa estiver marcada E se o código ainda não contiver 'SHG'.
     if (versaoVitonChecked && !codigoFinalFormatado.includes('SHG') && !codigoFinalFormatado.includes('S')) {
-        codigoFinalFormatado += ' - V';
+      codigoFinalFormatado += ' - V';
     }
 
     // As outras lógicas permanecem iguais.
     // Adiciona '- P' somente se for passante E NÃO for um cilindro ACE
     const cilindroUpper = cilindro.toUpperCase();
     if (versaoPassanteChecked && !(cilindroUpper.startsWith("ACE") || cilindroUpper.startsWith("ASE") || cilindroUpper.startsWith("ATE") || cilindroUpper.startsWith("SAI") || cilindroUpper.startsWith("MI") || cilindroUpper.startsWith("SGC"))) {
-    codigoFinalFormatado += ' - P';
+      codigoFinalFormatado += ' - P';
     }
     if (versaoInoxChecked && !(cilindroUpper.startsWith("SAI") || cilindroUpper.startsWith("SGC"))) {
-        codigoFinalFormatado += ' - I';
+      codigoFinalFormatado += ' - I';
     }
 
     if (prolongamentoAtivo) {
-            codigoFinalFormatado += ` - PH${prolongamento}`;
-       }
+      codigoFinalFormatado += ` - PH${prolongamento}`;
+    }
 
     if (prolongamentoPR > 0) {
-            codigoFinalFormatado += ` - PR${prolongamentoPR}`;
-        } 
-
-}
-
-    // Lógica para efeitos colaterais das checkboxes (executa separadamente da criação do código)
-
-    // Efeito colateral da Versão Passante: Mostrar/Esconder a folha
-    if (versaoPassanteChecked) {
-        $('.folhaPassante').removeClass('hidden');
-    } else {
-        $('.folhaPassante').addClass('hidden');
+      codigoFinalFormatado += ` - PR${prolongamentoPR}`;
     }
 
-    // Efeito colateral da Versão Inox: Alterar matéria-prima
-    const inputMateriaPrimaHaste = $('#input-materia-prima');
-    const inputMateriaPrimaHastePassante = $('#input-materia-prima-passante');
-    const sufixoInox = ' - I';
-    // Remove o sufixo '- I' para garantir que não seja duplicado
-    const materiaPrimaBase = (inputMateriaPrimaHaste.val() || '').replace(sufixoInox, '');
-    
-    if (versaoInoxChecked) {
-        if (materiaPrimaBase) {
-            inputMateriaPrimaHaste.val(materiaPrimaBase + sufixoInox);
-            inputMateriaPrimaHastePassante.val(materiaPrimaBase + sufixoInox);
-        }
-    } else {
-        // Remove o sufixo se a caixa for desmarcada
-        if (materiaPrimaBase) {
-            inputMateriaPrimaHaste.val(materiaPrimaBase);
-            inputMateriaPrimaHastePassante.val(materiaPrimaBase);
-        }
+  }
+
+  // Lógica para efeitos colaterais das checkboxes (executa separadamente da criação do código)
+
+  // Efeito colateral da Versão Passante: Mostrar/Esconder a folha
+  if (versaoPassanteChecked) {
+    $('.folhaPassante').removeClass('hidden');
+  } else {
+    $('.folhaPassante').addClass('hidden');
+  }
+
+  // Efeito colateral da Versão Inox: Alterar matéria-prima
+  const inputMateriaPrimaHaste = $('#input-materia-prima');
+  const inputMateriaPrimaHastePassante = $('#input-materia-prima-passante');
+  const sufixoInox = ' - I';
+  // Remove o sufixo '- I' para garantir que não seja duplicado
+  const materiaPrimaBase = (inputMateriaPrimaHaste.val() || '').replace(sufixoInox, '');
+
+  if (versaoInoxChecked) {
+    if (materiaPrimaBase) {
+      inputMateriaPrimaHaste.val(materiaPrimaBase + sufixoInox);
+      inputMateriaPrimaHastePassante.val(materiaPrimaBase + sufixoInox);
     }
-
-
-    // --- FIM DA LÓGICA MODIFICADA ---
-    
-
-    // --- Atualiza os Campos do Formulário ---
-    if (typeof $ !== "undefined") {
-        $("#codigo").val(codigoFinalFormatado);
-        $("#codigo-tubo").val(codigoFinalFormatado);
-        $("#codigo-guias").val(codigoFinalFormatado);
-        $("#codigo-tirantes").val(codigoFinalFormatado);
-        $("#codigo-ccmb").val(codigoFinalFormatado);
-        $('#codigo-passante').val(codigoFinalFormatado);
-
-        $("#curso-tubo").val(curso);
-        $("#curso-guias").val(curso);
-        $("#curso-tirantes").val(curso);
-    } else {
-        console.error("jQuery ($) não está definido. A atualização dos campos falhou.");
+  } else {
+    // Remove o sufixo se a caixa for desmarcada
+    if (materiaPrimaBase) {
+      inputMateriaPrimaHaste.val(materiaPrimaBase);
+      inputMateriaPrimaHastePassante.val(materiaPrimaBase);
     }
+  }
+
+
+  // --- FIM DA LÓGICA MODIFICADA ---
+
+
+  // --- Atualiza os Campos do Formulário ---
+  if (typeof $ !== "undefined") {
+    $("#codigo").val(codigoFinalFormatado);
+    $("#codigo-tubo").val(codigoFinalFormatado);
+    $("#codigo-guias").val(codigoFinalFormatado);
+    $("#codigo-tirantes").val(codigoFinalFormatado);
+    $("#codigo-ccmb").val(codigoFinalFormatado);
+    $('#codigo-passante').val(codigoFinalFormatado);
+
+    $("#curso-tubo").val(curso);
+    $("#curso-guias").val(curso);
+    $("#curso-tirantes").val(curso);
+  } else {
+    console.error("jQuery ($) não está definido. A atualização dos campos falhou.");
+  }
 }
 // --- Configuração dos Eventos (Ouvintes) ---
-$(document).ready(function() {
-    $('#select-cilindro').on('change', atualizarCodigo);
-    $('#curso').on('input', atualizarCodigo);
-    $('#versaoViton').on('change', atualizarCodigo);
-    $('#versaoInox').on('change', atualizarCodigo); 
-    $('#versaoPassante').on('change', atualizarCodigo);
+$(document).ready(function () {
+  $('#select-cilindro').on('change', atualizarCodigo);
+  $('#curso').on('input', atualizarCodigo);
+  $('#versaoViton').on('change', atualizarCodigo);
+  $('#versaoInox').on('change', atualizarCodigo);
+  $('#versaoPassante').on('change', atualizarCodigo);
 
-    // Chame 'atualizarCodigo()' uma vez ao carregar a página.
-    atualizarCodigo();
+  // Chame 'atualizarCodigo()' uma vez ao carregar a página.
+  atualizarCodigo();
 });
 
 /**
@@ -1972,8 +1972,8 @@ $(document).ready(function() {
  */
 function adicionaPH(event) {
   // 1. Impede o comportamento padrão do botão (como recarregar a página)
-  event.preventDefault(); 
-  
+  event.preventDefault();
+
   // 2. Apenas chama a função calcular(), que já sabe o que fazer!
   console.log("Calculando com prolongamento de haste...");
   calcular();
@@ -1987,7 +1987,7 @@ function adicionaPH(event) {
  */
 function removePH(event) {
   // 1. Impede o comportamento padrão do botão (prevenção)
-  event.preventDefault(); 
+  event.preventDefault();
 
   // 2. Limpa o campo de entrada do prolongamento
   $('#inputAdicionaPh').val('');
@@ -2005,24 +2005,24 @@ function removePH(event) {
  * Função acionada pelo botão "Adicionar" do Prolongamento de Rosca (PR).
  */
 function adicionaPR(event) {
-    event.preventDefault();
-    console.log("Calculando com prolongamento de rosca...");
-    // Chama todas as funções, pois PR afeta tanto o corte quanto a rosca
-    calcular();
-    calcularMi();
-    calcularRosca();
-    atualizarCodigo();
+  event.preventDefault();
+  console.log("Calculando com prolongamento de rosca...");
+  // Chama todas as funções, pois PR afeta tanto o corte quanto a rosca
+  calcular();
+  calcularMi();
+  calcularRosca();
+  atualizarCodigo();
 }
 
 /**
  * Remove o valor do prolongamento de rosca e recalcula tudo.
  */
 function removePR(event) {
-    event.preventDefault();
-    $('#inputAdicionaPr').val('');
-    console.log("Removendo prolongamento de rosca e recalculando...");
-    calcular();
-    calcularMi();
-    calcularRosca();
-    atualizarCodigo();
+  event.preventDefault();
+  $('#inputAdicionaPr').val('');
+  console.log("Removendo prolongamento de rosca e recalculando...");
+  calcular();
+  calcularMi();
+  calcularRosca();
+  atualizarCodigo();
 }
