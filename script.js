@@ -278,6 +278,10 @@ $(document).ready(function () {
     const imgHasteAced = $('#imgHasteAced');
     const RdAced = $('#input-medida-rosca-dianteira-aced');
 
+    const inputDiamZ = $('#input-diamz');
+    const inputDistZ = $('#input-distz');
+    const inputCompZ = $('#input-compz');
+
     // Lista de cilindros que devem mostrar a página de guias
     const cilindrosGuiados = [
       "CCNG12", "CCNG16", "CCNG20", "CCNG25", "CCNG32",
@@ -417,6 +421,10 @@ $(document).ready(function () {
       imgHasteAced.attr('src', '');
       RdAced.val('');
 
+      inputDiamZ.val('');
+      inputDistZ.val('');
+      inputCompZ.val('');
+
 
       // Esconde páginas opcionais
       $("#paginaGuias").addClass("hidden");
@@ -552,6 +560,10 @@ $(document).ready(function () {
       inputMedidaRtAced.val(item.medidartaced || '');
       imgHasteAced.attr('src', item.imghasteaced || '');
       RdAced.val(medidaRDAcedConcatenada || '');
+
+      inputDiamZ.val(item.diamz || '');
+      inputDistZ.val(item.distz || '');
+      inputCompZ.val(item.compz || '');
 
 
       // Calcula as medidas finais
@@ -700,6 +712,7 @@ $(document).ready(function () {
       const linhaDuplaContainer = $("#linha-dupla-container");
       const linhaDuplaContainerRoscaMi = $("#linha-dupla-container-rosca-mi");
       const especial = $("#especial");
+      const especialSai = $("#especial-sai");
 
       const cilindrosMI = [
         "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
@@ -745,6 +758,12 @@ $(document).ready(function () {
         "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG"
       ];
 
+      const cilindrosEspecialSai = [
+        "BSAI32SG", "BSAI40SG", "BSAI50SG", "BSAI63SG", "BSAI80SG", 
+        "BSAI100SG", "BSAI125S", "SAI32SNG", "SAI40SNG", "SAI50SNG", 
+        "SAI63SNG", "SAI80SNG", "SAI100SNG", "SAI125SNG", "SAI160SNG", "SAI200SNG"
+      ];
+
       const observacao = $("#obs-avanco-retorno");
       const textoObsAvanco = "Avanço Mola - Usinar cabeçote traseiro";
       const textoObsRetorno = "Retorno Mola - Usinar cabeçote dianteiro";
@@ -788,6 +807,12 @@ $(document).ready(function () {
         especial.removeClass("hidden");
       } else {
         especial.addClass("hidden");
+      }
+
+      if (cilindrosEspecialSai.includes(cilindroSelecionado)) {
+        especialSai.removeClass("hidden");
+      } else {
+        especialSai.addClass("hidden");
       }
 
       // VARIÁVEIS LOCAIS (dentro do bloco de seleção do cilindro)
@@ -961,6 +986,10 @@ $(document).ready(function () {
       inputMedidaRtAced.val('');
       imgHasteAced.attr('src', '');
       RdAced.val('');
+
+      inputDiamZ.val('');
+      inputDistZ.val('');
+      inputCompZ.val('');
 
 
       // Esconde as imagens de rebaixo CCMB e mostra a imagem do tubo normal
