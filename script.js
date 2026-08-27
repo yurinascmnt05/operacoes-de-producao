@@ -1,6 +1,3 @@
-// URL da API do Sheet.best que retorna os dados da planilha
-const urlAPI = 'https://script.google.com/macros/s/AKfycbxW_JOnqHLV2aryMZRL_h50IsKN6af6zoR0ju8AAN9WsLMLHwj9ZCwY9D8SoHkn3AEoWw/exec';
-
 // Variável global para armazenar os dados carregados da planilha
 let dadosPlanilha = [];
 
@@ -146,15 +143,17 @@ $(document).ready(function () {
   // --- FIM DA SINCRONIZAÇÃO DE PRIORIDADE ---
 
 
-  // Carrega os dados da API
-  fetch(urlAPI)
-    .then(response => response.json()) // Converte a resposta para JSON
-    .then(data => {
+  // Carrega os dados do arquivo CSV local
+  Papa.parse('planilhaCilindros.csv', {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
       // Armazena os dados retornados na variável global
-      dadosPlanilha = data;
+      dadosPlanilha = results.data;
 
-      // Extrai uma lista única de nomes de cilindros (sem duplicatas)
-      const cilindros = [...new Set(data.map(item => item.cilindro))];
+      // Extrai uma lista única de nomes de cilindros (sem duplicatas e vazios)
+      const cilindros = [...new Set(dadosPlanilha.map(item => item.cilindro).filter(Boolean))];
 
       // Limpa o select e adiciona placeholder
       const selectCilindro = $('#select-cilindro');
@@ -168,8 +167,11 @@ $(document).ready(function () {
 
       // Atualiza o Select2 para mostrar as opções
       selectCilindro.trigger('change.select2');
-    })
-    .catch(err => console.error('Erro ao carregar dados:', err));
+    },
+    error: function(err) {
+      console.error('Erro ao carregar dados CSV:', err);
+    }
+  });
 
   // Evento quando o usuário muda a seleção do cilindro
   $('#select-cilindro').on('change', function () {
