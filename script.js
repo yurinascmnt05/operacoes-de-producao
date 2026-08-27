@@ -1388,6 +1388,22 @@ function calcularRosca() {
     const roscaFinalString = `${medidaRD_texto}${valorFinalCRD}${unidadeCRD}`.trim();
     $('#input-medida-rosca-dianteira').val(roscaFinalString);
     $('#input-medida-rosca-dianteira-mi').val(roscaFinalString);
+    $('#input-medida-rosca-dianteira-passante').val(roscaFinalString); // Atualiza passante normal
+
+    // Calcula para o ACED (Passante da linha ACE)
+    const medidaRDAced_texto = item.medidardacedb || '';
+    const medidaCRDAced_base_str = item.medidaCRDacedb || '0';
+    
+    // Se existir configuração para ACED, calcula e atualiza
+    if (medidaRDAced_texto !== '' || medidaCRDAced_base_str !== '0') {
+      const valorBaseCRDAced = parseFloat(medidaCRDAced_base_str) || 0;
+      const unidadeCRDAced = medidaCRDAced_base_str.replace(/[0-9.,]/g, '');
+      
+      const valorFinalCRDAced = valorBaseCRDAced + prolongamentoPR;
+      
+      const roscaFinalStringAced = `${medidaRDAced_texto}${valorFinalCRDAced}${unidadeCRDAced}`.trim();
+      $('#input-medida-rosca-dianteira-aced').val(roscaFinalStringAced);
+    }
   }
 }
 
