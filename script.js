@@ -69,26 +69,26 @@ $(document).ready(function () {
   function resetarCampos() {
     console.log("Resetando campos de customização...");
 
-    // Desmarca todas as checkboxes de versões/opções
-    $('#versaoViton').prop('checked', false);
-    $('#versaoInox').prop('checked', false);
-    $('#versaoPassante').prop('checked', false);
-    $('#versaoVitonAirTac').prop('checked', false);
-
+    // Desmarca todas as checkboxes de versões/opções e dispara change
     $('#versaoViton').prop('checked', false).trigger('change');
     $('#versaoInox').prop('checked', false).trigger('change');
     $('#versaoPassante').prop('checked', false).trigger('change');
     $('#versaoVitonAirTac').prop('checked', false).trigger('change');
 
+    // Garante que o estado visual da haste volte ao padrão
+    $('#imagem-haste').removeClass('hidden');
+    $('#imgHasteAced').addClass('hidden');
+    $('#opCorteAce').addClass('hidden');
+    $('#rtAced').addClass('hidden');
+    $('#rdAced').addClass('hidden');
+    $('#op3-rosca-traseira').removeClass('hidden');
+    $('#haste-passante').addClass('hidden');
 
     // Limpa o valor do campo de Prolongamento de Haste (PH)
     $('#inputAdicionaPh').val('');
     // Limpa o valor do campo de Prolongamento de Rosca (PR)
     $('#inputAdicionaPr').val('');
     $('#qtd-cilindro').val('');
-
-
-    $('#haste-passante').addClass('hidden');
   }
 
 
@@ -1037,6 +1037,7 @@ $(document).ready(function () {
     }
 
 
+    atualizarQuantidades(); // Atualiza as quantidades para o novo cilindro
     atualizarCodigo(); // Atualiza o código exibido
   });
 
@@ -1102,25 +1103,18 @@ $(document).ready(function () {
     atualizarQuantidades();
   });
 
-  // Modificação do evento do versaoPassante para também disparar o recálculo de quantidades
+  // Evento para a checkbox 'passante'
   $('#versaoPassante').on('change', function () {
     const isChecked = $(this).is(':checked');
+    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
 
     if (isChecked) {
       $('#haste-passante').removeClass('hidden');
       $('#imgrebaixoTccmb').addClass('hidden');
       $('#tabelaRebaixoTccmb').addClass('hidden');
-    } else {
-      $('#haste-passante').addClass('hidden');
-      $('#imgrebaixoTccmb').removeClass('hidden');
-      $('#tabelaRebaixoTccmb').removeClass('hidden');
-    }
 
-    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
-
-    // Lógica para alternar campos da família ACE
-    if (cilindroSelecionado.toUpperCase().startsWith("ACE") || cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
-      if ($(this).is(':checked')) {
+      // Lógica para alternar campos das famílias ACE e CDVU quando passante estiver marcado
+      if (cilindroSelecionado.startsWith("ACE") || cilindroSelecionado.startsWith("CDVU")) {
         $('#linha-dupla-container-corte').addClass('hidden');
         $('#especial').addClass('hidden');
         $('#op3-rosca-traseira').addClass('hidden');
@@ -1131,28 +1125,28 @@ $(document).ready(function () {
         $('#rtAced').removeClass('hidden');
         $('#imgHasteAced').removeClass('hidden');
         $('#rdAced').removeClass('hidden');
-      } else {
-        $('#linha-dupla-container-corte').removeClass('hidden');
-        $('#especial').removeClass('hidden');
-        $('#op3-rosca-traseira').removeClass('hidden');
-        $('#imagem-haste').removeClass('hidden');
-        $('#linha-dupla-container-rosca-mi').removeClass('hidden');
-
-        $('#opCorteAce').addClass('hidden');
-        $('#rtAced').addClass('hidden');
-        $('#imgHasteAced').addClass('hidden');
-        $('#rdAced').addClass('hidden');
       }
-    }
 
-    if (cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
-      if ($(this).is(':checked')) {
-        $('#rtAced').removeClass('hidden');
-        $('#op3-rosca-traseira').addClass('hidden');
-      } else {
-        $('#rtAced').addClass('hidden');
-        $('#op3-rosca-traseira').removeClass('hidden');
+      // Se for família SAI, a folha extra de passante não é necessária (usa haste duplicada)
+      if (cilindroSelecionado.startsWith("SAI")) {
+        $('#haste-passante').addClass('hidden');
       }
+    } else {
+      // Quando DESMARCADO, SEMPRE restaura os campos para o padrão (independente do cilindro atual)
+      $('#haste-passante').addClass('hidden');
+      $('#imgrebaixoTccmb').removeClass('hidden');
+      $('#tabelaRebaixoTccmb').removeClass('hidden');
+
+      // Restaura elementos da haste padrão
+      $('#imagem-haste').removeClass('hidden');
+      $('#imgHasteAced').addClass('hidden');
+      $('#opCorteAce').addClass('hidden');
+      $('#rtAced').addClass('hidden');
+      $('#rdAced').addClass('hidden');
+
+      $('#linha-dupla-container-corte').removeClass('hidden');
+      $('#op3-rosca-traseira').removeClass('hidden');
+      $('#linha-dupla-container-rosca-mi').removeClass('hidden');
     }
 
     // CHAMA A ATUALIZAÇÃO DE QUANTIDADES PARA AJUSTAR O DOBRO CASO SEJA SAI PASSANTE
@@ -1162,17 +1156,7 @@ $(document).ready(function () {
     atualizarCodigo();
   });
 
-  // Certifique-se de que ao mudar o cilindro no select, as quantidades também atualizem
-  $('#select-cilindro').on('change', function () {
-    // ... (todo o seu código atual do evento change do select-cilindro permanece aqui) ...
-
-    // No final deste evento, logo antes do 'atualizarCodigo()', adicione:
-    atualizarQuantidades();
-  });
-
-  // --- FIM DA LÓGICA DE QUANTIDADE ---
-
-  // Evento para quando a quantidade de hastes for alterada
+  // Evento para quando a quantidade de hastes for alterada manualmente
   $('#input-qtd-haste').on('input', function () {
     const qtdHaste = parseInt($(this).val()) || 0;
     const isPassante = $('#versaoPassante').is(':checked');
@@ -1181,102 +1165,18 @@ $(document).ready(function () {
     let qtdTubo; // Variável para armazenar a quantidade de tubos calculada
 
     // A lógica de tubo = metade da haste só se aplica se for um cilindro SAI com opção passante
-    if (isPassante && cilindroSelecionado.toUpperCase().startsWith("SAI")) {
+    if (isPassante && cilindroSelecionado.startsWith("SAI")) {
       qtdTubo = Math.round(qtdHaste / 2) || 0;
     } else {
       // Para todos os outros casos, a quantidade de tubos é igual à de hastes
       qtdTubo = qtdHaste || 0;
     }
 
-
     // Atualiza os campos do formulário
     $('#input-qtd-tubo').val(qtdTubo || '');
     $('#input-qtd-guias').val(qtdHaste * 2 || '');
-    // <<< ALTERADO: A quantidade de tirantes agora é baseada na quantidade de TUBOS
     $('#input-qtd-tirantes').val(qtdTubo * 4 || '');
-
     $('#input-qtd-passante').val(qtdHaste || '');
-  });
-
-  // Evento para a checkbox 'passante'
-  $('#versaoPassante').on('change', function () {
-
-    const isChecked = $(this).is(':checked');
-
-    if (isChecked) {
-      $('#haste-passante').removeClass('hidden');
-      $('#imgrebaixoTccmb').addClass('hidden');
-      $('#tabelaRebaixoTccmb').addClass('hidden');
-    } else {
-      $('#haste-passante').addClass('hidden');
-      $('#imgrebaixoTccmb').removeClass('hidden');
-      $('#tabelaRebaixoTccmb').removeClass('hidden');
-    }
-
-    const cilindroSelecionado = ($('#select-cilindro').val() || '').toUpperCase().trim();
-
-    // Apenas executa a lógica de trocar o campo para a familía ace
-    if (cilindroSelecionado.toUpperCase().startsWith("ACE")) {
-      if ($(this).is(':checked')) {
-
-        $('#linha-dupla-container-corte').addClass('hidden');
-        $('#especial').addClass('hidden');
-        $('#op3-rosca-traseira').addClass('hidden');
-        $('#imagem-haste').addClass('hidden');
-        $('#linha-dupla-container-rosca-mi').addClass('hidden');
-
-        $('#opCorteAce').removeClass('hidden');
-        $('#rtAced').removeClass('hidden');
-        $('#imgHasteAced').removeClass('hidden');
-        $('#rdAced').removeClass('hidden');
-
-      } else {
-
-        $('#linha-dupla-container-corte').removeClass('hidden');
-        $('#especial').removeClass('hidden');
-        $('#op3-rosca-traseira').removeClass('hidden');
-        $('#imagem-haste').removeClass('hidden');
-        $('#linha-dupla-container-rosca-mi').removeClass('hidden');
-
-        $('#opCorteAce').addClass('hidden');
-        $('#rtAced').addClass('hidden');
-        $('#imgHasteAced').addClass('hidden');
-        $('#rdAced').addClass('hidden');
-
-      }
-    }
-
-    if (cilindroSelecionado.toUpperCase().startsWith("CDVU")) {
-      if ($(this).is(':checked')) {
-        $('#rtAced').removeClass('hidden');
-        $('#op3-rosca-traseira').addClass('hidden');
-      } else {
-        $('#rtAced').addClass('hidden');
-        $('#op3-rosca-traseira').removeClass('hidden');
-      }
-    }
-
-    // Apenas executa a lógica de alterar quantidades para a família SAI
-    if (cilindroSelecionado.toUpperCase().startsWith("SAI")) {
-      const qtdHasteInput = $('#input-qtd-haste');
-      const qtdTuboInput = $('#input-qtd-tubo');
-      const qtdBase = parseInt(qtdTuboInput.val()) || 0;
-
-      if ($(this).is(':checked')) {
-        qtdHasteInput.val(qtdBase * 2);
-        $('#haste-passante').addClass('hidden');
-      } else {
-        qtdHasteInput.val(qtdBase);
-        $('#haste-passante').addClass('hidden');
-      }
-
-      // Dispara a atualização das outras quantidades
-      qtdHasteInput.trigger('input');
-    }
-
-    // A função para atualizar o código do produto e a visibilidade da folha
-    // é chamada para TODOS os cilindros, o que está correto.
-    atualizarCodigo();
   });
 
 
