@@ -63,6 +63,29 @@ $(document).ready(function () {
     width: '100%'
   });
 
+  // Lista de cilindros da família MI / linha dupla
+  const cilindrosMI = [
+    "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
+    "MI12SU", "MI16SU", "MI20SUG", "MI25SUG",
+    "MIC12SCA", "MIC16SCA", "MIC20SCAG", "MIC25SCAG",
+    "MIC12SU", "MIC16SU", "MIC20SUG", "MIC25SUG",
+    "MSI12SCA", "MSI16SCA", "MSI20SCAG", "MSI25SCAG",
+    "MSI12SU", "MSI16SU", "MSI20SUG", "MSI25SUG",
+    "MTI12SCA", "MTI16SCA", "MTI20SCAG", "MTI25SCAG",
+    "MTI12SU", "MTI16SU", "MTI20SUG", "MTI25SUG",
+    "ACE12S", "ACE16S", "ACE20S", "ACE25S", "ACE32SG",
+    "ACE40SG", "ACE50SG", "ACE63SG",
+    "ACE125SG", "ACE12SB", "ACE16SB", "ACE20SB", "ACE25SB",
+    "ACE32SBG", "ACE40SBG", "ACE50SBG", "ACE63SBG",
+    "ACE125SBG", "ASE12", "ASE16", "ASE20", "ASE25",
+    "ASE32SG", "ASE40SG", "ASE50SG", "ASE63SG", "ASE80SG", "ASE100SG",
+    "ASE125SG", "ASE12SB", "ASE16SB", "ASE20SB", "ASE25SB", "ASE32SBG",
+    "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG",
+    "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG",
+    "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG",
+    "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG", "CDVU50-F"
+  ];
+
   /**
  * Reseta os campos de opções e customizações para o estado padrão.
  */
@@ -143,8 +166,8 @@ $(document).ready(function () {
   // --- FIM DA SINCRONIZAÇÃO DE PRIORIDADE ---
 
 
-  // Carrega os dados do arquivo CSV local
-  Papa.parse('planilhaCilindros.csv', {
+  // Carrega os dados do arquivo CSV local (com cache busting para sempre carregar a versão mais recente)
+  Papa.parse('planilhaCilindros.csv?v=' + Date.now(), {
     download: true,
     header: true,
     skipEmptyLines: true,
@@ -716,27 +739,6 @@ $(document).ready(function () {
       const especial = $("#especial");
       const especialSai = $("#especial-sai");
 
-      const cilindrosMI = [
-        "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
-        "MI12SU", "MI16SU", "MI20SUG", "MI25SUG",
-        "MIC12SCA", "MIC16SCA", "MIC20SCAG", "MIC25SCAG",
-        "MIC12SU", "MIC16SU", "MIC20SUG", "MIC25SUG",
-        "MSI12SCA", "MSI16SCA", "MSI20SCAG", "MSI25SCAG",
-        "MSI12SU", "MSI16SU", "MSI20SUG", "MSI25SUG",
-        "MTI12SCA", "MTI16SCA", "MTI20SCAG", "MTI25SCAG",
-        "MTI12SU", "MTI16SU", "MTI20SUG", "MTI25SUG",
-        "ACE12S", "ACE16S", "ACE20S", "ACE25S", "ACE32SG",
-        "ACE40SG", "ACE50SG", "ACE63SG",
-        "ACE125SG", "ACE12SB", "ACE16SB", "ACE20SB", "ACE25SB",
-        "ACE32SBG", "ACE40SBG", "ACE50SBG", "ACE63SBG",
-        "ACE125SBG", "ASE12", "ASE16", "ASE20", "ASE25",
-        "ASE32SG", "ASE40SG", "ASE50SG", "ASE63SG", "ASE80SG", "ASE100SG",
-        "ASE125SG", "ASE12SB", "ASE16SB", "ASE20SB", "ASE25SB", "ASE32SBG",
-        "ASE40SBG", "ASE50SBG", "ASE63SBG", "ASE80SBG", "ASE100SBG", "ASE125SBG",
-        "ATE12S", "ATE16S", "ATE20S", "ATE25S", "ATE32SG", "ATE40SG", "ATE50SG", "ATE63SG",
-        "ATE80SG", "ATE100SG", "ATE125SG", "ATE12SB", "ATE16SB", "ATE20SB", "ATE25SB", "ATE32SBG",
-        "ATE40SBG", "ATE50SBG", "ATE63SBG", "ATE80SBG", "ATE100SBG", "ATE125SBG", "CDVU50-F"
-      ];
 
       const cilindrosEspecial = [
         "MI12SCA", "MI16SCA", "MI20SCAG", "MI25SCAG",
@@ -1115,11 +1117,14 @@ $(document).ready(function () {
 
       // Lógica para alternar campos das famílias ACE e CDVU quando passante estiver marcado
       if (cilindroSelecionado.startsWith("ACE") || cilindroSelecionado.startsWith("CDVU")) {
+        $('#linha-dupla-container').removeClass('hidden');
         $('#linha-dupla-container-corte').addClass('hidden');
+        $('#linha-dupla-container-rosca-mi').addClass('hidden');
+        $('#opCorte').addClass('hidden');
+        $('#opRd').addClass('hidden');
         $('#especial').addClass('hidden');
         $('#op3-rosca-traseira').addClass('hidden');
         $('#imagem-haste').addClass('hidden');
-        $('#linha-dupla-container-rosca-mi').addClass('hidden');
 
         $('#opCorteAce').removeClass('hidden');
         $('#rtAced').removeClass('hidden');
@@ -1144,10 +1149,25 @@ $(document).ready(function () {
       $('#rtAced').addClass('hidden');
       $('#rdAced').addClass('hidden');
 
-      $('#linha-dupla-container-corte').removeClass('hidden');
+      if (cilindrosMI.includes(cilindroSelecionado)) {
+        $('#linha-dupla-container').removeClass('hidden');
+        $('#linha-dupla-container-corte').removeClass('hidden');
+        $('#linha-dupla-container-rosca-mi').removeClass('hidden');
+        $('#opCorte').addClass('hidden');
+        $('#opRd').addClass('hidden');
+      } else {
+        $('#linha-dupla-container').addClass('hidden');
+        $('#linha-dupla-container-corte').removeClass('hidden');
+        $('#linha-dupla-container-rosca-mi').removeClass('hidden');
+        $('#opCorte').removeClass('hidden');
+        $('#opRd').removeClass('hidden');
+      }
+
       $('#op3-rosca-traseira').removeClass('hidden');
-      $('#linha-dupla-container-rosca-mi').removeClass('hidden');
     }
+
+    // Recalcula medidas finais com a nova configuração
+    calcular();
 
     // CHAMA A ATUALIZAÇÃO DE QUANTIDADES PARA AJUSTAR O DOBRO CASO SEJA SAI PASSANTE
     atualizarQuantidades();
@@ -1204,7 +1224,12 @@ function calcular() {
 
   if (item && item.medidacorte) {
     // --- Cálculo ---
-    const medidaOriginalStr = String(item.medidacorte).replace(',', '.').replace('mm', '').trim();
+    let medidaBase = item.medidacorte;
+    const isPassante = $('#versaoPassante').is(':checked');
+    if (isPassante && item.cortepassanteace && (cilindroSelecionado.startsWith("CDVU") || cilindroSelecionado.startsWith("ACE"))) {
+      medidaBase = item.cortepassanteace;
+    }
+    const medidaOriginalStr = String(medidaBase).replace(',', '.').replace('mm', '').trim();
     const medidaOriginal = parseFloat(medidaOriginalStr) || 0;
 
     // 2. SOMA O PROLONGAMENTO NA MEDIDA FINAL
