@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -11,7 +12,7 @@
 
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- CSS do Select2 -->
+  <!-- CSS do Select2 -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   <!-- JS do jQuery (requerido pelo Select2) -->
@@ -33,14 +34,14 @@
       <select id="select-cilindro">
         <option value="" id="selecionado">-- Escolha um cilindro --</option>
       </select>
-    
+
       <label for="cursos">Curso:</label>
       <input type="number" placeholder="Digite o curso" id="curso" min="0">
 
       <label for="qtd-cilindro">Qtd:</label>
       <input type="number" placeholder="Qtd" id="qtd-cilindro" min="0">
     </div>
- 
+
   </div>
 
   <div class="componenteViton" id="componenteViton">
@@ -63,94 +64,94 @@
     <input type="checkbox" name="inox" id="versaoInox" value="inox">
   </div>
 
-  <div class="componentePh" id="componentePh"> 
+  <div class="componentePh" id="componentePh">
     <label for="inputAdicionaPh">Prolongamento de Haste 1: </label>
     <input type="number" id="inputAdicionaPh">
     <button type="button" id="botaoAdicionaPh" onclick="adicionaPH(event)">Adicionar</button>
     <button type="button" id="botaoRemovePh" onclick="removePH(event)">Remover</button>
   </div>
 
-  <div class="componentePr" id="componentePr"> 
+  <div class="componentePr" id="componentePr">
     <label for="inputAdicionaPr">Prolongamento de Rosca 1: </label>
     <input type="number" id="inputAdicionaPr">
     <button type="button" id="botaoAdicionaPr" onclick="adicionaPR(event)">Adicionar</button>
     <button type="button" id="botaoRemovePr" onclick="removePR(event)">Remover</button>
   </div>
 
-<!-- INICIO FOLHA DE HASTE -->
- <div class="folhaHaste" id="folhaHaste">
-  <header class="cabecalho">
-    <div class="logo">
-      <img src="logo.png" alt="Logo da Empresa">
-    </div>
-    <div class="titulo-area">
-      <p class="titulo-principal">Ordem de Produção – HASTES</p>
-    </div>
-    
-    <div class="dados-doc">
-      <p><strong>N° Doc:</strong> OP-001</p>
-      <p><strong>Página:</strong> 1 de 3</p>
-      <p><strong>Rev:</strong> 1</p>
-    </div>
-  </header>
+  <!-- INICIO FOLHA DE HASTE -->
+  <div class="folhaHaste" id="folhaHaste">
+    <header class="cabecalho">
+      <div class="logo">
+        <img src="logo.png" alt="Logo da Empresa">
+      </div>
+      <div class="titulo-area">
+        <p class="titulo-principal">Ordem de Produção – HASTES</p>
+      </div>
 
-  <!-- Seção Grau de Prioridade -->
-  <div class="section prioridade">
-    <div class="linha">
-      <div class="coluna prioridade">
-        <label>Grau de Prioridade:</label>
-        <div class="opcoes-prioridade">
-          <label><input type="radio" name="prioridade" value="padrao"> Padrão</label>
-          <label><input type="radio" name="prioridade" value="urgente"> Urgente</label>
+      <div class="dados-doc">
+        <p><strong>N° Doc:</strong> OP-001</p>
+        <p><strong>Página:</strong> 1 de 3</p>
+        <p><strong>Rev:</strong> 1</p>
+      </div>
+    </header>
+
+    <!-- Seção Grau de Prioridade -->
+    <div class="section prioridade">
+      <div class="linha">
+        <div class="coluna prioridade">
+          <label>Grau de Prioridade:</label>
+          <div class="opcoes-prioridade">
+            <label><input type="radio" name="prioridade" value="padrao"> Padrão</label>
+            <label><input type="radio" name="prioridade" value="urgente"> Urgente</label>
+          </div>
+        </div>
+        <div class="coluna">
+          <label>Data:</label>
+          <input type="date" name="data_prioridade" id="datahaste">
+        </div>
+        <div class="coluna">
+          <label>Hora:</label>
+          <input type="time" name="hora_prioridade" id="horahaste">
+        </div>
+        <div class="coluna">
+          <label for="select-nome">Avaliação – Nome:</label>
+          <select id="select-nome">
+            <option value="-">-</option>
+            <option value="alvaro">Alvaro</option>
+            <option value="fernando">Fernando</option>
+            <option value="gabriel">Gabriel</option>
+            <option value="yuri">Yuri</option>
+          </select>
         </div>
       </div>
+    </div>
+
+    <!-- Processos de Produção de Hastes -->
+
+    <div class="linha">
+
       <div class="coluna">
-        <label>Data:</label>
-        <input type="date" name="data_prioridade" id="datahaste">
+        <label for="codigo">Código</label><input type="text" id="codigo">
       </div>
+
       <div class="coluna">
-        <label>Hora:</label>
-        <input type="time" name="hora_prioridade" id="horahaste">
+        <label for="input-qtd-haste">Qtd Haste</label>
+        <input type="text" id="input-qtd-haste" readonly>
       </div>
+
+
       <div class="coluna">
-        <label for="select-nome">Avaliação – Nome:</label>
-        <select id="select-nome">
-          <option value="-">-</option>
-          <option value="alvaro">Alvaro</option>
-          <option value="fernando">Fernando</option>
-          <option value="gabriel">Gabriel</option>
-          <option value="yuri">Yuri</option>
-        </select>
+        <label for="input-materia-prima">Código Matéria-Prima</label>
+        <input type="text" id="input-materia-prima">
       </div>
     </div>
-  </div>
-
-  <!-- Processos de Produção de Hastes -->
-
-  <div class="linha">  
-
-    <div class="coluna">
-    <label for="codigo">Código</label><input type="text" id="codigo"  >
-    </div>
-
-    <div class="coluna">
-      <label for="input-qtd-haste">Qtd Haste</label>
-      <input type="text" id="input-qtd-haste" readonly>
-    </div>
 
 
-    <div class="coluna">
-      <label for="input-materia-prima">Código Matéria-Prima</label>
-      <input type="text" id="input-materia-prima"  >
-    </div>
-  </div>
- 
-
-  <div class="haste-padrao" id="haste-padrao">
-    <div class="imagem-haste-padrao" id="imgHastePadrao"></div>
+    <div class="haste-padrao" id="haste-padrao">
+      <div class="imagem-haste-padrao" id="imgHastePadrao"></div>
       <!-- IMAGEM DA HASTE -->
       <div class="imghaste">
-        <img src="img/imgBc.png" alt="Imagem da haste" id="imagem-bc" >
+        <img src="img/imgBc.png" alt="Imagem da haste" id="imagem-bc">
         <img src=" " alt="Imagem da haste" id="imagem-haste">
         <img src=" " class="hidden" alt="Imagem da Haste" id="imgHasteAced">
       </div>
@@ -158,17 +159,18 @@
       <span class="observacao" id="obs-avanco-retorno"></span>
 
       <style>
-      .imghaste {
-        width: 623px;
-        height: 155px;
-        object-fit: fill; /* Força o preenchimento total */
-        display: flex;
-        justify-content: space-between;
-      }
+        .imghaste {
+          width: 623px;
+          height: 155px;
+          object-fit: fill;
+          /* Força o preenchimento total */
+          display: flex;
+          justify-content: space-between;
+        }
 
-      .imghaste img{
-        max-width: 90%;
-      }
+        .imghaste img {
+          max-width: 90%;
+        }
       </style>
     </div>
 
@@ -190,8 +192,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" id="input-medida-corte-mi" ></td>
-              <td><input type="text" id="input-diametro-haste-mi" ></td>
+              <td><input type="text" id="input-medida-corte-mi"></td>
+              <td><input type="text" id="input-diametro-haste-mi"></td>
               <td><input type="text"></td>
               <td><input type="text"></td>
               <td><input type="text"></td>
@@ -200,7 +202,7 @@
         </table>
       </div>
 
-        <!-- ACE PASSANTE -->
+      <!-- ACE PASSANTE -->
       <div class="hidden section compacta operacao-corte" id="opCorteAce">
         <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
         <table>
@@ -215,8 +217,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" id="input-medida-corte-ace" ></td>
-              <td><input type="text" id="input-diametro-haste-ace" ></td>
+              <td><input type="text" id="input-medida-corte-ace"></td>
+              <td><input type="text" id="input-diametro-haste-ace"></td>
               <td><input type="text"></td>
               <td><input type="text"></td>
               <td><input type="text"></td>
@@ -239,7 +241,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" id="input-medida-rosca-dianteira-mi" ></td>
+              <td><input type="text" id="input-medida-rosca-dianteira-mi"></td>
               <td><input type="text" id="responsavel-rosca-dianteira-mi"></td>
               <td><input type="text"></td>
               <td><input type="text" id="observacoes-rosca-dianteira-mi"></td>
@@ -262,7 +264,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" id="input-medida-rosca-dianteira-aced" ></td>
+              <td><input type="text" id="input-medida-rosca-dianteira-aced"></td>
               <td><input type="text"></td>
               <td><input type="text"></td>
               <td><input type="text"></td>
@@ -272,9 +274,9 @@
       </div>
 
       <!-- OPERAÇÃO ESPECIAL MI-->
-      <div class="hidden section compacta operacao-corte-extra" id="especial"> 
+      <div class="hidden section compacta operacao-corte-extra" id="especial">
         <h3>OPERAÇÃO 2.5: MEDIDAS REBAIXO TRASEIRO</h3>
-      
+
         <table>
           <thead>
             <tr>
@@ -285,21 +287,21 @@
           </thead>
 
           <tbody>
-              <tr>
+            <tr>
               <td>Rebaixo traseira (ØX e X)</td>
-              <td><input type="text" id="input-rebaixo-traseira" ></td>
+              <td><input type="text" id="input-rebaixo-traseira"></td>
               <td></td>
             </tr>
 
             <tr>
               <td>distância canal oring (Y)</td>
-              <td><input type="text" id="input-distancia-oring" ></td>
+              <td><input type="text" id="input-distancia-oring"></td>
               <td></td>
             </tr>
 
             <tr>
               <td>Canal oring (ØZ e Z)</td>
-              <td><input type="text" id="input-rebaixo-oring" ></td>
+              <td><input type="text" id="input-rebaixo-oring"></td>
               <td></td>
             </tr>
           </tbody>
@@ -311,87 +313,87 @@
     <!-- APARECE POR PADRÃO -->
     <!-- OPERAÇÃO 1 -->
     <div class="section compacta operacao-corte" id="opCorte">
-    <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 20%;">Medida Final</th>
-          <th style="width: 20%;">Ø Haste</th>
-          <th style="width: 20%;">Responsável</th>
-          <th style="width: 20%;">Aprovado</th>
-          <th style="width: 20%;">Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="input-medida-corte" ></td>
-          <td><input type="text" id="input-diametro-haste" ></td>
-          <td><input type="text"></td>
-          <td><input type="text"></td>
-          <td><input type="text"></td>
-        </tr>
-      </tbody>
-    </table>
+      <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">Medida Final</th>
+            <th style="width: 20%;">Ø Haste</th>
+            <th style="width: 20%;">Responsável</th>
+            <th style="width: 20%;">Aprovado</th>
+            <th style="width: 20%;">Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-corte"></td>
+            <td><input type="text" id="input-diametro-haste"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- OPERAÇÃO 2: ROSCA DIANTEIRA -->
     <div class="section compacta operacao-rosca-dianteira" id="opRd">
-    <h3>OPERAÇÃO 2: Rosca dianteira RD X CRD <span id="toleranciaHasteRD"></span></h3>
-    <table>
-      <thead>
-        <tr>
-          <th width="25%">Medida</th>
-          <th width="25%">Responsável</th>
-          <th width="25%">Aprovado</th>
-          <th width="25%">Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="input-medida-rosca-dianteira" ></td>
-          <td><input type="text" id="responsavel-rosca-dianteira"></td>
-          <td><input type="text"></td>
-          <td><input type="text"></td>
-        </tr>
-      </tbody>
-    </table>
+      <h3>OPERAÇÃO 2: Rosca dianteira RD X CRD <span id="toleranciaHasteRD"></span></h3>
+      <table>
+        <thead>
+          <tr>
+            <th width="25%">Medida</th>
+            <th width="25%">Responsável</th>
+            <th width="25%">Aprovado</th>
+            <th width="25%">Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-rosca-dianteira"></td>
+            <td><input type="text" id="responsavel-rosca-dianteira"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="hidden section compacta operacao-cotas-extras" id="especial-sai"> 
-        <h3>OPERAÇÃO 2.5: MEDIDAS REBAIXO TRASEIRO</h3>
-      
-        <table>
-          <thead>
-            <tr>
-              <th>Operação</th>
-              <th>Medida</th>
-              <th>Nome/Aprovação</th>
-            </tr>
-          </thead>
+    <div class="hidden section compacta operacao-cotas-extras" id="especial-sai">
+      <h3>OPERAÇÃO 2.5: MEDIDAS REBAIXO TRASEIRO</h3>
 
-          <tbody>
-              <tr>
-              <td>Diâmetro Oring (ØZ)</td>
-              <td><input type="text" id="input-diamz" ></td>
-              <td></td>
-            </tr>
+      <table>
+        <thead>
+          <tr>
+            <th>Operação</th>
+            <th>Medida</th>
+            <th>Nome/Aprovação</th>
+          </tr>
+        </thead>
 
-            <tr>
-              <td>Distância Oring (DZ)</td>
-              <td><input type="text" id="input-distz" ></td>
-              <td></td>
-            </tr>
+        <tbody>
+          <tr>
+            <td>Diâmetro Oring (ØZ)</td>
+            <td><input type="text" id="input-diamz"></td>
+            <td></td>
+          </tr>
 
-            <tr>
-              <td>Comprimento Oring (CZ)</td>
-              <td><input type="text" id="input-compz" ></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+          <tr>
+            <td>Distância Oring (DZ)</td>
+            <td><input type="text" id="input-distz"></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>Comprimento Oring (CZ)</td>
+            <td><input type="text" id="input-compz"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    
+
     <!-- OPERAÇÃO 3: ROSCA TRASEIRA -->
     <div class="section compacta operacao-rosca-traseira" id="op3-rosca-traseira">
       <h3>OPERAÇÃO 3: Rosca traseira RT X CRT <span id="toleranciaHasteRT"></span></h3>
@@ -406,7 +408,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-rosca-traseira" ></td>
+            <td><input type="text" id="input-medida-rosca-traseira"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
@@ -443,25 +445,25 @@
 
     <!-- OPERAÇÃO 3: ROSCA TRASEIRA ACED -->
     <div class="hidden section compacta operacao-rosca-traseira" id="rtAced">
-    <h3>OPERAÇÃO 3: Rosca traseira RT X CRT <span id="toleranciaHasteRT"></span></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Medida</th>
-          <th>Responsável</th>
-          <th>Aprovado</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="input-medida-rosca-traseira-aced" ></td>
-          <td><input type="text"></td>
-          <td><input type="text"></td>
-          <td><input type="text"></td>
-        </tr>
-      </tbody>
-    </table>
+      <h3>OPERAÇÃO 3: Rosca traseira RT X CRT <span id="toleranciaHasteRT"></span></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Medida</th>
+            <th>Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-rosca-traseira-aced"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
 
@@ -481,11 +483,11 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-rebaixo" ></td>
-            <td><input type="text" id="input-medida-comprimento" ></td>
+            <td><input type="text" id="input-medida-rebaixo"></td>
+            <td><input type="text" id="input-medida-comprimento"></td>
             <td><input type="text"></td>
-            <td><input type="text" id="input-diametroR" ></td>
-            <td><input type="text" id="input-comprimentoR" ></td>
+            <td><input type="text" id="input-diametroR"></td>
+            <td><input type="text" id="input-comprimentoR"></td>
             <td><input type="text"></td>
           </tr>
         </tbody>
@@ -505,7 +507,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-embolo" ></td>
+            <td><input type="text" id="input-embolo"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
           </tr>
@@ -553,10 +555,10 @@
     <br>
     <br>
   </div>
-</div>
+  </div>
   <!-- FIM DA FOLHA DE HASTE -->
 
-  
+
   <!-- INÍCIO DA FOLHA HASTE PASSANTE -->
   <div class="hidden haste-passante quebra-pagina" id="haste-passante">
 
@@ -567,7 +569,7 @@
       <div class="titulo-area">
         <p class="titulo-principal">Ordem de Produção – HASTES</p>
       </div>
-      
+
       <div class="dados-doc">
         <p><strong>N° Doc:</strong> OP-001</p>
         <p><strong>Página:</strong> 1 de 3</p>
@@ -587,11 +589,11 @@
         </div>
         <div class="coluna">
           <label>Data:</label>
-          <input type="date" name="data_prioridade"  id="dataPassante"/>
+          <input type="date" name="data_prioridade" id="dataPassante" />
         </div>
         <div class="coluna">
           <label>Hora:</label>
-          <input type="time" name="hora_prioridade" id="horaPassante"/>
+          <input type="time" name="hora_prioridade" id="horaPassante" />
         </div>
         <div class="coluna">
           <label>Avaliação – Nome:</label>
@@ -603,9 +605,9 @@
     <!-- Processos de Produção de haste passante -->
     <div class="linha">
       <div class="coluna">
-      <label for="codigo">Código</label><input type="text" id="codigo-passante" >
-      </div>  
-      
+        <label for="codigo">Código</label><input type="text" id="codigo-passante">
+      </div>
+
       <div>
         <label for="input-qtd-passante">Qtd</label>
         <input type="text" id="input-qtd-passante">
@@ -613,56 +615,57 @@
 
       <div class="coluna">
         <label for="input-materia-prima-passante">Código Matéria-Prima</label>
-        <input type="text" id="input-materia-prima-passante" >
+        <input type="text" id="input-materia-prima-passante">
       </div>
     </div>
 
-       <!-- IMAGEM DA HASTE -->
+    <!-- IMAGEM DA HASTE -->
     <div class="imghaste">
-      <img src="img/imgBc.png" alt="Imagem da haste" id="imagem-bc" >
-      <img src=" " alt="Imagem da haste" id="imagem-haste-passante" >
+      <img src="img/imgBc.png" alt="Imagem da haste" id="imagem-bc">
+      <img src=" " alt="Imagem da haste" id="imagem-haste-passante">
     </div>
 
     <style>
-    .imghaste {
-      width: 623px;
-      height: 155px;
-      object-fit: fill; /* Força o preenchimento total */
-      display: flex;
-      justify-content: space-between;
-    }
+      .imghaste {
+        width: 623px;
+        height: 155px;
+        object-fit: fill;
+        /* Força o preenchimento total */
+        display: flex;
+        justify-content: space-between;
+      }
 
-    .imghaste img{
-      max-width: 90%;
-    }
+      .imghaste img {
+        max-width: 90%;
+      }
     </style>
 
     <!-- OPERAÇÃO 1 -->
-     <div class="section compacta operacao-corte-passante" id="cortepassante">
-        <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
-        <table class="tabela-corte-passante">
-          <thead>
-            <tr>
-              <th style="width: 20%;">Medida Final</th>              
-              <th style="width: 12%;">Ø Haste</th>
-              <th style="width: 12%;">Responsável</th>
-              <th>Aprovado</th>
-              <th>Observações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="text" id="input-medida-corte-passante" ></td>
-              <td><input type="text" id="input-diametro-haste-passante" ></td>
-              <td><input type="text"></td>
-              <td><input type="text"></td>
-              <td><input type="text"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="section compacta operacao-corte-passante" id="cortepassante">
+      <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
+      <table class="tabela-corte-passante">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Medida Final</th>
+            <th style="width: 12%;">Ø Haste</th>
+            <th style="width: 12%;">Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-corte-passante"></td>
+            <td><input type="text" id="input-diametro-haste-passante"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <!-- OPERAÇÃO 2: ROSCA DIANTEIRA -->
+    <!-- OPERAÇÃO 2: ROSCA DIANTEIRA -->
     <div class="section compacta operacao-rosca-dianteira" id="opRdPassante">
       <h3>OPERAÇÃO 2: Rosca dianteira RD X CRD <span id="toleranciaHasteRD"></span></h3>
       <table>
@@ -676,7 +679,8 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-rosca-dianteira-passante" ></td>
+            <td><input type="text" id="input-medida-rosca-dianteira-passante"></td>
+            <td><input type="text"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
           </tr>
@@ -698,9 +702,34 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-rosca-traseira-passante" ></td>
+            <td><input type="text" id="input-medida-rosca-traseira-passante"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- OPERAÇÃO 3 (ESPECÍFICA SAI160SNG): exibida no lugar da rosca traseira -->
+    <div class="section compacta operacao-rosca-traseira hidden" id="op3-sai160-passante">
+      <h3>OPERAÇÃO 3:Traseira Macho</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rosca</th>
+            <th>CMT</th>
+            <th>CRT</th>
+            <th>ØR</th>
+            <th>Responsável</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text">M16 x 2</td>
+            <td><input type="text">75mm</td>
+            <td><input type="text">50mm</td>
+            <td><input type="text">16mm</td>
             <td><input type="text"></td>
           </tr>
         </tbody>
@@ -722,8 +751,8 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-rebaixo-passante" ></td>
-            <td><input type="text" id="input-medida-comprimento-passante" ></td>
+            <td><input type="text" id="input-medida-rebaixo-passante"></td>
+            <td><input type="text" id="input-medida-comprimento-passante"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
@@ -771,7 +800,7 @@
   </div>
   <!-- FIM DA FOLHA DE HASTE PASSANTE -->
 
-  
+
 
   <!-- INICIO DA FOLHA DE TUBO -->
 
@@ -784,7 +813,7 @@
       <div class="titulo-area">
         <p class="titulo-principal">Ordem de Produção – TUBOS</p>
       </div>
-      
+
       <div class="dados-doc">
         <p><strong>N° Doc:</strong> OP-001</p>
         <p><strong>Página:</strong> 2 de 3</p>
@@ -804,11 +833,11 @@
         </div>
         <div class="coluna">
           <label>Data:</label>
-          <input type="date" name="data_prioridade"  id="datatubo"/>
+          <input type="date" name="data_prioridade" id="datatubo" />
         </div>
         <div class="coluna">
           <label>Hora:</label>
-          <input type="time" name="hora_prioridade" id="horatubo"/>
+          <input type="time" name="hora_prioridade" id="horatubo" />
         </div>
         <div class="coluna">
           <label>Avaliação – Nome:</label>
@@ -820,9 +849,9 @@
     <!-- Processos de Produção de Tubos -->
     <div class="linha">
       <div class="coluna">
-      <label for="codigo">Código</label><input type="text" id="codigo-tubo" >
-      </div>  
-      
+        <label for="codigo">Código</label><input type="text" id="codigo-tubo">
+      </div>
+
       <div>
         <label for="input-qtd-tubo">Qtd</label>
         <input type="text" id="input-qtd-tubo">
@@ -830,7 +859,7 @@
 
       <div class="coluna">
         <label for="input-materia-prima-tubo">Código Matéria-Prima</label>
-        <input type="text" id="input-materia-prima-tubo" >
+        <input type="text" id="input-materia-prima-tubo">
       </div>
     </div>
 
@@ -842,9 +871,9 @@
     </div>
 
     <!-- IMAGEM DO TUBO -->
-      <div class="imgtubo">
-        <img src="" alt="Imagem do tubo" id="imagem-tubo" height="150px" width="150px">
-      </div>
+    <div class="imgtubo">
+      <img src="" alt="Imagem do tubo" id="imagem-tubo" height="150px" width="150px">
+    </div>
 
 
     <!-- OPERAÇÃO 1 - CORTE TUBO -->
@@ -861,7 +890,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-corte-tubo"  /></td>
+            <td><input type="text" id="input-medida-corte-tubo" /></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
             <td><input type="text"></td>
@@ -884,7 +913,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="input-medida-rosca-tubo"  /></td>
+            <td><input type="text" id="input-medida-rosca-tubo" /></td>
             <td><input type="text" id="responsavel-rosca-fixacao-tubo" /></td>
             <td><input type="text" id="aprovado-rosca-fixacao-tubo" /></td>
             <td><input type="text" id="obs-rosca-fixacao-tubo" /></td>
@@ -977,13 +1006,13 @@
     </div>
   </div>
 
-    <!-- FIM DA FOLHA DE TUBOS-->
+  <!-- FIM DA FOLHA DE TUBOS-->
 
 
 
-    <!-- INICIO DA FOLHA DE GUIAS -->
+  <!-- INICIO DA FOLHA DE GUIAS -->
 
-    <div class="hidden guias quebra-pagina" id="paginaGuias">
+  <div class="hidden guias quebra-pagina" id="paginaGuias">
     <header class="cabecalho">
       <div class="logo">
         <img src="logo.png" alt="Logo da Empresa">
@@ -1030,23 +1059,23 @@
 
       <div class="linha">
 
-      <div class="coluna">
-      <label for="codigo-guias">Código</label>
-      <input type="text" id="codigo-guias" >
-      </div>  
+        <div class="coluna">
+          <label for="codigo-guias">Código</label>
+          <input type="text" id="codigo-guias">
+        </div>
 
-      <div class="coluna">
-        <label for="input-qtd-tubo">Qtd</label>
-        <input type="text" id="input-qtd-guias">
-      </div>
+        <div class="coluna">
+          <label for="input-qtd-tubo">Qtd</label>
+          <input type="text" id="input-qtd-guias">
+        </div>
 
-      <div class="coluna">
-        <label for="input-materia-prima-guias">Código Matéria-Prima</label>
-        <input type="text" id="input-materia-prima-guias" >
+        <div class="coluna">
+          <label for="input-materia-prima-guias">Código Matéria-Prima</label>
+          <input type="text" id="input-materia-prima-guias">
+        </div>
       </div>
     </div>
-    </div>
-    
+
 
     <!-- IMAGEM DAS GUIAS -->
     <div class="imgguias">
@@ -1055,273 +1084,273 @@
 
     <!-- OPERAÇÃO 1: CORTE -->
     <div class="section compacta operacao-corte-guias">
-    <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Medida Final</th>
-          <th>Diâmetro da Haste</th>
-          <th>Responsável</th>
-          <th>Aprovado</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-        <td><input type="text" id="input-medida-corte-guias" ></td>
-        <td><input type="text" id="input-diametro-haste-guias" ></td>
-        <td><input type="text"></td>
-        <td>
-          
-        </td>
-          <td><input type="text"></td>
-        </tr>
-      </tbody>
-    </table>
+      <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Medida Final</th>
+            <th>Diâmetro da Haste</th>
+            <th>Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-corte-guias"></td>
+            <td><input type="text" id="input-diametro-haste-guias"></td>
+            <td><input type="text"></td>
+            <td>
+
+            </td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- OPERAÇÃO 2 - ROSCA DAS GUIAS -->
+    <div class="section compacta operacao-rosca-guia">
+      <h3>Operação 2: Rosca da Guia RG X CRG</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Medida Tabelada</th>
+            <th>Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-rosca-guias" /></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ACABAMENTO -->
+    <div class="section compacta operacao-mecanica-tirantes">
+      <h3>Operação 3: Acabamento</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Operação</th>
+            <th>Máquina</th>
+            <th>Nome/Aprovação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Retirar rebarbas na haste</td>
+            <td>Escova de aço</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Limpar rosca de fixação</td>
+            <td>Limpador</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Conferir medida final da haste</td>
+            <td>Paquimetro/Trena</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
+  <!-- FIM DA FOLHA DE GUIAS -->
 
-  <!-- OPERAÇÃO 2 - ROSCA DAS GUIAS -->
-  <div class="section compacta operacao-rosca-guia">
-    <h3>Operação 2: Rosca da Guia RG X CRG</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Medida Tabelada</th>
-          <th>Responsável</th>
-          <th>Aprovado</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="input-medida-rosca-guias"  /></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <!-- INICIO DA FOLHA DE TIRANTES -->
 
-  <!-- ACABAMENTO -->
-  <div class="section compacta operacao-mecanica-tirantes">
-    <h3>Operação 3: Acabamento</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Operação</th>
-          <th>Máquina</th>
-          <th>Nome/Aprovação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Retirar rebarbas na haste</td>
-          <td>Escova de aço</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Limpar rosca de fixação</td>
-          <td>Limpador</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Conferir medida final da haste</td>
-          <td>Paquimetro/Trena</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-    </div>
+  <div class="hidden tirantes quebra-pagina" id="paginaTirantes">
 
-    <!-- FIM DA FOLHA DE GUIAS -->
+    <header class="cabecalho">
+      <div class="logo">
+        <img src="logo.png" alt="Logo da Empresa">
+      </div>
+      <div class="titulo-area">
+        <p class="titulo-principal">Ordem de Produção – TIRANTES</p>
+      </div>
+      <div class="dados-doc">
+        <p><strong>N° Doc:</strong> OP-001</p>
+        <p><strong>Página:</strong> 3 de 3</p>
+        <p><strong>Rev:</strong> 1</p>
+      </div>
+    </header>
 
-    <!-- INICIO DA FOLHA DE TIRANTES -->
-
-    <div class="hidden tirantes quebra-pagina" id="paginaTirantes">
-
-  <header class="cabecalho">
-    <div class="logo">
-      <img src="logo.png" alt="Logo da Empresa">
-    </div>
-    <div class="titulo-area">
-      <p class="titulo-principal">Ordem de Produção – TIRANTES</p>
-    </div>
-    <div class="dados-doc">
-      <p><strong>N° Doc:</strong> OP-001</p>
-      <p><strong>Página:</strong> 3 de 3</p>
-      <p><strong>Rev:</strong> 1</p>
-    </div>
-  </header>
-
-  <!-- Seção Grau de Prioridade -->
-  <div class="section prioridade">
-    <div class="linha">
-      <div class="coluna prioridade">
-        <label>Grau de Prioridade:</label>
-        <div class="opcoes-prioridade">
-          <label><input type="radio" name="prioridadeTirantes" value="padrao"> Padrão</label>
-          <label><input type="radio" name="prioridadeTirantes" value="urgente"> Urgente</label>
+    <!-- Seção Grau de Prioridade -->
+    <div class="section prioridade">
+      <div class="linha">
+        <div class="coluna prioridade">
+          <label>Grau de Prioridade:</label>
+          <div class="opcoes-prioridade">
+            <label><input type="radio" name="prioridadeTirantes" value="padrao"> Padrão</label>
+            <label><input type="radio" name="prioridadeTirantes" value="urgente"> Urgente</label>
+          </div>
+        </div>
+        <div class="coluna">
+          <label>Data:</label>
+          <input type="date" name="data_prioridade" id="datatirantes">
+        </div>
+        <div class="coluna">
+          <label>Hora:</label>
+          <input type="time" name="hora_prioridade" id="horatirantes">
+        </div>
+        <div class="coluna">
+          <label>Avaliação – Nome:</label>
+          <input type="text" id="nometirantes">
         </div>
       </div>
-      <div class="coluna">
-        <label>Data:</label>
-        <input type="date" name="data_prioridade" id="datatirantes">
+    </div>
+
+    <!-- Processos de Produção de Tirantes -->
+    <div class="processos-hastes">
+
+      <div class="linha">
+
+        <div class="coluna">
+          <label for="codigo-tirantes">Código</label>
+          <input type="text" id="codigo-tirantes">
+        </div>
+
+        <div class="coluna">
+          <label for="input-qtd-tubo">Qtd</label>
+          <input type="text" id="input-qtd-tirantes">
+        </div>
+
+        <div class="coluna">
+          <label for="input-materia-prima-tirantes">Código Matéria-Prima</label>
+          <input type="text" id="input-materia-prima-tirantes">
+        </div>
       </div>
-      <div class="coluna">
-        <label>Hora:</label>
-        <input type="time" name="hora_prioridade" id="horatirantes">
-      </div>
-      <div class="coluna">
-        <label>Avaliação – Nome:</label>
-        <input type="text" id="nometirantes">
-      </div>
+    </div>
+
+    <!-- IMAGEM DOS TIRANTES -->
+    <div class="imgtirantes">
+      <img src="" alt="Imagem do tirante" id="imagem-tirantes" height="120px" width="388">
+    </div>
+
+    <!-- OPERAÇÃO 1: CORTE -->
+    <div class="section compacta operacao-corte-tirantes">
+      <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Medida Final</th>
+            <th>Diâmetro da Haste</th>
+            <th>Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-corte-tirantes"></td>
+            <td><input type="text" id="input-diametro-haste-tirantes"></td>
+            <td><input type="text"></td>
+            <td>
+
+            </td>
+            <td><input type="text"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- OPERAÇÃO 2 - ROSCA DOS TIRANTES -->
+    <div class="section compacta operacao-rosca-tirantes">
+      <h3>Operação 2: Rosca dianteira RD X CRD</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Medida Tabelada</th>
+            <th>Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-rosca-tirantes" /></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- OPERAÇÃO 3 - ROSCA DOS TIRANTES LADO B -->
+    <div class="section compacta operacao-rosca-tirantes-lado-b">
+      <h3>Operação 3: Rosca traseira RT X CRT</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Medida Tabelada</th>
+            <th>Responsável</th>
+            <th>Aprovado</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="input-medida-rosca-tirantes-lado-b" /></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ACABAMENTO -->
+    <div class="section compacta operacao-mecanica-tirantes">
+      <h3>Operação 4: Acabamento</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Operação</th>
+            <th>Máquina</th>
+            <th>Nome/Aprovação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Retirar rebarbas na haste</td>
+            <td>Escova de aço</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Limpar rosca de fixação</td>
+            <td>Limpador</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Conferir medida final da haste</td>
+            <td>Paquimetro/Trena</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- Processos de Produção de Tirantes -->
-  <div class="processos-hastes">
+  <!-- FIM DA FOLHA DE TIRANTES -->
 
-    <div class="linha">
+  <!-- INICIO DA FOLHA CCMB/CCB -->
 
-    <div class="coluna">
-      <label for="codigo-tirantes">Código</label>
-      <input type="text" id="codigo-tirantes" >
-    </div>  
+  <br>
+  <br>
 
-    <div class="coluna">
-      <label for="input-qtd-tubo">Qtd</label>
-      <input type="text" id="input-qtd-tirantes">
-    </div>
-
-    <div class="coluna">
-      <label for="input-materia-prima-tirantes">Código Matéria-Prima</label>
-      <input type="text" id="input-materia-prima-tirantes" >
-    </div>
-  </div>
-  </div>
-
-  <!-- IMAGEM DOS TIRANTES -->
-  <div class="imgtirantes">
-    <img src="" alt="Imagem do tirante" id="imagem-tirantes" height="120px" width="388">
-  </div>
-
-  <!-- OPERAÇÃO 1: CORTE -->
-  <div class="section compacta operacao-corte-tirantes">
-  <h3>OPERAÇÃO 1: CORTE <span class="tolerancia">Tolerância (mm): -0 / +2</span></h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Medida Final</th>
-        <th>Diâmetro da Haste</th>
-        <th>Responsável</th>
-        <th>Aprovado</th>
-        <th>Observações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><input type="text" id="input-medida-corte-tirantes" ></td>
-        <td><input type="text" id="input-diametro-haste-tirantes" ></td>
-        <td><input type="text"></td>
-        <td>
-          
-        </td>
-        <td><input type="text"></td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-
-  <!-- OPERAÇÃO 2 - ROSCA DOS TIRANTES -->
-  <div class="section compacta operacao-rosca-tirantes">
-    <h3>Operação 2: Rosca dianteira RD X CRD</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Medida Tabelada</th>
-          <th>Responsável</th>
-          <th>Aprovado</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="input-medida-rosca-tirantes"  /></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- OPERAÇÃO 3 - ROSCA DOS TIRANTES LADO B -->
-  <div class="section compacta operacao-rosca-tirantes-lado-b">
-    <h3>Operação 3: Rosca traseira RT X CRT</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Medida Tabelada</th>
-          <th>Responsável</th>
-          <th>Aprovado</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="input-medida-rosca-tirantes-lado-b"  /></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ACABAMENTO -->
-  <div class="section compacta operacao-mecanica-tirantes">
-    <h3>Operação 4: Acabamento</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Operação</th>
-          <th>Máquina</th>
-          <th>Nome/Aprovação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Retirar rebarbas na haste</td>
-          <td>Escova de aço</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Limpar rosca de fixação</td>
-          <td>Limpador</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Conferir medida final da haste</td>
-          <td>Paquimetro/Trena</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-    </div>
-
-    <!-- FIM DA FOLHA DE TIRANTES -->
-
-    <!-- INICIO DA FOLHA CCMB/CCB -->
-
-    <br>
-    <br>
-
-    <div class="hidden ccmb quebra-pagina" id="paginaCcmb">
+  <div class="hidden ccmb quebra-pagina" id="paginaCcmb">
     <header class="cabecalho">
       <div class="logo">
         <img src="logo.png" alt="Logo da Empresa">
@@ -1344,41 +1373,41 @@
         <div class="coluna prioridade">
           <label>Grau de Prioridade:</label>
           <div class="opcoes-prioridade">
-          <label><input type="radio" name="prioridadeCcmb" value="padrao"> Padrão</label>
-          <label><input type="radio" name="prioridadeCcmb" value="urgente"> Urgente</label>
+            <label><input type="radio" name="prioridadeCcmb" value="padrao"> Padrão</label>
+            <label><input type="radio" name="prioridadeCcmb" value="urgente"> Urgente</label>
+          </div>
         </div>
-      </div>
 
-      <div class="coluna">
-        <label>Data:</label>
-        <input type="date" name="data_prioridade" id="dataccmb">
-      </div>
+        <div class="coluna">
+          <label>Data:</label>
+          <input type="date" name="data_prioridade" id="dataccmb">
+        </div>
 
-      <div class="coluna">
-        <label>Hora:</label>
-        <input type="time" name="hora_prioridade" id="horaccmb">
-      </div>
+        <div class="coluna">
+          <label>Hora:</label>
+          <input type="time" name="hora_prioridade" id="horaccmb">
+        </div>
 
-      <div class="coluna">
-        <label>Avaliação – Nome:</label>
-        <input type="text" id="nomeccmb">
-      </div>
+        <div class="coluna">
+          <label>Avaliação – Nome:</label>
+          <input type="text" id="nomeccmb">
+        </div>
 
-    </div>
+      </div>
     </div>
 
     <!-- Processos de Produção de Ccmb -->
     <div class="processos-hastes">
-        <div class="linha">
+      <div class="linha">
 
         <div class="coluna">
           <label for="codigo-Ccmb">Código</label>
-          <input type="text" id="codigo-ccmb" >
-        </div> 
+          <input type="text" id="codigo-ccmb">
+        </div>
 
         <br>
 
-        <div class="rebaixoDianteira" id="rebaixoDianteira" >
+        <div class="rebaixoDianteira" id="rebaixoDianteira">
           <div class="imgRebaixo">
             <img src="" id="imgRebaixoD" alt="Desenho Técnico Rebaixo Dianteira" height="120" width="300">
           </div>
@@ -1412,9 +1441,9 @@
             <div class="imgRebaixoT" id="imgrebaixoTccmb">
               <img src="" id="imgRebaixoT" alt="Desenho Técnico Rebaixo Traseira" height="120" width="300">
               <br>
-            </div> 
+            </div>
 
-            <table class id="tabelaRebaixoTccmb"> 
+            <table class id="tabelaRebaixoTccmb">
               <thead>
                 <tr>
                   <th>Diâmetro do Rebaixo (ØR)</th>
@@ -1479,27 +1508,28 @@
           </table>
 
         </div>
-        
-      
+
+
       </div>
 
 
 
-    
+
     </div>
-    </div>
-  
-    <!-- FIM DA FOLHA DE CCMB -->
-  
+  </div>
 
-  
+  <!-- FIM DA FOLHA DE CCMB -->
 
 
-    <script src="script.js"></script>
-    <script>
-      $(document).ready(function() {
-    $('select').select2();
+
+
+
+  <script src="script.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('select').select2();
     });
-    </script>
-    </body>
-    </html>
+  </script>
+</body>
+
+</html>

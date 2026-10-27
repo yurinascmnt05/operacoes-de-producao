@@ -1083,8 +1083,8 @@ $(document).ready(function () {
       qtdGuias = qtdCilindro * 2;     // Evita o efeito cascata
       qtdTirantes = qtdCilindro * 4;  // Evita o efeito cascata
     }
-    // 3. Regra Especial para cilindros SAI Passante
-    else if (isPassante && cilindroSelecionado.startsWith("SAI")) {
+    // 3. Regra Especial para cilindros SAI Passante (exceto SAI160SNG, que usa folha de haste passante)
+    else if (isPassante && cilindroSelecionado.startsWith("SAI") && cilindroSelecionado.trim() !== "SAI160SNG") {
       qtdHaste = qtdCilindro * 2;     // Dobro de hastes se for passante
       qtdTubo = qtdCilindro;
       qtdPassante = qtdCilindro * 2;
@@ -1104,6 +1104,15 @@ $(document).ready(function () {
   $('#qtd-cilindro').on('input change', function () {
     atualizarQuantidades();
   });
+
+  // Operação 3 da folha passante: SAI160SNG usa campos CMD / CRT / ØR / Responsável
+  function atualizarOp3Passante() {
+    const cilindro = ($('#select-cilindro').val() || '').toUpperCase().trim();
+    const isSai160 = cilindro === 'SAI160SNG';
+    $('#op3-sai160-passante').toggleClass('hidden', !isSai160);
+    $('#op3-rosca-traseira-passante').toggleClass('hidden', isSai160);
+  }
+  $(document).on('change input', '#select-cilindro, #versaoPassante', atualizarOp3Passante);
 
   // Evento para a checkbox 'passante'
   $('#versaoPassante').on('change', function () {
@@ -1133,7 +1142,8 @@ $(document).ready(function () {
       }
 
       // Se for família SAI, a folha extra de passante não é necessária (usa haste duplicada)
-      if (cilindroSelecionado.startsWith("SAI")) {
+      // Exceção: SAI160SNG exibe a folha de haste passante
+      if (cilindroSelecionado.startsWith("SAI") && cilindroSelecionado !== "SAI160SNG") {
         $('#haste-passante').addClass('hidden');
       }
     } else {
