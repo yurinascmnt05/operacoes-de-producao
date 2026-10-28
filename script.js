@@ -297,6 +297,8 @@ $(document).ready(function () {
     const inputMedidaRtPassante = $('#input-medida-rosca-traseira-passante');
     const inputMedidaRebaixoPassante = $('#input-medida-rebaixo-passante');
     const inputMedidaComprimentoPassante = $('#input-medida-comprimento-passante');
+    const inputDiametroRPassante = $('#input-diametroR-passante');
+    const inputComprimentoRPassante = $('#input-comprimentoR-passante');
     const inputMedidaCorteAce = $('#input-medida-corte-ace');
     const inputDiametroHasteAcePassante = $('#input-diametro-haste-ace');
     const inputMedidaRtAced = $('#input-medida-rosca-traseira-aced');
@@ -440,6 +442,8 @@ $(document).ready(function () {
       inputMedidaRtPassante.val('');
       inputMedidaRebaixoPassante.val('');
       inputMedidaComprimentoPassante.val('');
+      inputDiametroRPassante.val('');
+      inputComprimentoRPassante.val('');
       inputMedidaCorteAce.val('');
       inputDiametroHasteAcePassante.val('');
       inputMedidaRtAced.val('');
@@ -580,6 +584,8 @@ $(document).ready(function () {
       inputMedidaRtPassante.val(item.medidaRTpassante || '');
       inputMedidaRebaixoPassante.val(item.medidarebaixo || '');
       inputMedidaComprimentoPassante.val(item.medidacomprimento || '');
+      inputDiametroRPassante.val(item.diamrebbocadechave || '');
+      inputComprimentoRPassante.val(item.rebaixobocadechave || '');
       inputMedidaCorteAce.val(item.cortepassanteace || '');
       inputDiametroHasteAcePassante.val(item.diametrohaste || '');
       inputMedidaRtAced.val(item.medidartaced || '');
@@ -985,6 +991,8 @@ $(document).ready(function () {
       inputMedidaRtPassante.val('');
       inputMedidaRebaixoPassante.val('');
       inputMedidaComprimentoPassante.val('');
+      inputDiametroRPassante.val('');
+      inputComprimentoRPassante.val('');
       inputMedidaCorteAce.val('');
       inputDiametroHasteAcePassante.val('');
       inputMedidaRtAced.val('');
@@ -1751,9 +1759,10 @@ function atualizarCodigo() {
       cilindroUpper.match(/^MI(C)?(12|16)SCA$/) ||
       cilindroUpper.match(/^MI(C)?(20|25)SCAG$/) ||
       cilindroUpper.match(/^MI(C)?(12|16|20|25)SUG$/) ||
-      cilindroUpper.match(/^MI(C)?(12|16)SU$/)
+      cilindroUpper.match(/^MI(C)?(12|16)SU$/) ||
+      cilindroUpper.match(/^MI(C)?(12|16|20|25|32|40)SCMG$/)
     ) {
-      const match = cilindroUpper.match(/^(MI(C)?)(\d+)(SCA|SCAG|SUG|SU)$/);
+      const match = cilindroUpper.match(/^(MI(C)?)(\d+)(SCA|SCAG|SUG|SU|SCMG)$/);
 
       // Define o prefixo condicionalmente com base na seleção do passante
       const prefixo = versaoPassanteChecked
