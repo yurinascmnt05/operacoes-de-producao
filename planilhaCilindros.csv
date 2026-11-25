@@ -277,7 +277,7 @@ CSM16,"82,5mm","56,5mm","84,5mm",M6x1 X,16mm,,,M6x1 X,16mm,"M5x0,8 X 15,5mm","M4
 CSM20,75mm,"75,5mm","86,5mm","M8x1,25 X ",20mm,,,"M8x1,25 X ",20mm,"M5x0,8 X 15mm",M6x1 X 12mm,M6x1 X 18mm,,,,img/csm3.png,img/csm20-25.png,1mm,4mm,,,,,,Ø8,imgHastePassante/cpmeMachoMacho.png,HASTE-08,,,,36mm,,,imgTubo/mi-csm-ct.png,CSMTUBO-20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 CSM25,79mm,80mm,107mm,"M10x1,25 X ",22mm,,,"M10x1,25 X ",22mm,M6x1 X 25mm,M6x1 X 12mm,M6x1 X 27mm,,,,img/csm3.png,img/csm20-25.png,1mm,5mm,,,,,,Ø10,imgHastePassante/cpmeMachoMacho.png,HASTE-10,,,,"37,5mm",,,imgTubo/mi-csm-ct.png,CSMTUBO-25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-CSM16-C,"76,5mm",,"84,5mm",,,,,M6x1 X,16mm,"M4x0,7 X 10mm",,"M4x0,7 X 21mm",,,,,img/csm10-16.png,"0,5mm",4mm,,,,,,Ø6,imgHastePassante/cpmeMachoMacho.png,HASTE-06,,,,,,,imgTubo/mi-csm-ct.png,CSMTUBO-16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+CSM16-C,"82,5mm",,"84,5mm",,,,,M6x1 X,16mm,"M4x0,7 X 10mm",,"M4x0,7 X 21mm",,,,,img/csm10-16.png,"0,5mm",4mm,,,,,,Ø6,imgHastePassante/cpmeMachoMacho.png,HASTE-06,,,,34mm,,,imgTubo/mi-csm-ct.png,CSMTUBO-16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 CSM20-C,75mm,,"87,5mm",,,,,"M8x1,25 X ",20mm,"M5x0,8 X 15mm",,M6x1 X 18mm,,,,,img/csm20-25.png,1mm,4mm,,,,,,Ø8,imgHastePassante/cpmeMachoMacho.png,HASTE-08,,,,35mm,,,imgTubo/mi-csm-ct.png,CSMTUBO-20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 CSM25-C,79mm,,107mm,,,,,"M10x1,25 X ",22mm,M6x1 X 25mm,,M6x1 X 27mm,,,,,img/csm20-25.png,1mm,5mm,,,,,,Ø10,imgHastePassante/cpmeMachoMacho.png,HASTE-10,,,,"37,5mm",,,imgTubo/mi-csm-ct.png,CSMTUBO-25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
